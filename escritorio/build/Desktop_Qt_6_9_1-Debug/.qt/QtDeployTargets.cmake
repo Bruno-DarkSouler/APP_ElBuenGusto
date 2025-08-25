@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_ElBuenGusto_FILE /home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/ElBuenGusto)
+set(__QT_DEPLOY_TARGET_ElBuenGusto_TYPE EXECUTABLE)

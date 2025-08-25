@@ -1,0 +1,9 @@
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/ElBuenGusto.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/edit_cache.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/rebuild_cache.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/list_install_components.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/install.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/install/local.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/install/strip.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/ElBuenGusto_autogen_timestamp_deps.dir
+/home/bruno/Documents/ElBuenGusto/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/ElBuenGusto_autogen.dir
