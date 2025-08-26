@@ -2,5 +2,9 @@
     <qresource prefix="/img"/>
     <qresource prefix="/">
         <file>WhatsApp Image 2025-08-11 at 20.56.21.jpeg</file>
+        <file>hamburguesa.jpeg</file>
+        <file>fideos.jpeg</file>
+        <file>minutas.jpeg</file>
+        <file>salame.jpeg</file>
     </qresource>
 </RCC>
