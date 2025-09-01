@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1310</width>
-    <height>912</height>
+    <width>176</width>
+    <height>177</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,11 +15,20 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(245,235,210);
-border-radius:20;</string>
+border-radius:10;</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="7,2">
    <item>
     <widget class="QLabel" name="label">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="styleSheet">
       <string notr="true">border-radius:20;</string>
      </property>
@@ -46,7 +55,7 @@ border-radius:20;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">baackground-color:rgb(80,50,20);</string>
+      <string notr="true">background-color:rgb(80,50,20);</string>
      </property>
      <property name="lineWidth">
       <number>1</number>

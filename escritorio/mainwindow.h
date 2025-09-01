@@ -18,9 +18,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void colocar_layouts();
+    void conseguir_comida();
 
 private:
     Ui::MainWindow *ui;
-    QGridLayout *grilla;
 };
 #endif // MAINWINDOW_H

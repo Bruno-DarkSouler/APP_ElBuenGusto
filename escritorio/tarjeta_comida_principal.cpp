@@ -13,6 +13,6 @@ tarjeta_comida_principal::~tarjeta_comida_principal()
     delete ui;
 }
 
-void tarjeta_comida_principal::setData(const DataModel data){
+void tarjeta_comida_principal::setData(const QString data){
     ui->label_2->setText(data);
 }
