@@ -25,6 +25,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         img.qrc
         tarjeta_comida_principal.h tarjeta_comida_principal.cpp tarjeta_comida_principal.ui
+        carrito.h carrito.cpp carrito.ui
+        borrar.png
+
 
     )
 # Define target properties for Android with Qt 6 as:
