@@ -25,6 +25,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         img.qrc
         tarjeta_comida_principal.h tarjeta_comida_principal.cpp tarjeta_comida_principal.ui
+        sign_in.h sign_in.cpp sign_in.ui
+        sign_up.h sign_up.cpp sign_up.ui
+
 
     )
 # Define target properties for Android with Qt 6 as:
