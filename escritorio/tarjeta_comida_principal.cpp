@@ -1,5 +1,5 @@
 #include "tarjeta_comida_principal.h"
-#include "ui_tarjeta_comida_principal.h"
+#include "ui_tarjeta_especialidades.h"
 
 tarjeta_comida_principal::tarjeta_comida_principal(QWidget *parent)
     : QWidget(parent)

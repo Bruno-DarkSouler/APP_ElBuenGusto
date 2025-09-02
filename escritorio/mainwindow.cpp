@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "tarjeta_comida_principal.h"
+#include "tarjeta_especialidades.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->barraBusqueda, &QLineEdit::textChanged, this, &MainWindow::on_barraBusqueda_textChanged);
 }
 
 MainWindow::~MainWindow()
@@ -22,13 +23,12 @@ void MainWindow::colocar_layouts(){
 
     for (const auto &nombre : productos) {
         qInfo("HELLO WORLD");
-        tarjeta_comida_principal *tarjeta = new tarjeta_comida_principal(this);
+        tarjeta_especialidades *tarjeta = new tarjeta_especialidades(this);
         tarjeta->setData(nombre);
         contenedor_v->addWidget(tarjeta);
     }
 }
 
-void MainWindow::conseguir_comida(){
-
-
+void MainWindow::on_barraBusqueda_textChanged(){
+    qInfo("HOLAAAAA");
 }

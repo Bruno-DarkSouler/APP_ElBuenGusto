@@ -19,7 +19,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void colocar_layouts();
-    void conseguir_comida();
+
+private slots:
+    void on_barraBusqueda_textChanged();
 
 private:
     Ui::MainWindow *ui;

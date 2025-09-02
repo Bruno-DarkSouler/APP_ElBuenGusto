@@ -114,7 +114,7 @@ padding: 8;</string>
       <property name="frameShadow">
        <enum>QFrame::Shadow::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="8,1">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
        <item>
         <widget class="QFrame" name="frame_6">
          <property name="frameShape">
@@ -123,9 +123,9 @@ padding: 8;</string>
          <property name="frameShadow">
           <enum>QFrame::Shadow::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
           <item>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="barraBusqueda">
             <property name="styleSheet">
              <string notr="true">background-color:rgb(245,235,210
 );
@@ -139,26 +139,10 @@ margin: 0 10;</string>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label">
-            <property name="font">
-             <font>
-              <pointsize>14</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color:rgb(245,235,210);</string>
-            </property>
-            <property name="text">
-             <string>Nuestras Especialidades</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignmentFlag::AlignVCenter">
            <widget class="QScrollArea" name="scrollArea">
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+            </property>
             <property name="widgetResizable">
              <bool>true</bool>
             </property>
@@ -168,7 +152,7 @@ margin: 0 10;</string>
                <x>0</x>
                <y>0</y>
                <width>758</width>
-               <height>69</height>
+               <height>631</height>
               </rect>
              </property>
             </widget>
