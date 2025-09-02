@@ -6,6 +6,7 @@
         <file>fideos.jpeg</file>
         <file>minutas.jpeg</file>
         <file>salame.jpeg</file>
+<<<<<<< HEAD
         <file>fideostop.jpg</file>
         <file>tarta.jpg</file>
         <file>mas.png</file>
@@ -13,5 +14,8 @@
         <file>numero-uno.png</file>
         <file>borrar.png</file>
         <file>pngwing.com.png</file>
+=======
+        <file>fondo2.jpg</file>
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
     </qresource>
 </RCC>

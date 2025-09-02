@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-bbdf73d28fa2ca7ab1c3.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ElBuenGusto",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ElBuenGusto::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ElBuenGusto-Debug-384f27c83e8538dafbf5.json",
+					"name" : "ElBuenGusto",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ElBuenGusto_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ElBuenGusto_autogen-Debug-d88cba8b0af90e49a8da.json",
+					"name" : "ElBuenGusto_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ElBuenGusto_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ElBuenGusto_autogen_timestamp_deps-Debug-56d2ff63085ac07ea355.json",
+					"name" : "ElBuenGusto_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

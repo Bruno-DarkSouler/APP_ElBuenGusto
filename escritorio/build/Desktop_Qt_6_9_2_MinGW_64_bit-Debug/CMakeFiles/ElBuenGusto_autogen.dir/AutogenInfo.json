@@ -1,5 +1,6 @@
 {
 	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
+<<<<<<< HEAD
 	"BUILD_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen",
 	"CMAKE_BINARY_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
 	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
@@ -14,6 +15,22 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake",
 		"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
+=======
+	"BUILD_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio",
+	"CMAKE_EXECUTABLE" : "C:/Qt/Tools/CMake_64/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : 
+	[
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/CMakeLists.txt",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
+		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
+		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake",
@@ -26,7 +43,11 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake",
+<<<<<<< HEAD
 		"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake",
+=======
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeRCInformation.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake",
@@ -339,15 +360,24 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake",
 		"C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake",
+<<<<<<< HEAD
 		"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/img.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio",
 	"CROSS_CONFIG" : false,
 	"DEP_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/deps",
+=======
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/img.qrc"
+	],
+	"CMAKE_SOURCE_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/deps",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 	"DEP_FILE_RULE_NAME" : "ElBuenGusto_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
+<<<<<<< HEAD
 			"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/carrito.h",
 			"MU",
 			"EWIEGA46WW/moc_carrito.cpp",
@@ -355,20 +385,44 @@
 		],
 		[
 			"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/mainwindow.h",
+=======
+			"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/mainwindow.h",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
 			null
 		],
 		[
+<<<<<<< HEAD
 			"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/tarjeta_comida_principal.h",
+=======
+			"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/sign_in.h",
+			"MU",
+			"EWIEGA46WW/moc_sign_in.cpp",
+			null
+		],
+		[
+			"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/sign_up.h",
+			"MU",
+			"EWIEGA46WW/moc_sign_up.cpp",
+			null
+		],
+		[
+			"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/tarjeta_comida_principal.h",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 			"MU",
 			"EWIEGA46WW/moc_tarjeta_comida_principal.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+<<<<<<< HEAD
 	"INCLUDE_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/include",
 	"MOC_COMPILATION_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/mocs_compilation.cpp",
+=======
+	"INCLUDE_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/mocs_compilation.cpp",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
@@ -424,16 +478,26 @@
 		"-c",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp"
 	],
+<<<<<<< HEAD
 	"MOC_PREDEFS_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 2,
 	"PARSE_CACHE_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/ParseCache.txt",
+=======
+	"MOC_PREDEFS_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/ParseCache.txt",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 	"QT_MOC_EXECUTABLE" : "C:/Qt/6.9.2/mingw_64/bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "C:/Qt/6.9.2/mingw_64/bin/uic.exe",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 9,
+<<<<<<< HEAD
 	"SETTINGS_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
@@ -454,6 +518,21 @@
 		],
 		[
 			"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/tarjeta_comida_principal.cpp",
+=======
+	"SETTINGS_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/main.cpp", "MU", null ],
+		[
+			"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[ "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/sign_in.cpp", "MU", null ],
+		[ "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/sign_up.cpp", "MU", null ],
+		[
+			"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/tarjeta_comida_principal.cpp",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 			"MU",
 			null
 		]

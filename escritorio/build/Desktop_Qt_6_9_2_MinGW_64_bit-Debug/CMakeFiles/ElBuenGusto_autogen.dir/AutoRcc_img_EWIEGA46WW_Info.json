@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"BUILD_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen",
 	"CMAKE_BINARY_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
 	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
@@ -23,14 +24,39 @@
 		"C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/numero-uno.png"
 	],
 	"LOCK_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/AutoRcc_img_EWIEGA46WW_Lock.lock",
+=======
+	"BUILD_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio",
+	"CMAKE_SOURCE_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/hamburguesa.jpeg",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/fideos.jpeg",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/salame.jpeg",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/minutas.jpeg",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/fondo2.jpg",
+		"C:/Users/Alumnos/APP_ElBuenGusto/escritorio/WhatsApp Image 2025-08-11 at 20.56.21.jpeg"
+	],
+	"LOCK_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/AutoRcc_img_EWIEGA46WW_Lock.lock",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 	"MULTI_CONFIG" : false,
 	"OPTIONS" : [ "--no-zstd", "-name", "img" ],
 	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
 	"OUTPUT_NAME" : "qrc_img.cpp",
 	"RCC_EXECUTABLE" : "C:/Qt/6.9.2/mingw_64/bin/rcc.exe",
 	"RCC_LIST_OPTIONS" : [ "--list" ],
+<<<<<<< HEAD
 	"SETTINGS_FILE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/AutoRcc_img_EWIEGA46WW_Used.txt",
 	"SOURCE" : "C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/img.qrc",
+=======
+	"SETTINGS_FILE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir/AutoRcc_img_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Users/Alumnos/APP_ElBuenGusto/escritorio/img.qrc",
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
 	"USE_BETTER_GRAPH" : true,
 	"VERBOSITY" : 0
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto.dir
 C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
 C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
@@ -7,3 +8,14 @@ C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_Min
 C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
 C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen_timestamp_deps.dir
 C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir
+=======
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen_timestamp_deps.dir
+C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/ElBuenGusto_autogen.dir
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
