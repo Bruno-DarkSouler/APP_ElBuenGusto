@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+set(__QT_DEPLOY_TARGET_ElBuenGusto_FILE C:/Users/Alumnos/Downloads/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto.exe)
+=======
+set(__QT_DEPLOY_TARGET_ElBuenGusto_FILE C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/ElBuenGusto.exe)
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
+set(__QT_DEPLOY_TARGET_ElBuenGusto_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ElBuenGusto_RUNTIME_DLLS C:/Qt/6.9.2/mingw_64/bin/Qt6Widgets.dll;C:/Qt/6.9.2/mingw_64/bin/Qt6Gui.dll;C:/Qt/6.9.2/mingw_64/bin/Qt6Core.dll)

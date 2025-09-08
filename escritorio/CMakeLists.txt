@@ -24,8 +24,20 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         img.qrc
+<<<<<<< HEAD
 
         tarjeta_especialidades.h tarjeta_especialidades.cpp tarjeta_especialidades.ui
+=======
+        tarjeta_comida_principal.h tarjeta_comida_principal.cpp tarjeta_comida_principal.ui
+<<<<<<< HEAD
+        carrito.h carrito.cpp carrito.ui
+        borrar.png
+=======
+        sign_in.h sign_in.cpp sign_in.ui
+        sign_up.h sign_up.cpp sign_up.ui
+>>>>>>> 5056372057d3d681aae9900b6b453f2a0c051725
+
+>>>>>>> 10ffa5fa0da75a65b3dd1f5b61c4e88977806605
 
     )
 # Define target properties for Android with Qt 6 as:
