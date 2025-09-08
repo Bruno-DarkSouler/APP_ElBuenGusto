@@ -31,4 +31,5 @@ void MainWindow::colocar_layouts(){
 
 void MainWindow::on_barraBusqueda_textChanged(){
     qInfo("HOLAAAAA");
+
 }
