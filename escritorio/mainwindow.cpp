@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->barraBusqueda, &QLineEdit::textChanged, this, &MainWindow::on_barraBusqueda_textChanged);
+    connect(ui->barraBusqueda, &QLineEdit::editingFinished, this, &MainWindow::on_barraBusqueda_textChanged);
 }
 
 MainWindow::~MainWindow()
@@ -19,10 +19,9 @@ MainWindow::~MainWindow()
 void MainWindow::colocar_layouts(){
     QVBoxLayout *contenedor_v = new QVBoxLayout;
     ui->scrollAreaWidgetContents->setLayout(contenedor_v);
-    std::vector<QString> productos = {"Camisa", "Pantalón", "Zapatos"};
+    std::vector<QString> productos = {"Camisa", "Hola", "Zapatos"};
 
-    for (const auto &nombre : productos) {
-        qInfo("HELLO WORLD");
+    for (const auto &nombre : productos){
         tarjeta_especialidades *tarjeta = new tarjeta_especialidades(this);
         tarjeta->setData(nombre);
         contenedor_v->addWidget(tarjeta);
@@ -30,5 +29,11 @@ void MainWindow::colocar_layouts(){
 }
 
 void MainWindow::on_barraBusqueda_textChanged(){
-    qInfo("HOLAAAAA MUNDOOOO");
+    QWidget* ventana_contenedor = ui->scrollArea->widget();
+    QLayout* colocador = ventana_contenedor->layout();
+    for(int i=0; i < colocador->count(); i++){
+        if(colocador->itemAt(i)->childAt(1)->text() == "Hola"){
+            qInfo('ege');
+        }
+    }
 }
