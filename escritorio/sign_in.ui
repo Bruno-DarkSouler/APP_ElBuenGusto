@@ -63,7 +63,7 @@ border-radius: 0;</string>
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="img.qrc">:/fondo2.jpg</pixmap>
+            <pixmap>:/fondo2.jpg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -162,7 +162,7 @@ border-radius: 0;</string>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2">
+          <widget class="QLineEdit" name="email">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
@@ -220,7 +220,7 @@ border-radius: 0;</string>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="contra">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
@@ -269,11 +269,20 @@ border-radius: 0;</string>
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(200, 30, 45);
-color: rgb(255,255,255);
-border: 2 solid rgb(200, 30, 45);
-border-radius: 10;
-padding: 10;</string>
+            <string notr="true">QPushButton {
+	background-color: rgb(200, 30, 45);
+	color: rgb(255,255,255);
+	border-radius: 10;
+	padding: 10;
+}
+QPushButton:hover {
+    background-color: rgb(171,17,27);
+	color: rgb(255,255,255);
+	box-shadow: 0 100 200 rgba(0, 0, 0, 0.3);
+}
+QPushButton:pressed {
+    background-color: rgb(124,10,25);
+}</string>
            </property>
            <property name="text">
             <string>Iniciar Sesión</string>
@@ -393,8 +402,6 @@ padding: 10;</string>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="img.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
