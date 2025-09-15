@@ -6,5 +6,8 @@
         <file>fideos.jpeg</file>
         <file>minutas.jpeg</file>
         <file>salame.jpeg</file>
+        <file>menu-hamb.png</file>
+        <file>logo.png</file>
+        <file>fideos.png</file>
     </qresource>
 </RCC>
