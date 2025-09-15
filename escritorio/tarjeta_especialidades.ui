@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>333</width>
-    <height>302</height>
+    <height>347</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -58,18 +58,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_2">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
+    <widget class="QPushButton" name="pushButton">
      <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+      <string>PushButton</string>
      </property>
     </widget>
    </item>

@@ -32,8 +32,13 @@ void MainWindow::on_barraBusqueda_textChanged(){
     QWidget* ventana_contenedor = ui->scrollArea->widget();
     QLayout* colocador = ventana_contenedor->layout();
     for(int i=0; i < colocador->count(); i++){
-        if(colocador->itemAt(i)->childAt(1)->text() == "Hola"){
-            qInfo('ege');
+        QLayoutItem* objeto_tarjeta = colocador->itemAt(i);
+        if(objeto_tarjeta){
+            QWidget *ventana_tarjeta = objeto_tarjeta->widget();
+            if(ventana_tarjeta){
+                QList<QPushButton*> botones = ventana_tarjeta->findChildren<QPushButton*>();
+                qInfo("HOLA MUNDO");
+            }
         }
     }
 }

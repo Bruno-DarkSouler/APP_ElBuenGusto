@@ -11,10 +11,14 @@ class tarjeta_especialidades : public QFrame
 {
     Q_OBJECT
 
+private slots:
+    void abrirTarjeta(QString id);
+
 public:
     explicit tarjeta_especialidades(QWidget *parent = nullptr);
     ~tarjeta_especialidades();
     void setData(QString texto);
+    int id;
 
 private:
     Ui::tarjeta_especialidades *ui;

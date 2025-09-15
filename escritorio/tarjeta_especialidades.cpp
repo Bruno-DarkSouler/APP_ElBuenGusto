@@ -6,6 +6,9 @@ tarjeta_especialidades::tarjeta_especialidades(QWidget *parent)
     , ui(new Ui::tarjeta_especialidades)
 {
     ui->setupUi(this);
+    connect(ui->pushButton, &QPushButton::clicked, this, [=]{
+        tarjeta_especialidades::abrirTarjeta("HOLA Mundo");
+    });
 }
 
 tarjeta_especialidades::~tarjeta_especialidades()
@@ -14,5 +17,10 @@ tarjeta_especialidades::~tarjeta_especialidades()
 }
 
 void tarjeta_especialidades::setData(const QString data){
-    ui->label_2->setText(data);
+    ui->pushButton->setText(data);
+    this->id = 1;
+}
+
+void tarjeta_especialidades::abrirTarjeta(QString id){
+    qInfo("id");
 }
