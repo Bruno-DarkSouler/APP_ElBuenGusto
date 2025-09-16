@@ -162,11 +162,10 @@ border-radius: 0;</string>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="email">
+          <widget class="QLineEdit" name="lineEdit_email">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
-border-radius: 20;
 border-radius: 10;
 padding: 10;</string>
            </property>
@@ -220,7 +219,7 @@ border-radius: 0;</string>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="contra">
+          <widget class="QLineEdit" name="lineEdit_password">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
@@ -257,7 +256,7 @@ border-radius: 0;</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="pushButton_sign_in">
            <property name="font">
             <font>
              <family>Arial</family>
@@ -365,7 +364,7 @@ border-radius: 0;</string>
           </widget>
          </item>
          <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="pushButton_sign_up">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
              <horstretch>0</horstretch>

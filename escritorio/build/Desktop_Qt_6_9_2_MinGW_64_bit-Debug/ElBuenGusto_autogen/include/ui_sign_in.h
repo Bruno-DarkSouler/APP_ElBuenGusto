@@ -34,19 +34,19 @@ public:
     QFrame *frame_5;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_3;
-    QLineEdit *email;
+    QLineEdit *lineEdit_email;
     QFrame *frame_6;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_2;
-    QLineEdit *contra;
+    QLineEdit *lineEdit_password;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout_5;
-    QPushButton *pushButton;
+    QPushButton *pushButton_sign_in;
     QPushButton *pushButton_3;
     QFrame *frame_3;
     QVBoxLayout *verticalLayout_3;
     QLabel *label;
-    QPushButton *pushButton_2;
+    QPushButton *pushButton_sign_up;
 
     void setupUi(QWidget *sign_in)
     {
@@ -142,15 +142,15 @@ public:
 
         verticalLayout_6->addWidget(label_3);
 
-        email = new QLineEdit(frame_5);
-        email->setObjectName("email");
-        email->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        lineEdit_email = new QLineEdit(frame_5);
+        lineEdit_email->setObjectName("lineEdit_email");
+        lineEdit_email->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "border: 2 solid rgba(0, 0, 0,0.50);\n"
 "border-radius: 20;\n"
 "border-radius: 10;\n"
 "padding: 10;"));
 
-        verticalLayout_6->addWidget(email);
+        verticalLayout_6->addWidget(lineEdit_email);
 
 
         verticalLayout_2->addWidget(frame_5);
@@ -174,16 +174,16 @@ public:
 
         verticalLayout_4->addWidget(label_2, 0, Qt::AlignmentFlag::AlignLeft);
 
-        contra = new QLineEdit(frame_6);
-        contra->setObjectName("contra");
-        contra->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        lineEdit_password = new QLineEdit(frame_6);
+        lineEdit_password->setObjectName("lineEdit_password");
+        lineEdit_password->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "border: 2 solid rgba(0, 0, 0,0.50);\n"
 "border-radius: 20;\n"
 "border-radius: 10;\n"
 "padding: 10;"));
-        contra->setEchoMode(QLineEdit::EchoMode::Password);
+        lineEdit_password->setEchoMode(QLineEdit::EchoMode::Password);
 
-        verticalLayout_4->addWidget(contra);
+        verticalLayout_4->addWidget(lineEdit_password);
 
 
         verticalLayout_2->addWidget(frame_6);
@@ -197,11 +197,11 @@ public:
         frame_2->setFrameShadow(QFrame::Shadow::Raised);
         verticalLayout_5 = new QVBoxLayout(frame_2);
         verticalLayout_5->setObjectName("verticalLayout_5");
-        pushButton = new QPushButton(frame_2);
-        pushButton->setObjectName("pushButton");
-        pushButton->setFont(font2);
-        pushButton->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        pushButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        pushButton_sign_in = new QPushButton(frame_2);
+        pushButton_sign_in->setObjectName("pushButton_sign_in");
+        pushButton_sign_in->setFont(font2);
+        pushButton_sign_in->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        pushButton_sign_in->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	background-color: rgb(200, 30, 45);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 10;\n"
@@ -216,7 +216,7 @@ public:
 "    background-color: rgb(124,10,25);\n"
 "}"));
 
-        verticalLayout_5->addWidget(pushButton);
+        verticalLayout_5->addWidget(pushButton_sign_in);
 
         pushButton_3 = new QPushButton(frame_2);
         pushButton_3->setObjectName("pushButton_3");
@@ -259,19 +259,19 @@ public:
 
         verticalLayout_3->addWidget(label, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
 
-        pushButton_2 = new QPushButton(frame_3);
-        pushButton_2->setObjectName("pushButton_2");
-        sizePolicy.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
-        pushButton_2->setSizePolicy(sizePolicy);
-        pushButton_2->setFont(font2);
-        pushButton_2->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        pushButton_2->setStyleSheet(QString::fromUtf8("background-color: rgb(245, 235, 210);\n"
+        pushButton_sign_up = new QPushButton(frame_3);
+        pushButton_sign_up->setObjectName("pushButton_sign_up");
+        sizePolicy.setHeightForWidth(pushButton_sign_up->sizePolicy().hasHeightForWidth());
+        pushButton_sign_up->setSizePolicy(sizePolicy);
+        pushButton_sign_up->setFont(font2);
+        pushButton_sign_up->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        pushButton_sign_up->setStyleSheet(QString::fromUtf8("background-color: rgb(245, 235, 210);\n"
 "color: rgb(200,30,45);\n"
 "border: 2 solid rgb(200, 30, 45);\n"
 "border-radius: 10;\n"
 "padding: 10;"));
 
-        verticalLayout_3->addWidget(pushButton_2, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
+        verticalLayout_3->addWidget(pushButton_sign_up, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
 
 
         verticalLayout_2->addWidget(frame_3);
@@ -292,15 +292,15 @@ public:
         label_5->setText(QCoreApplication::translate("sign_in", "El buen gusto", nullptr));
         pushButton_4->setText(QCoreApplication::translate("sign_in", "Rotiser\303\255a - Comida casera", nullptr));
         label_3->setText(QCoreApplication::translate("sign_in", "Email", nullptr));
-        email->setText(QString());
-        email->setPlaceholderText(QCoreApplication::translate("sign_in", "Ingresa tu email", nullptr));
+        lineEdit_email->setText(QString());
+        lineEdit_email->setPlaceholderText(QCoreApplication::translate("sign_in", "Ingresa tu email", nullptr));
         label_2->setText(QCoreApplication::translate("sign_in", "Contrase\303\261a", nullptr));
-        contra->setText(QString());
-        contra->setPlaceholderText(QCoreApplication::translate("sign_in", "Ingresa tu contrase\303\261a", nullptr));
-        pushButton->setText(QCoreApplication::translate("sign_in", "Iniciar Sesi\303\263n", nullptr));
+        lineEdit_password->setText(QString());
+        lineEdit_password->setPlaceholderText(QCoreApplication::translate("sign_in", "Ingresa tu contrase\303\261a", nullptr));
+        pushButton_sign_in->setText(QCoreApplication::translate("sign_in", "Iniciar Sesi\303\263n", nullptr));
         pushButton_3->setText(QCoreApplication::translate("sign_in", "\302\277Olvidaste tu contrase\303\261a?", nullptr));
         label->setText(QCoreApplication::translate("sign_in", "\302\277No tienes una cuenta?", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("sign_in", "Crear cuenta", nullptr));
+        pushButton_sign_up->setText(QCoreApplication::translate("sign_in", "Crear cuenta", nullptr));
     } // retranslateUi
 
 };

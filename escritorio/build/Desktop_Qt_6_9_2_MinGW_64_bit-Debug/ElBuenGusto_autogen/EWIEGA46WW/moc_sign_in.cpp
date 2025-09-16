@@ -38,10 +38,23 @@ template <> constexpr inline auto sign_in::qt_create_metaobjectdata<qt_meta_tag_
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "sign_in"
+        "sign_in",
+        "registrationSuccessful",
+        "",
+        "validateEmail",
+        "validatePassword",
+        "on_iniciar_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'registrationSuccessful'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'validateEmail'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'validatePassword'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_iniciar_clicked'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -63,10 +76,19 @@ Q_CONSTINIT const QMetaObject sign_in::staticMetaObject = { {
 void sign_in::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<sign_in *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->registrationSuccessful(); break;
+        case 1: _t->validateEmail(); break;
+        case 2: _t->validatePassword(); break;
+        case 3: _t->on_iniciar_clicked(); break;
+        default: ;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (sign_in::*)()>(_a, &sign_in::registrationSuccessful, 0))
+            return;
+    }
 }
 
 const QMetaObject *sign_in::metaObject() const
@@ -85,6 +107,24 @@ void *sign_in::qt_metacast(const char *_clname)
 int sign_in::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 4)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 4;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 4)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 4;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void sign_in::registrationSuccessful()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

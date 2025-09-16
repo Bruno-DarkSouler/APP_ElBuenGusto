@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>perfil</class>
+ <widget class="QWidget" name="perfil">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>671</width>
+    <height>2458</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(245,235,210);</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>653</width>
+        <height>2440</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(200, 35, 40);
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>👤 Mi Perfil</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(245,235,210);</string>
+            </property>
+            <property name="text">
+             <string>Información personal y preferenciasl</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255,255,255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QFrame" name="frame_5">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QFormLayout" name="formLayout">
+             <item row="0" column="0">
+              <widget class="QFrame" name="frame_7">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item alignment="Qt::AlignmentFlag::AlignHCenter">
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Foto de perfil</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QFrame" name="frame_8">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_4">
+                <item>
+                 <widget class="QLabel" name="label_3">
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(80,50,20);</string>
+                  </property>
+                  <property name="text">
+                   <string>María González</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_4">
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(70,85,90);</string>
+                  </property>
+                  <property name="text">
+                   <string>Cliente desde: Enero 2023</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_5">
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(200,30,45);</string>
+                  </property>
+                  <property name="text">
+                   <string>⭐ Cliente VIP</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Nombre Completo *</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>María González</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_4">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Email *</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_2">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>maria.gonzalez@email.com</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_6">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Teléfono *</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_3">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>11-1234-5678</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_9">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Fecha de Nacimiento</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_4">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>1985-03-15</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_10">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Dirección Principal *</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_5">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>Av. Libertador 1234, San Isidro, Buenos Aires</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_11">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>🎯 Preferencias</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_12">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Comida Favorita</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_6">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>Empanadas</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_13">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Horario Preferido</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_7">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string>Cena (19:00 - 21:00)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_14">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_15">
+             <item>
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>Recibir notificaciones de ofertas y promociones</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_2">
+               <property name="text">
+                <string>Recordatorios de pedidos frecuentes</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_15">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <item>
+              <widget class="QLabel" name="label_15">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>🔒 Seguridad</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_16">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_17">
+             <item>
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Nueva Contraseña</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_8">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="placeholderText">
+                <string>Dejar vacío para no cambiar</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_17">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_18">
+             <item>
+              <widget class="QLabel" name="label_17">
+               <property name="text">
+                <string>Confirmar Contraseña</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_9">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="placeholderText">
+                <string>Confirmar nueva contraseña</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_18">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: rgb(107, 114, 128);
+	color: rgb(255,255,255);
+	border-radius: 10;
+	padding: 10;
+}
+QPushButton:hover {
+    background-color: rgb(171,17,27);
+	color: rgb(255,255,255);
+	box-shadow: 0 100 200 rgba(0, 0, 0, 0.3);
+}
+QPushButton:pressed {
+    background-color: rgb(124,10,25);
+}</string>
+               </property>
+               <property name="text">
+                <string>Cancelar Cambios</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton">
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: rgb(200, 30, 45);
+	color: rgb(255,255,255);
+	border-radius: 10;
+	padding: 10;
+}
+QPushButton:hover {
+    background-color: rgb(171,17,27);
+	color: rgb(255,255,255);
+	box-shadow: 0 100 200 rgba(0, 0, 0, 0.3);
+}
+QPushButton:pressed {
+    background-color: rgb(124,10,25);
+}</string>
+               </property>
+               <property name="text">
+                <string>💾 Guardar Cambios</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignmentFlag::AlignVCenter">
+        <widget class="QFrame" name="frame_19">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(22, 163, 74);
+color: rgb(255, 255, 255);
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_19">
+          <item>
+           <widget class="QLabel" name="label_18">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>📊 Mis Estadísticas</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_20">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255,255,255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_23">
+          <item>
+           <widget class="QFrame" name="frame_27">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QLabel" name="label_22">
+               <property name="text">
+                <string>Pedidos Totales:</string>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignmentFlag::AlignRight">
+              <widget class="QLabel" name="label_23">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(22,16,74);</string>
+               </property>
+               <property name="text">
+                <string>47</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_28">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Gastado Total:</string>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignmentFlag::AlignRight">
+              <widget class="QLabel" name="label_25">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(22,16,74);</string>
+               </property>
+               <property name="text">
+                <string>$234,500</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_29">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QLabel" name="label_26">
+               <property name="text">
+                <string>Pedido Promedio:</string>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignmentFlag::AlignRight">
+              <widget class="QLabel" name="label_27">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(22,16,74);</string>
+               </property>
+               <property name="text">
+                <string>$4,989</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_30">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QLabel" name="label_28">
+               <property name="text">
+                <string>Reseñas Dadas:</string>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignmentFlag::AlignRight">
+              <widget class="QLabel" name="label_29">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(22,16,74);</string>
+               </property>
+               <property name="text">
+                <string>31</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignmentFlag::AlignVCenter">
+        <widget class="QFrame" name="frame_21">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(37, 99, 255);
+color: rgb(255, 255, 255);
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_20">
+          <item>
+           <widget class="QLabel" name="label_19">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>💳 Métodos de Pago</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_22">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255,255,255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_35">
+          <item>
+           <widget class="QFrame" name="frame_31">
+            <property name="styleSheet">
+             <string notr="true">border: 2 dashed rgba(0, 0, 0,0.50);
+border-radius: 5;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_25">
+             <item alignment="Qt::AlignmentFlag::AlignHCenter">
+              <widget class="QLabel" name="label_30">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(200,35,40);
+border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="text">
+                <string>+ Agregar Método de Pago</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignmentFlag::AlignVCenter">
+        <widget class="QFrame" name="frame_23">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(147, 51, 234);
+color: rgb(255, 255, 255);
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_21">
+          <item>
+           <widget class="QLabel" name="label_20">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>📍 Mis Direcciones</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_24">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255,255,255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_24">
+          <item>
+           <widget class="QFrame" name="frame_32">
+            <property name="styleSheet">
+             <string notr="true">border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 5;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_27">
+             <item>
+              <widget class="QFrame" name="frame_34">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QLabel" name="label_31">
+                  <property name="text">
+                   <string>🏠 Casa</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_35">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="QLabel" name="label_33">
+                  <property name="text">
+                   <string>Av. Libertador 1234</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_36">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_28">
+                <item>
+                 <widget class="QLabel" name="label_35">
+                  <property name="text">
+                   <string>San Isidro, Buenos Aires</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_37">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_29">
+                <item>
+                 <widget class="QLabel" name="label_36">
+                  <property name="text">
+                   <string>Código Postal: 1642</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_33">
+            <property name="styleSheet">
+             <string notr="true">border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 5;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_32">
+             <item>
+              <widget class="QFrame" name="frame_38">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="QLabel" name="label_32">
+                  <property name="text">
+                   <string>🏠 Casa</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_39">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="QLabel" name="label_34">
+                  <property name="text">
+                   <string>Av. Libertador 1234</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_40">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_30">
+                <item>
+                 <widget class="QLabel" name="label_37">
+                  <property name="text">
+                   <string>San Isidro, Buenos Aires</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_41">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_31">
+                <item>
+                 <widget class="QLabel" name="label_38">
+                  <property name="text">
+                   <string>Código Postal: 1642</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_42">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255,255,255);</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_34">
+             <item>
+              <widget class="QFrame" name="frame_44">
+               <property name="styleSheet">
+                <string notr="true">border: 2 dashed rgba(0, 0, 0,0.50);
+border-radius: 5;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_26">
+                <item alignment="Qt::AlignmentFlag::AlignHCenter">
+                 <widget class="QLabel" name="label_40">
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(200,35,40);
+border: 2 dashed rgba(0, 0, 0,0.0);
+border-radius: 15;</string>
+                  </property>
+                  <property name="text">
+                   <string>+ Agregar Dirección</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignmentFlag::AlignVCenter">
+        <widget class="QFrame" name="frame_25">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(234, 88, 12);
+color: rgb(255, 255, 255);
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_22">
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>📦 Pedidos Recientes</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_26">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255,255,255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>618</width>
-    <height>750</height>
+    <width>671</width>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -161,7 +161,7 @@ border-radius: 0;</string>
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-203</y>
            <width>561</width>
            <height>693</height>
           </rect>
@@ -332,7 +332,6 @@ border-radius: 0;</string>
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
-border-radius: 20;
 border-radius: 10;
 padding: 10;</string>
                </property>

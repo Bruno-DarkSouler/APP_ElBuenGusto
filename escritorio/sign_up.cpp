@@ -1,3 +1,4 @@
+#include "mainwindow.h"
 #include "sign_up.h"
 #include "ui_sign_up.h"
 #include <QMessageBox>
@@ -239,8 +240,7 @@ void sign_up::on_iniciar_clicked()
         // O cerrar esta ventana y abrir otra
         this->close();
 
-        // Si tienes otra ventana para abrir:
-        // MainWindow *mainWindow = new MainWindow();
-        // mainWindow->show();
+        MainWindow *mainwindow = new MainWindow();
+        mainwindow->show();
     }
 }
