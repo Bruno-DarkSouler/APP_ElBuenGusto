@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>423</width>
     <height>600</height>
    </rect>
   </property>
@@ -151,8 +151,8 @@ margin: 0 10;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>758</width>
-               <height>390</height>
+               <width>381</width>
+               <height>344</height>
               </rect>
              </property>
             </widget>
@@ -173,8 +173,28 @@ border-radius:10px;</string>
          <property name="frameShadow">
           <enum>QFrame::Shadow::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(200,30,50);
+border-radius:5px;color:rgb(245,235,210);
+padding:10 0;</string>
+            </property>
+            <property name="text">
+             <string>Programar Pedido</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
            <widget class="QPushButton" name="pushButton_2">
             <property name="font">
              <font>
@@ -195,27 +215,7 @@ padding:10 0;</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="font">
-             <font>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color:rgb(200,30,50);
-border-radius:5px;color:rgb(245,235,210);
-padding:10 0;</string>
-            </property>
-            <property name="text">
-             <string>Programar Pedido</string>
-            </property>
-           </widget>
-          </item>
-          <item>
+          <item row="1" column="0">
            <widget class="QPushButton" name="pushButton_4">
             <property name="font">
              <font>
@@ -235,7 +235,7 @@ padding:10 0;</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="1" column="1">
            <widget class="QPushButton" name="pushButton_5">
             <property name="font">
              <font>

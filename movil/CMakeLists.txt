@@ -29,6 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         sign_up.h sign_up.cpp sign_up.ui
         sign_in.h sign_in.cpp sign_in.ui
         carrito.h carrito.cpp carrito.ui
+        repartidor.h repartidor.cpp repartidor.ui
 
     )
 # Define target properties for Android with Qt 6 as:
