@@ -14,6 +14,7 @@ class repartidor : public QWidget
 public:
     explicit repartidor(QWidget *parent = nullptr);
     ~repartidor();
+    void instancia_tarjetas();
 
 private:
     Ui::repartidor *ui;
