@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PanelCajero</class>
+ <widget class="QWidget" name="PanelCajero">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1030</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Panel Cajero - Rotisería El Buen Gusto</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+   QWidget {
+       background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #8B4513, stop:1 #654321);
+       font-family: 'Segoe UI', Arial, sans-serif;
+   }
+   </string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_main">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frame_left">
+     <property name="maximumSize">
+      <size>
+       <width>750</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #F5EBD2; border-radius: 10px; margin: 5px;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_left">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="frame_header">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(200, 30, 45, 0.1); border-radius: 8px; padding: 8px;</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_header">
+         <item>
+          <widget class="QLabel" name="label_logo">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="img.qrc">:/logo.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_titulo">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>18</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(80,50,20);</string>
+           </property>
+           <property name="text">
+            <string>Panel del Cajero</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_header">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_hora">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(80,50,20);</string>
+           </property>
+           <property name="text">
+            <string>00:00:00</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_busqueda">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white; border-radius: 8px; padding: 5px;</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_busqueda">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_buscarCliente">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit { padding: 8px; border: 2px solid #ddd; border-radius: 4px; font-size: 12px; }</string>
+           </property>
+           <property name="placeholderText">
+            <string>Buscar cliente por nombre o teléfono...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_buscarCliente">
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton { background-color: rgb(200, 30, 45); color: white; border: none; padding: 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+QPushButton:hover { background-color: rgb(180, 25, 40); }</string>
+           </property>
+           <property name="text">
+            <string>Buscar</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_limpiarCliente">
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton { background-color: #666; color: white; border: none; padding: 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+QPushButton:hover { background-color: #555; }</string>
+           </property>
+           <property name="text">
+            <string>Limpiar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_filtros">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white; border-radius: 8px; padding: 5px;</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_filtros">
+         <item>
+          <widget class="QLabel" name="label_categoria">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Categoría:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_categorias">
+           <property name="styleSheet">
+            <string notr="true">QComboBox { padding: 6px; border: 2px solid #ddd; border-radius: 4px; font-size: 11px; }</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Todas las categorías</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Minutas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Pastas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Guisos</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Tartas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Empanadas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Postres</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Bebidas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Embutidos</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Comidas Rápidas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Otros</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_buscarProducto">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit { padding: 6px; border: 2px solid #ddd; border-radius: 4px; font-size: 11px; }</string>
+           </property>
+           <property name="placeholderText">
+            <string>Buscar producto...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QScrollArea" name="scrollArea_productos">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QScrollArea { border: none; background-color: transparent; }</string>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>520</width>
+           <height>290</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_productos">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_right">
+     <property name="maximumSize">
+      <size>
+       <width>430</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #F5EBD2; border-radius: 10px; margin: 5px;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_right">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item>
+       <widget class="QGroupBox" name="groupBox_datosCliente">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+         QGroupBox {
+             background-color: white;
+             border-radius: 8px;
+             padding-top: 15px;
+             color: rgb(80,50,20);
+         }
+         QGroupBox::title {
+             subcontrol-origin: margin;
+             left: 10px;
+             padding: 0 8px 0 8px;
+         }
+         </string>
+        </property>
+        <property name="title">
+         <string>Cliente Seleccionado</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_datosCliente">
+         <item>
+          <widget class="QLabel" name="label_nombreCliente">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>10</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:black;</string>
+           </property>
+           <property name="text">
+            <string>Nombre y Apellido: -</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_telefonoCliente">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>10</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Gmail: -</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_direccionCliente">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>10</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Dirección: -</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_emailCliente">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>10</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Telefono: -</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_tipoPedido">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+         QGroupBox {
+             background-color: white;
+             border-radius: 8px;
+             padding-top: 15px;
+             color: rgb(80,50,20);
+         }
+         QGroupBox::title {
+             subcontrol-origin: margin;
+             left: 10px;
+             padding: 0 8px 0 8px;
+         }
+         </string>
+        </property>
+        <property name="title">
+         <string>Tipo de Pedido</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_tipoPedido">
+         <item>
+          <widget class="QRadioButton" name="radioButton_inmediato">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>11</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Pedido Inmediato</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButton_programado">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>11</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Pedido Programado</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_programacion">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_programacion">
+            <property name="spacing">
+             <number>8</number>
+            </property>
+            <item>
+             <widget class="QDateEdit" name="dateEdit_fecha">
+              <property name="styleSheet">
+               <string notr="true">QDateEdit { padding: 4px; border: 2px solid #ddd; border-radius: 4px; font-size: 10px; }</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="timeEdit_hora">
+              <property name="styleSheet">
+               <string notr="true">QTimeEdit { padding: 4px; border: 2px solid #ddd; border-radius: 4px; font-size: 10px; }</string>
+              </property>
+              <property name="displayFormat">
+               <string>HH:mm</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_carrito">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+         QGroupBox {
+             background-color: white;
+             border-radius: 8px;
+             padding-top: 15px;
+             color: rgb(80,50,20);
+         }
+         QGroupBox::title {
+             subcontrol-origin: margin;
+             left: 10px;
+             padding: 0 8px 0 8px;
+         }
+         </string>
+        </property>
+        <property name="title">
+         <string>Carrito de Compras</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_carrito">
+         <item>
+          <widget class="QScrollArea" name="scrollArea_carrito">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>280</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QScrollArea { border: 1px solid #ddd; border-radius: 6px; background-color: #f9f9f9; }</string>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_carrito">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>350</width>
+              <height>69</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_carritoItems">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_totales">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+         QGroupBox {
+             background-color: rgba(200, 30, 45, 0.1);
+             border-radius: 8px;
+             padding-top: 15px;
+             color: rgb(80,50,20);
+         }
+         QGroupBox::title {
+             subcontrol-origin: margin;
+             left: 10px;
+             padding: 0 8px 0 8px;
+         }
+         </string>
+        </property>
+        <property name="title">
+         <string>Totales</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_totales">
+         <item>
+          <widget class="QLabel" name="label_subtotal">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>11</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Subtotal: $0.00</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_delivery">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>11</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Delivery: $0.00</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_total">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>14</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(200, 30, 45);</string>
+           </property>
+           <property name="text">
+            <string>Total: $0.00</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_crearPedido">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton { background-color: rgb(200, 30, 45); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; }
+QPushButton:hover { background-color: rgb(180, 25, 40); }
+QPushButton:disabled { background-color: #ccc; color: #999; }</string>
+        </property>
+        <property name="text">
+         <string>Crear Pedido</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
+ <connections/>
+</ui>

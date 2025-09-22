@@ -9,5 +9,8 @@
         <file>menu-hamb.png</file>
         <file>logo.png</file>
         <file>fideos.png</file>
+        <file>menos-top.png</file>
+        <file>mas-top.png</file>
+        <file>trash.png</file>
     </qresource>
 </RCC>
