@@ -1,17 +1,17 @@
 #include "pedido_pendiente.h"
 #include "ui_pedido_pendiente.h"
 
-pedido_pendiente::pedido_pendiente(QWidget *parent)
+pedido_pendiente::pedido_pendiente(int id, QString direccion, QString telefono, double distancia, double precio, double tiempo, QString nombre, QWidget *parent)
     : QFrame(parent)
     , ui(new Ui::pedido_pendiente)
 {
     ui->setupUi(this);
-/*    this->id = id;
+    this->id = id;
     this->tiempo = tiempo;
     this->precio = precio;
     this->telefono = telefono;
     this->direccion = direccion;
-    this->distancia = distancia;*/
+    this->distancia = distancia;
 }
 
 pedido_pendiente::~pedido_pendiente()

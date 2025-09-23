@@ -12,9 +12,9 @@ class pedido_pendiente : public QFrame
     Q_OBJECT
 
 public:
-    explicit pedido_pendiente(QWidget *parent = nullptr);
+    //explicit pedido_pendiente(QWidget *parent = nullptr);
     ~pedido_pendiente();
-    //explicit pedido_pendiente(int id, QString direccion, QString telefono, double distancia, double precio, double tiempo, QString nombre, QWidget *parent);
+    explicit pedido_pendiente(int id, QString direccion, QString telefono, double distancia, double precio, double tiempo, QString nombre, QWidget *parent);
     void actualizar_etiquetas();
 
 private:
