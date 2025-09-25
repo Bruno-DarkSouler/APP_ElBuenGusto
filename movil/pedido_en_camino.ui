@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>pedido_pendiente</class>
- <widget class="QFrame" name="pedido_pendiente">
+ <class>pedido_en_camino</class>
+ <widget class="QFrame" name="pedido_en_camino">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,7 +27,7 @@ border-radius:10;</string>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="ui_id_pedido">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -56,7 +56,7 @@ border-radius:10;</string>
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="ui_estado">
        <property name="styleSheet">
         <string notr="true">color: rgb(200, 80, 20);
 background-color: rgb(245, 235, 210);</string>
@@ -72,12 +72,12 @@ background-color: rgb(245, 235, 210);</string>
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="ui_nombre">
      <property name="styleSheet">
       <string notr="true">color:rgb(108, 108, 108);</string>
      </property>
      <property name="text">
-      <string>María González</string>
+      <string>Nombre</string>
      </property>
     </widget>
    </item>
@@ -169,7 +169,7 @@ background-color: rgb(245, 235, 210);</string>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_14">
+      <widget class="QLabel" name="ui_precio">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -179,14 +179,20 @@ background-color: rgb(245, 235, 210);</string>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 85, 255);
+      <string notr="true">background-color: rgb(46, 95, 255);
 color: rgb(245, 235, 210);
 padding: 10;
 border-radius: 10;</string>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Aceptar</string>
      </property>
     </widget>
    </item>

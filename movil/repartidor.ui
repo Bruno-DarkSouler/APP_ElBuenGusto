@@ -55,9 +55,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-342</y>
         <width>344</width>
-        <height>701</height>
+        <height>1118</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -435,6 +435,12 @@ border: 5 solid rgb(255, 59, 52);</string>
        </item>
        <item>
         <widget class="QFrame" name="frame_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>250</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">border-radius:10;
 background-color: rgb(245, 222, 177);</string>
@@ -476,13 +482,13 @@ border-radius: 10;</string>
             <property name="widgetResizable">
              <bool>true</bool>
             </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_2">
+            <widget class="QWidget" name="ventana_pedidos_pendientes">
              <property name="geometry">
               <rect>
                <x>0</x>
                <y>0</y>
                <width>326</width>
-               <height>68</height>
+               <height>207</height>
               </rect>
              </property>
             </widget>
@@ -493,6 +499,12 @@ border-radius: 10;</string>
        </item>
        <item>
         <widget class="QFrame" name="frame_10">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>250</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">border-radius:10;
 background-color: rgb(245, 222, 177);</string>
@@ -530,17 +542,17 @@ border-radius: 10;</string>
            </widget>
           </item>
           <item>
-           <widget class="QScrollArea" name="scrollArea_3">
+           <widget class="QScrollArea" name="scroll_pedidos_en_camino">
             <property name="widgetResizable">
              <bool>true</bool>
             </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_3">
+            <widget class="QWidget" name="ventana_pedidos_en_camino">
              <property name="geometry">
               <rect>
                <x>0</x>
                <y>0</y>
                <width>326</width>
-               <height>68</height>
+               <height>207</height>
               </rect>
              </property>
             </widget>
@@ -551,6 +563,12 @@ border-radius: 10;</string>
        </item>
        <item>
         <widget class="QFrame" name="frame_11">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>250</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">border-radius:10;
 background-color: rgb(245, 222, 177);</string>
@@ -588,17 +606,17 @@ border-radius: 10;</string>
            </widget>
           </item>
           <item>
-           <widget class="QScrollArea" name="scrollArea_4">
+           <widget class="QScrollArea" name="scroll_pedidos_entregados">
             <property name="widgetResizable">
              <bool>true</bool>
             </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_4">
+            <widget class="QWidget" name="ventana_pedidos_entregados">
              <property name="geometry">
               <rect>
                <x>0</x>
                <y>0</y>
                <width>326</width>
-               <height>68</height>
+               <height>207</height>
               </rect>
              </property>
             </widget>

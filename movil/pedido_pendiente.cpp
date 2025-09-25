@@ -12,6 +12,7 @@ pedido_pendiente::pedido_pendiente(int id, QString direccion, QString telefono, 
     this->telefono = telefono;
     this->direccion = direccion;
     this->distancia = distancia;
+    this->nombre_cliente = nombre;
 }
 
 pedido_pendiente::~pedido_pendiente()
@@ -20,7 +21,7 @@ pedido_pendiente::~pedido_pendiente()
 }
 
 void pedido_pendiente::actualizar_etiquetas(){
-    ui->ui_id_pedido->setText(QString::number(this->id));
+    ui->ui_id_pedido->setText("Pedido N" + QString::number(this->id));
     ui->ui_direccion->setText(this->direccion);
     ui->ui_tiempo->setText(QString::number(this->tiempo));
     ui->ui_tele->setText(this->telefono);

@@ -32,6 +32,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         carrito.h carrito.cpp carrito.ui
         repartidor.h repartidor.cpp repartidor.ui
         pedido_pendiente.h pedido_pendiente.cpp pedido_pendiente.ui
+        pedido_en_camino.h pedido_en_camino.cpp pedido_en_camino.ui
+        pedido_entregado.h pedido_entregado.cpp pedido_entregado.ui
 
 
 
