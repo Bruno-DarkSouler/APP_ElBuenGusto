@@ -55,8 +55,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-342</y>
-        <width>344</width>
+        <y>0</y>
+        <width>341</width>
         <height>1118</height>
        </rect>
       </property>
@@ -92,7 +92,7 @@
             </property>
             <property name="styleSheet">
              <string notr="true">border-radius:10;
-border: 5 solid rgb(255, 59, 52);</string>
+border: 5 solid rgb(200, 30, 45);</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
@@ -210,7 +210,7 @@ border: 5 solid rgb(255, 59, 52);</string>
             </property>
             <property name="styleSheet">
              <string notr="true">border-radius:10;
-border: 5 solid rgb(255, 59, 52);</string>
+border: 5 solid rgb(0, 85, 255);</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
@@ -487,8 +487,8 @@ border-radius: 10;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>326</width>
-               <height>207</height>
+               <width>323</width>
+               <height>208</height>
               </rect>
              </property>
             </widget>
@@ -551,8 +551,8 @@ border-radius: 10;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>326</width>
-               <height>207</height>
+               <width>323</width>
+               <height>208</height>
               </rect>
              </property>
             </widget>
@@ -615,8 +615,8 @@ border-radius: 10;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>326</width>
-               <height>207</height>
+               <width>323</width>
+               <height>208</height>
               </rect>
              </property>
             </widget>

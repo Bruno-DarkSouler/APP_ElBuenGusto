@@ -1,6 +1,8 @@
 #include "repartidor.h"
 #include "ui_repartidor.h"
 #include "pedido_pendiente.h"
+#include "pedido_en_camino.h"
+#include "pedido_entregado.h"
 #include "QNetworkAccessManager"
 #include "QNetworkReply"
 #include "QJsonDocument"
@@ -42,12 +44,27 @@ void repartidor::instancia_tarjetas(){
             // Parsear el JSON
             QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
             if (!jsonDoc.isNull()){
-                QJsonArray parseado = jsonDoc.array();
-                for(const QJsonValue &valor : parseado){
+                QJsonObject general = jsonDoc.object();
+                QJsonArray pendientes_parseado = general["pendientes"].toArray();
+                QJsonArray en_camino_parseado = general["pendientes"].toArray();
+                QJsonArray entregados_parseado = general["pendientes"].toArray();
+                for(const QJsonValue &valor : pendientes_parseado){
                     QJsonObject fila = valor.toObject();
                     pedido_pendiente *tarjeta_pedido_pendiente = new pedido_pendiente(fila["id"].toInt(), fila["direccion"].toString(), fila["telefono"].toString(), fila["distancia"].toDouble(), fila["precio"].toDouble(), fila["tiempo"].toInt(), fila["nombre"].toString(), this);
                     tarjeta_pedido_pendiente->actualizar_etiquetas();
                     colocador_pedidos_pendientes->addWidget(tarjeta_pedido_pendiente);
+                }
+                for(const QJsonValue &valor : en_camino_parseado){
+                    QJsonObject fila = valor.toObject();
+                    pedido_en_camino *tarjeta_pedido_en_camino = new pedido_en_camino(fila["id"].toInt(), fila["direccion"].toString(), fila["telefono"].toString(), fila["precio"].toDouble(), fila["nombre"].toString(), this);
+                    tarjeta_pedido_en_camino->actualizar_etiquetas();
+                    colocador_pedidos_en_camino->addWidget(tarjeta_pedido_en_camino);
+                }
+                for(const QJsonValue &valor : entregados_parseado){
+                    QJsonObject fila = valor.toObject();
+                    pedido_entregado *tarjeta_pedido_entregado = new pedido_entregado(fila["id"].toInt(), fila["direccion"].toString(), fila["hora"].toInt(), fila["nombre"].toString(), this);
+                    tarjeta_pedido_entregado->actualizar_etiquetas();
+                    colocador_pedidos_entregados->addWidget(tarjeta_pedido_entregado);
                 }
             }
         } else {
