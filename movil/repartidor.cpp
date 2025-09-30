@@ -39,15 +39,15 @@ void repartidor::instancia_tarjetas(){
             ui->ventana_pedidos_entregados->setLayout(colocador_pedidos_entregados);
 
             QByteArray response_data = reply->readAll();
-            qDebug() << "Respuesta:" << response_data;
+            //qDebug() << "Respuesta:" << response_data;
 
             // Parsear el JSON
             QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
             if (!jsonDoc.isNull()){
                 QJsonObject general = jsonDoc.object();
                 QJsonArray pendientes_parseado = general["pendientes"].toArray();
-                QJsonArray en_camino_parseado = general["pendientes"].toArray();
-                QJsonArray entregados_parseado = general["pendientes"].toArray();
+                QJsonArray en_camino_parseado = general["en_camino"].toArray();
+                QJsonArray entregados_parseado = general["entregados"].toArray();
                 for(const QJsonValue &valor : pendientes_parseado){
                     QJsonObject fila = valor.toObject();
                     pedido_pendiente *tarjeta_pedido_pendiente = new pedido_pendiente(fila["id"].toInt(), fila["direccion"].toString(), fila["telefono"].toString(), fila["distancia"].toDouble(), fila["precio"].toDouble(), fila["tiempo"].toInt(), fila["nombre"].toString(), this);

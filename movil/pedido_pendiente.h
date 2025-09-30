@@ -17,6 +17,9 @@ public:
     explicit pedido_pendiente(int id, QString direccion, QString telefono, double distancia, double precio, double tiempo, QString nombre, QWidget *parent);
     void actualizar_etiquetas();
 
+private slots:
+    void marcar_aceptado();
+
 private:
     int id;
     QString direccion;

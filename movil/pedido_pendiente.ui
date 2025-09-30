@@ -280,7 +280,7 @@ color: rgb(181, 113, 45);</string>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="boton_marcar">
      <property name="font">
       <font>
        <pointsize>12</pointsize>
