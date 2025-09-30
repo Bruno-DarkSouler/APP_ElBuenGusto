@@ -161,9 +161,9 @@ border-radius: 0;</string>
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-203</y>
+           <y>-292</y>
            <width>561</width>
-           <height>693</height>
+           <height>782</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -222,6 +222,53 @@ padding: 10;</string>
                </property>
                <property name="placeholderText">
                 <string>Tu nombre</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(80,50,20);
+</string>
+               </property>
+               <property name="text">
+                <string>Apellido*</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_apellido">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 20;
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Tu apellido</string>
                </property>
               </widget>
              </item>
@@ -617,7 +664,7 @@ border: 0 solid rgba(80, 50, 20,0);
 border-radius: 0;</string>
                </property>
                <property name="text">
-                <string>¿No tienes una cuenta?</string>
+                <string>¿Ya tienes una cuenta?</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -625,7 +672,7 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="pushButton_sign_in">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                  <horstretch>0</horstretch>
@@ -650,7 +697,7 @@ border-radius: 10;
 padding: 10;</string>
                </property>
                <property name="text">
-                <string>Crear cuenta</string>
+                <string>Iniciar sesion</string>
                </property>
               </widget>
              </item>

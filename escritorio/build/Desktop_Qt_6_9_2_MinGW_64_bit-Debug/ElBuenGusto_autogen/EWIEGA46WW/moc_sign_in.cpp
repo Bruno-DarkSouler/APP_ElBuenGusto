@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../../sign_in.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -43,6 +44,7 @@ template <> constexpr inline auto sign_in::qt_create_metaobjectdata<qt_meta_tag_
         "",
         "validateEmail",
         "validatePassword",
+        "on_ir_a_sign_up_clicked",
         "on_iniciar_clicked"
     };
 
@@ -53,8 +55,10 @@ template <> constexpr inline auto sign_in::qt_create_metaobjectdata<qt_meta_tag_
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'validatePassword'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_iniciar_clicked'
+        // Slot 'on_ir_a_sign_up_clicked'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_iniciar_clicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -81,7 +85,8 @@ void sign_in::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 0: _t->registrationSuccessful(); break;
         case 1: _t->validateEmail(); break;
         case 2: _t->validatePassword(); break;
-        case 3: _t->on_iniciar_clicked(); break;
+        case 3: _t->on_ir_a_sign_up_clicked(); break;
+        case 4: _t->on_iniciar_clicked(); break;
         default: ;
         }
     }
@@ -110,14 +115,14 @@ int sign_in::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

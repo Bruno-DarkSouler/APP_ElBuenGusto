@@ -43,10 +43,12 @@ template <> constexpr inline auto sign_up::qt_create_metaobjectdata<qt_meta_tag_
         "registrationSuccessful",
         "",
         "validateName",
+        "validateApellido",
         "validateEmail",
         "validatePhone",
         "validateDate",
         "validatePassword",
+        "on_ir_a_sign_in_clicked",
         "on_iniciar_clicked"
     };
 
@@ -55,16 +57,20 @@ template <> constexpr inline auto sign_up::qt_create_metaobjectdata<qt_meta_tag_
         QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'validateName'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'validateEmail'
+        // Slot 'validateApellido'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'validatePhone'
+        // Slot 'validateEmail'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'validateDate'
+        // Slot 'validatePhone'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'validatePassword'
+        // Slot 'validateDate'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_iniciar_clicked'
+        // Slot 'validatePassword'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_ir_a_sign_in_clicked'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_iniciar_clicked'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -90,11 +96,13 @@ void sign_up::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         switch (_id) {
         case 0: _t->registrationSuccessful(); break;
         case 1: _t->validateName(); break;
-        case 2: _t->validateEmail(); break;
-        case 3: _t->validatePhone(); break;
-        case 4: _t->validateDate(); break;
-        case 5: _t->validatePassword(); break;
-        case 6: _t->on_iniciar_clicked(); break;
+        case 2: _t->validateApellido(); break;
+        case 3: _t->validateEmail(); break;
+        case 4: _t->validatePhone(); break;
+        case 5: _t->validateDate(); break;
+        case 6: _t->validatePassword(); break;
+        case 7: _t->on_ir_a_sign_in_clicked(); break;
+        case 8: _t->on_iniciar_clicked(); break;
         default: ;
         }
     }
@@ -123,14 +131,14 @@ int sign_up::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

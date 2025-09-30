@@ -146,7 +146,6 @@ public:
         lineEdit_email->setObjectName("lineEdit_email");
         lineEdit_email->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "border: 2 solid rgba(0, 0, 0,0.50);\n"
-"border-radius: 20;\n"
 "border-radius: 10;\n"
 "padding: 10;"));
 

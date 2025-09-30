@@ -1,6 +1,13 @@
 #include "mainwindow.h"
 #include "sign_in.h"
 #include "ui_sign_in.h"
+#include "sign_up.h"
+// ----------------------------------------------------------------------
+// SOLUCIÓN: INCLUIR LAS CABECERAS PARA REDIRECCIÓN POR ROL
+// ----------------------------------------------------------------------
+#include "carrito.h"
+#include "perfil.h"
+// ----------------------------------------------------------------------
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QDate>
@@ -8,16 +15,25 @@
 #include <QPushButton>
 #include <QLineEdit>
 
+#include "QNetworkAccessManager"
+#include "QNetworkRequest"
+#include "QNetworkReply"
+#include "QJsonDocument"
+#include "QJsonObject"
+
 sign_in::sign_in(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::sign_in)
 {
     ui->setupUi(this);
+
     // Conectar validaciones en tiempo real
     connect(ui->lineEdit_email, &QLineEdit::textChanged, this, &sign_in::validateEmail);
     connect(ui->lineEdit_password, &QLineEdit::textChanged, this, &sign_in::validatePassword);
-    // Conectar el botón de iniciar sesión
+
+    // Conectar el botón de iniciar sesión y el de ir a registro
     connect(ui->pushButton_sign_in, &QPushButton::clicked, this, &sign_in::on_iniciar_clicked);
+    connect(ui->pushButton_sign_up, &QPushButton::clicked, this, &sign_in::on_ir_a_sign_up_clicked);
 }
 
 sign_in::~sign_in()
@@ -32,7 +48,6 @@ void sign_in::validateEmail()
         setFieldStyle(ui->lineEdit_email, "normal");
         return;
     }
-    // Validar formato de email y que termine con @gmail.com
     QRegularExpression emailRegex("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
     if (emailRegex.match(email).hasMatch()) {
         setFieldStyle(ui->lineEdit_email, "valid");
@@ -48,7 +63,6 @@ void sign_in::validatePassword()
         setFieldStyle(ui->lineEdit_password, "normal");
         return;
     }
-    // Validar longitud mínima de 8 caracteres
     if (password.length() >= 8) {
         setFieldStyle(ui->lineEdit_password, "valid");
     } else {
@@ -81,14 +95,12 @@ bool sign_in::isFormValid()
     QString email = ui->lineEdit_email->text().trimmed();
     QString password = ui->lineEdit_password->text();
 
-    // Validar email
     QRegularExpression emailRegex("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
     if (!emailRegex.match(email).hasMatch()) {
         showError("El email debe ser una dirección válida de Gmail (@gmail.com)");
         return false;
     }
 
-    // Validar contraseña
     if (password.length() < 8) {
         showError("La contraseña debe tener al menos 8 caracteres");
         return false;
@@ -99,23 +111,105 @@ bool sign_in::isFormValid()
 
 void sign_in::showError(const QString& message)
 {
-    QMessageBox::warning(this, "Error de validación", message);
+    QMessageBox::warning(this, "Error de Inicio de Sesión", message);
+}
+
+void sign_in::on_ir_a_sign_up_clicked()
+{
+    this->close();
+    sign_up *signUpWindow = new sign_up();
+    signUpWindow->show();
 }
 
 void sign_in::on_iniciar_clicked()
 {
-    if (isFormValid()) {
-        // Mostrar mensaje de éxito
-        QMessageBox::information(this, "Registro exitoso",
-                                 "¡Registro completado correctamente!\nRedirigiendo...");
-
-        emit registrationSuccessful();
-
-        // Crear y mostrar la ventana principal
-        MainWindow *mainwindow = new MainWindow();
-        mainwindow->show();
-
-        // Cerrar esta ventana
-        this->close();
+    if (!isFormValid()) {
+        return;
     }
+
+    // 1. Preparar datos y UI
+    ui->pushButton_sign_in->setEnabled(false); // Deshabilita el botón
+
+    QString email = ui->lineEdit_email->text().trimmed();
+    QString password = ui->lineEdit_password->text();
+
+    // 2. Construir el JSON para el servidor
+    QJsonObject jsonPayload;
+    jsonPayload["username"] = email;
+    jsonPayload["password"] = password;
+
+    QJsonDocument doc(jsonPayload);
+    QByteArray postData = doc.toJson(QJsonDocument::Compact);
+
+    // 3. Configurar y enviar la solicitud POST
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QUrl url("http://localhost/WEB_ElBuenGusto/api/sign_in.php");
+    QNetworkRequest request(url);
+
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = manager->post(request, postData);
+
+    // 4. Manejar la respuesta del servidor (ASÍNCRONO)
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        // Habilitar el botón de nuevo
+        ui->pushButton_sign_in->setEnabled(true);
+
+        if (reply->error() == QNetworkReply::NoError) {
+
+            QByteArray response_data = reply->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
+
+            if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                QJsonObject response = jsonDoc.object();
+                QString status = response["status"].toString();
+                QString message = response["message"].toString();
+
+                if (status == "success") {
+                    // Éxito: Servidor confirma el inicio de sesión
+                    QMessageBox::information(this, "Acceso Autorizado", message);
+
+                    // Extraer el rol del usuario
+                    QString rol = response["rol"].toString();
+                    QWidget *nextWindow = nullptr;
+
+                    // Lógica de Redirección basada en Rol
+                    if (rol == "cliente") {
+                        // Si es cliente, llevar a la ventana principal
+                        nextWindow = new MainWindow();
+
+                    } else if (rol == "repartidor") {
+                        // Si es repartidor, llevar al Carrito (ej. gestión de pedidos)
+                        nextWindow = new carrito();
+
+                    } else if (rol == "cajero") {
+                        // Si es cajero, llevar al Perfil (ej. gestión de caja)
+                        nextWindow = new perfil();
+
+                    } else {
+                        // Rol desconocido o por defecto
+                        nextWindow = new MainWindow();
+                    }
+
+                    if (nextWindow) {
+                        nextWindow->show();
+                        this->close();
+                    }
+
+                } else {
+                    // Fallo Lógico: Credenciales incorrectas, usuario no encontrado, etc.
+                    showError(message);
+                }
+            } else {
+                // Error al interpretar la respuesta como JSON
+                showError("Error al procesar la respuesta del servidor.");
+            }
+        } else {
+            // Error de Conexión o de Red
+            showError("Error de conexión al servidor: " + reply->errorString());
+        }
+
+        reply->deleteLater();
+        manager->deleteLater();
+    });
 }

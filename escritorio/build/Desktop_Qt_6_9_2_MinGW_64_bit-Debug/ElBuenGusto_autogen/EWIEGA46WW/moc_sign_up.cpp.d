@@ -157,15 +157,10 @@ C:/Users/Alumnos/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_2_MinGW_64_bit-
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QCheckBox \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QWidget \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qcheckbox.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \

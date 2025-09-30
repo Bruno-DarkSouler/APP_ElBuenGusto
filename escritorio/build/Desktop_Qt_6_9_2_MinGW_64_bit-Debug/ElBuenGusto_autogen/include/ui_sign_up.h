@@ -41,6 +41,10 @@ public:
     QVBoxLayout *verticalLayout_5;
     QLabel *label_3;
     QLineEdit *lineEdit_nombre;
+    QFrame *frame_3;
+    QVBoxLayout *verticalLayout_12;
+    QLabel *label_9;
+    QLineEdit *lineEdit_apellido;
     QFrame *frame_6;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_2;
@@ -68,13 +72,13 @@ public:
     QFrame *frame_5;
     QVBoxLayout *verticalLayout_3;
     QLabel *label;
-    QPushButton *pushButton_2;
+    QPushButton *pushButton_sign_in;
 
     void setupUi(QWidget *sign_up)
     {
         if (sign_up->objectName().isEmpty())
             sign_up->setObjectName("sign_up");
-        sign_up->resize(618, 750);
+        sign_up->resize(671, 624);
         sign_up->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:0, y0:1, x2:1, y2:1, stop:0 rgba(245, 235, 210, 255), stop:1 rgba(80, 50, 20, 255))"));
         horizontalLayout = new QHBoxLayout(sign_up);
         horizontalLayout->setObjectName("horizontalLayout");
@@ -157,7 +161,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName("scrollAreaWidgetContents_3");
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 561, 693));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, -292, 561, 782));
         verticalLayout_11 = new QVBoxLayout(scrollAreaWidgetContents_3);
         verticalLayout_11->setObjectName("verticalLayout_11");
         frame_7 = new QFrame(scrollAreaWidgetContents_3);
@@ -196,6 +200,33 @@ public:
 
 
         verticalLayout_11->addWidget(frame_7);
+
+        frame_3 = new QFrame(scrollAreaWidgetContents_3);
+        frame_3->setObjectName("frame_3");
+        frame_3->setFrameShape(QFrame::Shape::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Shadow::Raised);
+        verticalLayout_12 = new QVBoxLayout(frame_3);
+        verticalLayout_12->setObjectName("verticalLayout_12");
+        label_9 = new QLabel(frame_3);
+        label_9->setObjectName("label_9");
+        label_9->setFont(font2);
+        label_9->setStyleSheet(QString::fromUtf8("color: rgb(80,50,20);\n"
+""));
+
+        verticalLayout_12->addWidget(label_9);
+
+        lineEdit_apellido = new QLineEdit(frame_3);
+        lineEdit_apellido->setObjectName("lineEdit_apellido");
+        lineEdit_apellido->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"border: 2 solid rgba(0, 0, 0,0.50);\n"
+"border-radius: 20;\n"
+"border-radius: 10;\n"
+"padding: 10;"));
+
+        verticalLayout_12->addWidget(lineEdit_apellido);
+
+
+        verticalLayout_11->addWidget(frame_3);
 
         frame_6 = new QFrame(scrollAreaWidgetContents_3);
         frame_6->setObjectName("frame_6");
@@ -253,7 +284,6 @@ public:
         lineEdit_telefono->setObjectName("lineEdit_telefono");
         lineEdit_telefono->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "border: 2 solid rgba(0, 0, 0,0.50);\n"
-"border-radius: 20;\n"
 "border-radius: 10;\n"
 "padding: 10;"));
         lineEdit_telefono->setEchoMode(QLineEdit::EchoMode::Normal);
@@ -422,19 +452,19 @@ public:
 
         verticalLayout_3->addWidget(label, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
 
-        pushButton_2 = new QPushButton(frame_5);
-        pushButton_2->setObjectName("pushButton_2");
-        sizePolicy1.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
-        pushButton_2->setSizePolicy(sizePolicy1);
-        pushButton_2->setFont(font2);
-        pushButton_2->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        pushButton_2->setStyleSheet(QString::fromUtf8("background-color: rgb(245, 235, 210);\n"
+        pushButton_sign_in = new QPushButton(frame_5);
+        pushButton_sign_in->setObjectName("pushButton_sign_in");
+        sizePolicy1.setHeightForWidth(pushButton_sign_in->sizePolicy().hasHeightForWidth());
+        pushButton_sign_in->setSizePolicy(sizePolicy1);
+        pushButton_sign_in->setFont(font2);
+        pushButton_sign_in->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        pushButton_sign_in->setStyleSheet(QString::fromUtf8("background-color: rgb(245, 235, 210);\n"
 "color: rgb(200,30,45);\n"
 "border: 2 solid rgb(200, 30, 45);\n"
 "border-radius: 10;\n"
 "padding: 10;"));
 
-        verticalLayout_3->addWidget(pushButton_2, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
+        verticalLayout_3->addWidget(pushButton_sign_in, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
 
 
         verticalLayout_11->addWidget(frame_5);
@@ -461,6 +491,9 @@ public:
         label_3->setText(QCoreApplication::translate("sign_up", "Nombre*", nullptr));
         lineEdit_nombre->setText(QString());
         lineEdit_nombre->setPlaceholderText(QCoreApplication::translate("sign_up", "Tu nombre", nullptr));
+        label_9->setText(QCoreApplication::translate("sign_up", "Apellido*", nullptr));
+        lineEdit_apellido->setText(QString());
+        lineEdit_apellido->setPlaceholderText(QCoreApplication::translate("sign_up", "Tu apellido", nullptr));
         label_2->setText(QCoreApplication::translate("sign_up", "Email*", nullptr));
         lineEdit_email->setText(QString());
         lineEdit_email->setPlaceholderText(QCoreApplication::translate("sign_up", "tu@email.com", nullptr));
@@ -477,8 +510,8 @@ public:
         checkBox->setText(QCoreApplication::translate("sign_up", "Acepto los t\303\251rminos y condiciones y la pol\303\255tica de privacidad", nullptr));
         checkBox_2->setText(QCoreApplication::translate("sign_up", "Quiero recibir ofertas especiales y novedades por email", nullptr));
         pushButton->setText(QCoreApplication::translate("sign_up", "Iniciar Sesi\303\263n", nullptr));
-        label->setText(QCoreApplication::translate("sign_up", "\302\277No tienes una cuenta?", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("sign_up", "Crear cuenta", nullptr));
+        label->setText(QCoreApplication::translate("sign_up", "\302\277Ya tienes una cuenta?", nullptr));
+        pushButton_sign_in->setText(QCoreApplication::translate("sign_up", "Iniciar sesion", nullptr));
     } // retranslateUi
 
 };
