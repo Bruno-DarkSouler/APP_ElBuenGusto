@@ -1,11 +1,14 @@
 #include "tarjeta_especialidades.h"
 #include "ui_tarjeta_especialidades.h"
 
-tarjeta_especialidades::tarjeta_especialidades(QWidget *parent)
+tarjeta_especialidades::tarjeta_especialidades(QString nombre, QWidget *parent)
     : QFrame(parent)
     , ui(new Ui::tarjeta_especialidades)
 {
     ui->setupUi(this);
+
+    ui->pushButton->setText(nombre);
+
     connect(ui->pushButton, &QPushButton::clicked, this, [=]{
         tarjeta_especialidades::abrirTarjeta("HOLA Mundo");
     });

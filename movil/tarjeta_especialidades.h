@@ -15,7 +15,7 @@ private slots:
     void abrirTarjeta(QString id);
 
 public:
-    explicit tarjeta_especialidades(QWidget *parent = nullptr);
+    explicit tarjeta_especialidades(QString nombre, QWidget *parent = nullptr);
     ~tarjeta_especialidades();
     void setData(QString texto);
     int id;
