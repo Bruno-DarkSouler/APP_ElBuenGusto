@@ -14,6 +14,12 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QVector>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonObject>
 
 QT_BEGIN_NAMESPACE
 class Ui_carrito;
@@ -48,6 +54,9 @@ class carrito : public QWidget
 public:
     carrito(QWidget *parent = nullptr);
     ~carrito();
+    
+    // Sobrescribir el método eventFilter para manejar eventos
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
     // Métodos públicos para manejar el carrito
     void agregarProducto(int productoId, int cantidad = 1);
@@ -86,6 +95,13 @@ private:
     QVector<ProductoCarrito> productos;
     double subtotal;
     double total;
+    
+    // API y Network
+    QNetworkAccessManager *networkManager;
+    QString apiUrl;
+    void cargarProductosDesdeAPI();
+    void procesarRespuestaAPI(QNetworkReply *reply);
+    bool validarPedido();
     
     // Métodos privados
     void cargarProductoDesdeDB(int productoId, ProductoCarrito& producto);

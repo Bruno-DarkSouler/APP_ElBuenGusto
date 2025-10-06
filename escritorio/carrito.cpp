@@ -7,11 +7,15 @@ carrito::carrito(QWidget *parent)
     , ui(new Ui_carrito)
     , subtotal(0.0)
     , total(0.0)
+    , networkManager(new QNetworkAccessManager(this))
+    , apiUrl("C:\\Users\\NoxiePC\\Downloads\\WEB_ElBuenGusto\\api\\carrito.php")
 {
     ui->setupUi(this);
     
     if (inicializarBaseDatos()) {
         configurarEventos();
+        // Cargar productos desde la API en lugar de la base de datos local
+        cargarProductosDesdeAPI();
         actualizarInterfaz();
     } else {
         mostrarMensajeError("Error al conectar con la base de datos");
@@ -21,6 +25,27 @@ carrito::carrito(QWidget *parent)
 carrito::~carrito()
 {
     delete ui;
+    // El networkManager se eliminará automáticamente ya que es hijo de este objeto
+}
+
+bool carrito::validarPedido()
+{
+    // Verificar si hay productos en el carrito
+    if (productos.isEmpty()) {
+        QMessageBox::warning(this, "Carrito vacío", "No hay productos en el carrito para crear un pedido.");
+        return false;
+    }
+    
+    // Verificar si todos los productos están disponibles
+    for (const ProductoCarrito &producto : productos) {
+        if (!producto.disponible) {
+            QMessageBox::warning(this, "Producto no disponible", 
+                                "El producto " + producto.nombre + " no está disponible actualmente.");
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 bool carrito::inicializarBaseDatos()
@@ -38,8 +63,8 @@ bool carrito::inicializarBaseDatos()
 
 void carrito::configurarEventos()
 {
-    // Conectar el botón de finalizar pedido
-    connect(ui->label, &QLabel::mousePressEvent, this, &carrito::finalizarPedido);
+    // Conectar el botón de finalizar pedido mediante eventFilter en lugar de mousePressEvent
+    // El evento se maneja en el método eventFilter
     
     // Nota: El botón "Finalizar pedido" en el .ui es un QLabel, lo convertiremos en clickeable
     ui->label->setCursor(Qt::PointingHandCursor);
@@ -70,35 +95,91 @@ void carrito::agregarProducto(int productoId, int cantidad)
         if (validarStock(productoId, nuevaCantidad)) {
             productoExistente->cantidad = nuevaCantidad;
             productoExistente->precioTotal = productoExistente->precio * nuevaCantidad;
+            actualizarInterfaz();
+            emit carritoActualizado();
         } else {
             mostrarMensajeError("No hay suficiente stock para agregar más unidades");
             return;
         }
     } else {
-        // Agregar nuevo producto
-        ProductoCarrito nuevoProducto;
-        cargarProductoDesdeDB(productoId, nuevoProducto);
-        nuevoProducto.cantidad = cantidad;
-        nuevoProducto.precioTotal = nuevoProducto.precio * cantidad;
-        productos.append(nuevoProducto);
+        // Preparar la solicitud para agregar un producto al carrito
+        QNetworkRequest request;
+        request.setUrl(QUrl(apiUrl));
+        request.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+        
+        // Crear el objeto JSON para enviar
+        QJsonObject jsonObj;
+        jsonObj["accion"] = "agregar";
+        jsonObj["producto_id"] = productoId;
+        jsonObj["cantidad"] = cantidad;
+        
+        QJsonDocument doc(jsonObj);
+        QByteArray data = doc.toJson();
+        
+        // Enviar la solicitud POST a la API
+        QNetworkReply *reply = networkManager->post(request, data.constData());
+        
+        connect(reply, &QNetworkReply::finished, [this, reply, productoId, cantidad]() {
+            if (reply->error() == QNetworkReply::NoError) {
+                // Recargar el carrito desde la API para reflejar los cambios
+                cargarProductosDesdeAPI();
+            } else {
+                mostrarMensajeError("Error al agregar producto: " + reply->errorString());
+                
+                // Como respaldo, intentar agregar desde la base de datos local
+                ProductoCarrito nuevoProducto;
+                cargarProductoDesdeDB(productoId, nuevoProducto);
+                nuevoProducto.cantidad = cantidad;
+                nuevoProducto.precioTotal = nuevoProducto.precio * cantidad;
+                productos.append(nuevoProducto);
+                actualizarInterfaz();
+                emit carritoActualizado();
+            }
+            reply->deleteLater();
+        });
     }
-    
-    actualizarInterfaz();
-    emit carritoActualizado();
 }
 
 void carrito::eliminarProducto(int productoId)
 {
-    for (int i = 0; i < productos.size(); ++i) {
-        if (productos[i].id == productoId) {
-            productos.removeAt(i);
-            break;
-        }
-    }
+    // Preparar la solicitud para eliminar un producto del carrito
+    QNetworkRequest request;
+    request.setUrl(QUrl(apiUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
     
-    actualizarInterfaz();
-    emit productoEliminado(productoId);
-    emit carritoActualizado();
+    // Crear el objeto JSON para enviar
+    QJsonObject jsonObj;
+    jsonObj["accion"] = "eliminar";
+    jsonObj["producto_id"] = productoId;
+    
+    QJsonDocument doc(jsonObj);
+    QByteArray data = doc.toJson();
+    
+    // Enviar la solicitud POST
+    QNetworkReply *reply = networkManager->post(request, data.constData());
+    
+    connect(reply, &QNetworkReply::finished, [this, productoId, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            // Recargar el carrito desde la API para reflejar los cambios
+            cargarProductosDesdeAPI();
+            emit productoEliminado(productoId);
+        } else {
+            mostrarMensajeError("Error al eliminar producto: " + reply->errorString());
+            
+            // Como respaldo, eliminar localmente
+            for (int i = 0; i < productos.size(); ++i) {
+                if (productos[i].id == productoId) {
+                    productos.removeAt(i);
+                    break;
+                }
+            }
+            
+            actualizarInterfaz();
+            emit carritoActualizado();
+            emit productoEliminado(productoId);
+        }
+        reply->deleteLater();
+    });
 }
 
 void carrito::modificarCantidad(int productoId, int nuevaCantidad)
@@ -113,21 +194,78 @@ void carrito::modificarCantidad(int productoId, int nuevaCantidad)
         return;
     }
     
-    ProductoCarrito* producto = buscarProducto(productoId);
-    if (producto) {
-        producto->cantidad = nuevaCantidad;
-        producto->precioTotal = producto->precio * nuevaCantidad;
-        actualizarInterfaz();
-        emit cantidadModificada(productoId, nuevaCantidad);
-        emit carritoActualizado();
-    }
+    // Preparar la solicitud para modificar la cantidad de un producto
+    QNetworkRequest request;
+    request.setUrl(QUrl(apiUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    
+    // Crear el objeto JSON para enviar
+    QJsonObject jsonObj;
+    jsonObj["accion"] = "modificar";
+    jsonObj["producto_id"] = productoId;
+    jsonObj["cantidad"] = nuevaCantidad;
+    
+    QJsonDocument doc(jsonObj);
+    QByteArray data = doc.toJson();
+    
+    // Enviar la solicitud POST
+    QNetworkReply *reply = networkManager->post(request, data.constData());
+    
+    connect(reply, &QNetworkReply::finished, [this, productoId, nuevaCantidad, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            // Recargar el carrito desde la API para reflejar los cambios
+            cargarProductosDesdeAPI();
+            emit cantidadModificada(productoId, nuevaCantidad);
+        } else {
+            mostrarMensajeError("Error al modificar cantidad: " + reply->errorString());
+            
+            // Como respaldo, modificar localmente
+            ProductoCarrito* producto = buscarProducto(productoId);
+            if (producto) {
+                producto->cantidad = nuevaCantidad;
+                producto->precioTotal = producto->precio * nuevaCantidad;
+                actualizarInterfaz();
+                emit carritoActualizado();
+                emit cantidadModificada(productoId, nuevaCantidad);
+            }
+        }
+        reply->deleteLater();
+    });
 }
 
 void carrito::limpiarCarrito()
 {
-    productos.clear();
-    actualizarInterfaz();
-    emit carritoActualizado();
+    // Preparar la solicitud para limpiar el carrito
+    QNetworkRequest request;
+    request.setUrl(QUrl(apiUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    
+    // Crear el objeto JSON para enviar
+    QJsonObject jsonObj;
+    jsonObj["accion"] = "limpiar";
+    
+    QJsonDocument doc(jsonObj);
+    QByteArray data = doc.toJson();
+    
+    // Enviar la solicitud POST
+    QNetworkReply *reply = networkManager->post(request, data.constData());
+    
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            // Recargar el carrito desde la API para reflejar los cambios
+            productos.clear();
+            actualizarInterfaz();
+            emit carritoActualizado();
+        } else {
+            mostrarMensajeError("Error al limpiar carrito: " + reply->errorString());
+            
+            // Como respaldo, limpiar localmente
+            productos.clear();
+            actualizarInterfaz();
+            emit carritoActualizado();
+        }
+        reply->deleteLater();
+    });
 }
 
 QVector<ProductoCarrito> carrito::obtenerProductos() const
@@ -198,6 +336,63 @@ void carrito::actualizarInterfaz()
 {
     actualizarVisualizacion();
     actualizarTotales();
+}
+
+// Método para cargar productos desde la API
+void carrito::cargarProductosDesdeAPI()
+{
+    QNetworkRequest request;
+    request.setUrl(QUrl(apiUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    
+    QNetworkReply *reply = networkManager->get(request);
+    
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            procesarRespuestaAPI(reply);
+        } else {
+            mostrarMensajeError("Error al conectar con la API: " + reply->errorString());
+            // Si falla la API, intentar cargar desde la base de datos local como respaldo
+            inicializarBaseDatos();
+        }
+        reply->deleteLater();
+    });
+}
+
+// Método para procesar la respuesta de la API
+void carrito::procesarRespuestaAPI(QNetworkReply *reply)
+{
+    QByteArray responseData = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+    
+    if (jsonDoc.isArray()) {
+        // Limpiar productos actuales
+        productos.clear();
+        
+        QJsonArray productosArray = jsonDoc.array();
+        for (const QJsonValue &value : productosArray) {
+            QJsonObject obj = value.toObject();
+            
+            ProductoCarrito producto;
+            producto.id = obj["id"].toInt();
+            producto.nombre = obj["nombre"].toString();
+            producto.precio = obj["precio"].toDouble();
+            producto.cantidad = obj["cantidad"].toInt();
+            producto.precioTotal = producto.precio * producto.cantidad;
+            producto.disponible = true;
+            
+            // Agregar el producto al vector
+            productos.append(producto);
+        }
+        
+        // Actualizar la interfaz con los nuevos productos
+        actualizarTotales();
+        actualizarVisualizacion();
+        
+        emit carritoActualizado();
+    } else {
+        mostrarMensajeError("Formato de respuesta de API inválido");
+    }
 }
 
 void carrito::cargarProductoDesdeDB(int productoId, ProductoCarrito& producto)
@@ -345,18 +540,34 @@ void carrito::crearWidgetProducto(const ProductoCarrito& producto)
     layoutCarrito->addWidget(frameProducto);
 }
 
-bool carrito::eventFilter(QObject *obj, QEvent *event)
-{
-    if (event->type() == QEvent::MouseButtonPress) {
-        QLabel* label = qobject_cast<QLabel*>(obj);
-        if (label) {
-            if (label == ui->label) {
-                finalizarPedido();
-                return true;
+
+            QLabel* label = qobject_cast<QLabel*>(obj);
+            if (label) {
+                QVariant productoIdVar = label->property("productoId");
+                QVariant accionVar = label->property("accion");
+                
+                if (productoIdVar.isValid() && accionVar.isValid()) {
+                    int productoId = productoIdVar.toInt();
+                    QString accion = accionVar.toString();
+                    
+                    if (accion == "aumentar") {
+                        aumentarCantidad(productoId);
+                    } else if (accion == "disminuir") {
+                        disminuirCantidad(productoId);
+                    } else if (accion == "eliminar") {
+                        eliminarDelCarrito(productoId);
+                    }
+                    return true;
+                }
             }
-            
-            QVariant productoIdVar = label->property("productoId");
-            QVariant accionVar = label->property("accion");
+        }
+    }
+    
+    return QWidget::eventFilter(obj, event);
+}
+        if (mouseEvent->button() == Qt::LeftButton) {
+            QVariant productoIdVar = qobject_cast<QLabel*>(sender())->property("productoId");
+            QVariant accionVar = qobject_cast<QLabel*>(sender())->property("accion");
             
             if (productoIdVar.isValid() && accionVar.isValid()) {
                 int productoId = productoIdVar.toInt();
@@ -376,6 +587,7 @@ bool carrito::eventFilter(QObject *obj, QEvent *event)
     
     return QWidget::eventFilter(obj, event);
 }
+
 
 void carrito::actualizarTotales()
 {

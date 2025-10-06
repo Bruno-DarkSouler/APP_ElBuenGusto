@@ -15,6 +15,8 @@ PanelCajero::PanelCajero(QWidget *parent)
     , horaCierre1(QTime(15, 0))
     , horaApertura2(QTime(19, 0))
     , horaCierre2(QTime(23, 0))
+    , networkManager(new QNetworkAccessManager(this))
+    , apiUrl("C:\\Users\\NoxiePC\\Downloads\\WEB_ElBuenGusto\\api\\cajero.php")
 {
     ui->setupUi(this);
     
@@ -565,18 +567,30 @@ void PanelCajero::toggleTipoPedido()
     validarCreacionPedido();
 }
 
-void PanelCajero::validarCreacionPedido()
+// Implementación para validar la creación del pedido
+bool PanelCajero::validarCreacionPedido()
 {
-    bool puedeCrear = clienteEstaSeleccionado && !carrito.isEmpty();
-    
-    if (puedeCrear && ui->radioButton_inmediato->isChecked()) {
-        puedeCrear = validarPedidoInmediato();
-    } else if (puedeCrear && ui->radioButton_programado->isChecked()) {
-        QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
-        puedeCrear = validarPedidoProgramado(fechaHora);
+    // Verificar si el carrito está vacío
+    if (carrito.isEmpty()) {
+        mostrarMensajeError("El carrito está vacío. Agregue productos antes de crear un pedido.");
+        return false;
     }
     
-    ui->pushButton_crearPedido->setEnabled(puedeCrear);
+    // Verificar si hay un cliente seleccionado
+    if (!clienteEstaSeleccionado) {
+        mostrarMensajeError("Debe seleccionar un cliente para crear el pedido.");
+        return false;
+    }
+    
+    // Validar según el tipo de pedido (inmediato o programado)
+    if (ui->radioButton_inmediato->isChecked()) {
+        return validarPedidoInmediato();
+    } else if (ui->radioButton_programado->isChecked()) {
+        QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
+        return validarPedidoProgramado(fechaHora);
+    }
+    
+    return true;
 }
 
 bool PanelCajero::validarPedidoInmediato()
@@ -591,6 +605,38 @@ bool PanelCajero::validarPedidoProgramado(const QDateTime& fechaHora)
     QTime hora = fechaHora.time();
     return (hora >= horaApertura1 && hora <= horaCierre1) ||
            (hora >= horaApertura2 && hora <= horaCierre2);
+}
+
+// Única implementación para validar la creación del pedido
+bool PanelCajero::validarCreacionPedido()
+{
+    // Verificar si el carrito está vacío
+    if (carrito.isEmpty()) {
+        mostrarMensajeError("El carrito está vacío. Agregue productos antes de crear un pedido.");
+        return false;
+    }
+    
+    // Verificar si hay un cliente seleccionado
+    if (!clienteEstaSeleccionado) {
+        mostrarMensajeError("Debe seleccionar un cliente para crear el pedido.");
+        return false;
+    }
+    
+    // Validar según el tipo de pedido (inmediato o programado)
+    if (ui->radioButton_inmediato->isChecked()) {
+        if (!validarPedidoInmediato()) {
+            mostrarMensajeError("No se puede crear un pedido inmediato fuera del horario laboral");
+            return false;
+        }
+    } else if (ui->radioButton_programado->isChecked()) {
+        QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
+        if (!validarPedidoProgramado(fechaHora)) {
+            mostrarMensajeError("No se puede programar un pedido fuera del horario laboral");
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 void PanelCajero::crearPedido()

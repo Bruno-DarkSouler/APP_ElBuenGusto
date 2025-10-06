@@ -107,6 +107,10 @@ private:
     QTime horaApertura2;
     QTime horaCierre2;
     
+    // Red
+    QNetworkAccessManager *networkManager;
+    QString apiUrl;
+    
     // Métodos privados
     void cargarProductos();
     void cargarClientes();
@@ -120,6 +124,7 @@ private:
     double calcularDistancia(const QString& direccionDestino);
     bool validarPedidoInmediato();
     bool validarPedidoProgramado(const QDateTime& fechaHora);
+    bool validarCreacionPedido();
     void limpiarCarrito();
     void mostrarMensajeError(const QString& mensaje);
     void mostrarMensajeExito(const QString& mensaje);

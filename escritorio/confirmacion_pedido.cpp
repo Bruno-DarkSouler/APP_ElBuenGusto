@@ -14,7 +14,8 @@ ConfirmacionPedido::ConfirmacionPedido(QWidget *parent)
     , direccionSucursal("Cerrito 3966")
     , validadorTelefono(nullptr)
     , validadorEmail(nullptr)
-    , networkManager(nullptr)
+    , networkManager(new QNetworkAccessManager(this))
+    , apiUrl("C:\\Users\\NoxiePC\\Downloads\\APP_ElBuenGusto_PHPurl\\APP_ElBuenGusto_PHPurl\\api\\confirmacion_pedido.php")
 {
     ui->setupUi(this);
     
@@ -376,6 +377,20 @@ void ConfirmacionPedido::validarFormulario()
     ui->pushButton_confirmar->setEnabled(formularioValido);
 }
 
+void ConfirmacionPedido::validarFormulario()
+{
+    bool datosPersonalesValidos = validarDatosPersonales();
+    bool direccionValida = validarDireccionEntrega();
+    bool tipoPedidoValido = validarTipoPedido();
+    
+    if (datosPersonalesValidos && direccionValida && tipoPedidoValido) {
+        // Proceder con el pedido
+        QMessageBox::information(this, "Validación", "Todos los datos son correctos");
+    } else {
+        QMessageBox::warning(this, "Error de validación", "Por favor, complete correctamente todos los campos");
+    }
+}
+
 bool ConfirmacionPedido::validarDatosPersonales()
 {
     QString nombre = ui->lineEdit_nombre->text().trimmed();
@@ -388,12 +403,16 @@ bool ConfirmacionPedido::validarDatosPersonales()
     }
     
     // Validar formato de teléfono
-    if (!validadorTelefono->validate(telefono, 0)) {
+    int pos = 0;
+    QString telefonoCopy = telefono;
+    if (validadorTelefono->validate(telefonoCopy, pos) == QValidator::Invalid) {
         return false;
     }
     
     // Validar formato de email
-    if (!validadorEmail->validate(email, 0)) {
+    int posEmail = 0;
+    QString emailCopy = email;
+    if (validadorEmail->validate(emailCopy, posEmail) == QValidator::Invalid) {
         return false;
     }
     
@@ -420,11 +439,39 @@ bool ConfirmacionPedido::validarTipoPedido()
 
 bool ConfirmacionPedido::validarPedidoInmediato()
 {
-    QTime ahora = QTime::currentTime();
-    return esHorarioLaboral(ahora);
+    // Para pedidos inmediatos, verificamos que estamos dentro del horario de atención
+    QTime horaActual = QTime::currentTime();
+    QTime horaApertura(8, 0); // 8:00 AM
+    QTime horaCierre(22, 0);  // 10:00 PM
+    
+    return horaActual >= horaApertura && horaActual <= horaCierre;
 }
 
 bool ConfirmacionPedido::validarPedidoProgramado(const QDateTime& fechaHora)
+{
+    // Verificar que la fecha no sea anterior a la actual
+    QDateTime ahora = QDateTime::currentDateTime();
+    if (fechaHora <= ahora) {
+        return false;
+    }
+    
+    // Verificar que la fecha no sea más de una semana en el futuro
+    QDateTime maximaFecha = ahora.addDays(7);
+    if (fechaHora > maximaFecha) {
+        return false;
+    }
+    
+    // Verificar que la hora esté dentro del horario de atención
+    QTime hora = fechaHora.time();
+    QTime horaApertura(8, 0); // 8:00 AM
+    QTime horaCierre(22, 0);  // 10:00 PM
+    
+    return hora >= horaApertura && hora <= horaCierre;
+}
+
+
+// Implementación alternativa para evitar duplicación
+bool ConfirmacionPedido::validarFechaProgramada(const QDateTime& fechaHora)
 {
     // Validar que la fecha no sea pasada
     if (fechaHora.date() < QDate::currentDate()) {
@@ -460,7 +507,10 @@ bool ConfirmacionPedido::validarMetodoPago()
 
 void ConfirmacionPedido::confirmarPedido()
 {
-    if (!validarFormulario()) {
+    validarFormulario();
+    
+    // Verificamos si todos los campos son válidos
+    if (!validarDatosPersonales() || !validarDireccionEntrega() || !validarTipoPedido()) {
         mostrarMensajeError("Por favor, complete todos los campos obligatorios correctamente");
         return;
     }

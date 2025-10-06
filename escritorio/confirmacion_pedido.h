@@ -18,14 +18,14 @@
 #include <QtCore/QTimer>
 #include <QtCore/QDateTime>
 #include <QtCore/QRegularExpression>
-#include <QtCore/QRegularExpressionValidator>
+#include <QtGui/QRegularExpressionValidator>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QVector>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
 
 QT_BEGIN_NAMESPACE
 class Ui_ConfirmacionPedido;
@@ -76,6 +76,13 @@ public:
     // Métodos para configurar datos iniciales
     void establecerProductos(const QVector<ProductoConfirmacion>& productos);
     void establecerDatosCliente(const DatosCliente& cliente);
+    
+    // Métodos de validación
+    bool validarDatosPersonales();
+    bool validarDireccionEntrega();
+    bool validarTipoPedido();
+    bool validarPedidoInmediato();
+    bool validarPedidoProgramado(const QDateTime& fechaHora);
 
 signals:
     void pedidoConfirmado(int pedidoId);
@@ -117,6 +124,7 @@ private:
     
     // Red para cálculo de distancia (opcional)
     QNetworkAccessManager* networkManager;
+    QString apiUrl;
     
     // Métodos privados de inicialización
     void configurarInterfaz();
@@ -125,9 +133,6 @@ private:
     void cargarConfiguracion();
     
     // Métodos de validación
-    bool validarDatosPersonales();
-    bool validarDireccionEntrega();
-    bool validarTipoPedido();
     bool validarHorarioLaboral(const QDateTime& fechaHora);
     bool validarEdadCliente();
     bool validarMetodoPago();
