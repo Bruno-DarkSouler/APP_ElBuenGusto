@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'confirmacion_pedido.h'
 **
-** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.2)
+** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -20,7 +20,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'confirmacion_pedido.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 69
-#error "This file was generated using the moc from 6.9.2. It"
+#error "This file was generated using the moc from 6.9.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -54,7 +54,10 @@ template <> constexpr inline auto ConfirmacionPedido::qt_create_metaobjectdata<q
         "confirmarPedido",
         "volverCarrito",
         "onDireccionChanged",
-        "validarCamposObligatorios"
+        "validarCamposObligatorios",
+        "procesarRespuestaConfirmacion",
+        "QNetworkReply*",
+        "reply"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -84,6 +87,10 @@ template <> constexpr inline auto ConfirmacionPedido::qt_create_metaobjectdata<q
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'validarCamposObligatorios'
         QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'procesarRespuestaConfirmacion'
+        QtMocHelpers::SlotData<void(QNetworkReply *)>(15, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 16, 17 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -118,7 +125,20 @@ void ConfirmacionPedido::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 8: _t->volverCarrito(); break;
         case 9: _t->onDireccionChanged(); break;
         case 10: _t->validarCamposObligatorios(); break;
+        case 11: _t->procesarRespuestaConfirmacion((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 11:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
@@ -150,14 +170,14 @@ int ConfirmacionPedido::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 11;
+        if (_id < 12)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 12;
     }
     return _id;
 }

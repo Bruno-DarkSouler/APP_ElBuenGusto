@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cajero.ui'
 **
-** Created by: Qt User Interface Compiler version 6.9.2
+** Created by: Qt User Interface Compiler version 6.9.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -80,7 +80,6 @@ public:
     QLabel *label_delivery;
     QLabel *label_total;
     QPushButton *pushButton_crearPedido;
-    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *PanelCajero)
     {
@@ -108,7 +107,7 @@ public:
         verticalLayout_left->setContentsMargins(15, 15, 15, 15);
         frame_header = new QFrame(frame_left);
         frame_header->setObjectName("frame_header");
-        frame_header->setMaximumSize(QSize(16777215, 70));
+        frame_header->setMaximumSize(QSize(16777215, 100));
         frame_header->setStyleSheet(QString::fromUtf8("background-color: rgba(200, 30, 45, 0.1); border-radius: 8px; padding: 8px;"));
         horizontalLayout_header = new QHBoxLayout(frame_header);
         horizontalLayout_header->setObjectName("horizontalLayout_header");
@@ -122,6 +121,7 @@ public:
 
         label_titulo = new QLabel(frame_header);
         label_titulo->setObjectName("label_titulo");
+        label_titulo->setMaximumSize(QSize(16777215, 90));
         QFont font;
         font.setFamilies({QString::fromUtf8("Segoe UI")});
         font.setPointSize(18);
@@ -138,11 +138,12 @@ public:
         label_hora = new QLabel(frame_header);
         label_hora->setObjectName("label_hora");
         QFont font1;
+        font1.setFamilies({QString::fromUtf8("Segoe UI")});
         font1.setPointSize(12);
         font1.setBold(true);
         label_hora->setFont(font1);
         label_hora->setStyleSheet(QString::fromUtf8("color: rgb(80,50,20);"));
-        label_hora->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter);
+        label_hora->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         horizontalLayout_header->addWidget(label_hora);
 
@@ -151,7 +152,7 @@ public:
 
         frame_busqueda = new QFrame(frame_left);
         frame_busqueda->setObjectName("frame_busqueda");
-        frame_busqueda->setMaximumSize(QSize(16777215, 50));
+        frame_busqueda->setMaximumSize(QSize(16777215, 100));
         frame_busqueda->setStyleSheet(QString::fromUtf8("background-color: white; border-radius: 8px; padding: 5px;"));
         horizontalLayout_busqueda = new QHBoxLayout(frame_busqueda);
         horizontalLayout_busqueda->setObjectName("horizontalLayout_busqueda");
@@ -182,13 +183,14 @@ public:
 
         frame_filtros = new QFrame(frame_left);
         frame_filtros->setObjectName("frame_filtros");
-        frame_filtros->setMaximumSize(QSize(16777215, 45));
+        frame_filtros->setMaximumSize(QSize(16777215, 100));
         frame_filtros->setStyleSheet(QString::fromUtf8("background-color: white; border-radius: 8px; padding: 5px;"));
         horizontalLayout_filtros = new QHBoxLayout(frame_filtros);
         horizontalLayout_filtros->setObjectName("horizontalLayout_filtros");
         label_categoria = new QLabel(frame_filtros);
         label_categoria->setObjectName("label_categoria");
         QFont font2;
+        font2.setFamilies({QString::fromUtf8("Segoe UI")});
         font2.setPointSize(11);
         font2.setBold(true);
         label_categoria->setFont(font2);
@@ -223,11 +225,12 @@ public:
 
         scrollArea_productos = new QScrollArea(frame_left);
         scrollArea_productos->setObjectName("scrollArea_productos");
+        scrollArea_productos->setMaximumSize(QSize(16777215, 550));
         scrollArea_productos->setStyleSheet(QString::fromUtf8("QScrollArea { border: none; background-color: transparent; }"));
         scrollArea_productos->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 718, 600));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 690, 433));
         verticalLayout_productos = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_productos->setSpacing(8);
         verticalLayout_productos->setObjectName("verticalLayout_productos");
@@ -249,7 +252,7 @@ public:
         verticalLayout_right->setContentsMargins(15, 15, 15, 15);
         groupBox_datosCliente = new QGroupBox(frame_right);
         groupBox_datosCliente->setObjectName("groupBox_datosCliente");
-        groupBox_datosCliente->setMaximumSize(QSize(16777215, 140));
+        groupBox_datosCliente->setMaximumSize(QSize(16777215, 160));
         groupBox_datosCliente->setFont(font1);
         groupBox_datosCliente->setStyleSheet(QString::fromUtf8("\n"
 "         QGroupBox {\n"
@@ -276,6 +279,7 @@ public:
         label_telefonoCliente = new QLabel(groupBox_datosCliente);
         label_telefonoCliente->setObjectName("label_telefonoCliente");
         QFont font3;
+        font3.setFamilies({QString::fromUtf8("Segoe UI")});
         font3.setPointSize(10);
         font3.setBold(false);
         label_telefonoCliente->setFont(font3);
@@ -319,11 +323,12 @@ public:
         verticalLayout_tipoPedido->setObjectName("verticalLayout_tipoPedido");
         radioButton_inmediato = new QRadioButton(groupBox_tipoPedido);
         radioButton_inmediato->setObjectName("radioButton_inmediato");
-        radioButton_inmediato->setChecked(true);
         QFont font4;
+        font4.setFamilies({QString::fromUtf8("Segoe UI")});
         font4.setPointSize(11);
         font4.setBold(false);
         radioButton_inmediato->setFont(font4);
+        radioButton_inmediato->setChecked(true);
 
         verticalLayout_tipoPedido->addWidget(radioButton_inmediato);
 
@@ -378,12 +383,12 @@ public:
         verticalLayout_carrito->setObjectName("verticalLayout_carrito");
         scrollArea_carrito = new QScrollArea(groupBox_carrito);
         scrollArea_carrito->setObjectName("scrollArea_carrito");
-        scrollArea_carrito->setMaximumSize(QSize(16777215, 280));
+        scrollArea_carrito->setMaximumSize(QSize(16777215, 350));
         scrollArea_carrito->setStyleSheet(QString::fromUtf8("QScrollArea { border: 1px solid #ddd; border-radius: 6px; background-color: #f9f9f9; }"));
         scrollArea_carrito->setWidgetResizable(true);
         scrollAreaWidgetContents_carrito = new QWidget();
         scrollAreaWidgetContents_carrito->setObjectName("scrollAreaWidgetContents_carrito");
-        scrollAreaWidgetContents_carrito->setGeometry(QRect(0, 0, 396, 278));
+        scrollAreaWidgetContents_carrito->setGeometry(QRect(0, 0, 350, 160));
         verticalLayout_carritoItems = new QVBoxLayout(scrollAreaWidgetContents_carrito);
         verticalLayout_carritoItems->setSpacing(5);
         verticalLayout_carritoItems->setObjectName("verticalLayout_carritoItems");
@@ -396,7 +401,7 @@ public:
 
         groupBox_totales = new QGroupBox(frame_right);
         groupBox_totales->setObjectName("groupBox_totales");
-        groupBox_totales->setMaximumSize(QSize(16777215, 100));
+        groupBox_totales->setMaximumSize(QSize(16777215, 150));
         groupBox_totales->setFont(font1);
         groupBox_totales->setStyleSheet(QString::fromUtf8("\n"
 "         QGroupBox {\n"
@@ -428,6 +433,7 @@ public:
         label_total = new QLabel(groupBox_totales);
         label_total->setObjectName("label_total");
         QFont font5;
+        font5.setFamilies({QString::fromUtf8("Segoe UI")});
         font5.setPointSize(14);
         font5.setBold(true);
         label_total->setFont(font5);
@@ -440,17 +446,13 @@ public:
 
         pushButton_crearPedido = new QPushButton(frame_right);
         pushButton_crearPedido->setObjectName("pushButton_crearPedido");
+        pushButton_crearPedido->setEnabled(false);
         pushButton_crearPedido->setMinimumSize(QSize(0, 50));
         pushButton_crearPedido->setStyleSheet(QString::fromUtf8("QPushButton { background-color: rgb(200, 30, 45); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; }\n"
 "QPushButton:hover { background-color: rgb(180, 25, 40); }\n"
 "QPushButton:disabled { background-color: #ccc; color: #999; }"));
-        pushButton_crearPedido->setEnabled(false);
 
         verticalLayout_right->addWidget(pushButton_crearPedido);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        verticalLayout_right->addItem(verticalSpacer);
 
 
         horizontalLayout_main->addWidget(frame_right);

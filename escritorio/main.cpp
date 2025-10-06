@@ -1,12 +1,11 @@
-#include "mainwindow.h"
+#include "cajero.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    PanelCajero w;
     w.show();
-    w.colocar_layouts();
     return a.exec();
 }

@@ -1,12 +1,11 @@
 #include "confirmacion_pedido.h"
 #include "ui_confirmacion_pedido.h"
-#include <QtCore/QDebug>
-#include <QtCore/QStandardPaths>
+#include <QDebug>
 #include <cmath>
 
 ConfirmacionPedido::ConfirmacionPedido(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui_ConfirmacionPedido)
+    , ui(new Ui::ConfirmacionPedido)
     , horaApertura1(QTime(11, 0))
     , horaCierre1(QTime(15, 0))
     , horaApertura2(QTime(19, 0))
@@ -15,19 +14,14 @@ ConfirmacionPedido::ConfirmacionPedido(QWidget *parent)
     , validadorTelefono(nullptr)
     , validadorEmail(nullptr)
     , networkManager(new QNetworkAccessManager(this))
-    , apiUrl("C:\\Users\\NoxiePC\\Downloads\\APP_ElBuenGusto_PHPurl\\APP_ElBuenGusto_PHPurl\\api\\confirmacion_pedido.php")
+    , apiUrl("http://localhost/WEB_ElBuenGusto/api/confirmacion_pedido.php")
 {
     ui->setupUi(this);
-    
-    if (inicializarBaseDatos()) {
-        configurarInterfaz();
-        configurarValidadores();
-        configurarEventos();
-        cargarConfiguracion();
-        validarFormulario();
-    } else {
-        mostrarMensajeError("Error al conectar con la base de datos");
-    }
+    configurarInterfaz();
+    configurarValidadores();
+    configurarEventos();
+    cargarConfiguracion();
+    validarFormulario();
 }
 
 ConfirmacionPedido::ConfirmacionPedido(const QVector<ProductoConfirmacion>& productos, QWidget *parent)
@@ -41,53 +35,32 @@ ConfirmacionPedido::~ConfirmacionPedido()
     delete ui;
     if (validadorTelefono) delete validadorTelefono;
     if (validadorEmail) delete validadorEmail;
-    if (networkManager) delete networkManager;
-}
-
-bool ConfirmacionPedido::inicializarBaseDatos()
-{
-    db = QSqlDatabase::addDatabase("QSQLITE", "confirmacion_connection");
-    db.setDatabaseName("rotiseria.db");
-    
-    if (!db.open()) {
-        qDebug() << "Error al abrir base de datos:" << db.lastError().text();
-        return false;
-    }
-    
-    return true;
 }
 
 void ConfirmacionPedido::configurarInterfaz()
 {
-    // Configurar fechas mínimas y máximas
     ui->dateEdit_fecha->setDate(QDate::currentDate());
     ui->dateEdit_fecha->setMinimumDate(QDate::currentDate());
     ui->dateEdit_fecha->setMaximumDate(QDate::currentDate().addDays(30));
     
-    // Configurar hora inicial
     ui->timeEdit_hora->setTime(horaApertura1);
     
-    // Inicializar totales
     configuracionPedido.subtotal = 0.0;
     configuracionPedido.costoDelivery = 0.0;
     configuracionPedido.total = 0.0;
     
-    // Configurar datos del cliente
     datosCliente.esClienteExistente = false;
     datosCliente.clienteId = -1;
     
-    // Actualizar interfaz
     actualizarTotales();
 }
 
 void ConfirmacionPedido::configurarValidadores()
 {
-    // Validador para teléfono (formato argentino)
     QRegularExpression regexTelefono("^[0-9]{10,15}$");
     validadorTelefono = new QRegularExpressionValidator(regexTelefono, this);
     ui->lineEdit_telefono->setValidator(validadorTelefono);
     
-    // Validador para email
     QRegularExpression regexEmail("^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$");
     validadorEmail = new QRegularExpressionValidator(regexEmail, this);
     ui->lineEdit_email->setValidator(validadorEmail);
@@ -95,60 +68,27 @@ void ConfirmacionPedido::configurarValidadores()
 
 void ConfirmacionPedido::configurarEventos()
 {
-    // Eventos de validación de campos
     connect(ui->lineEdit_nombre, &QLineEdit::textChanged, this, &ConfirmacionPedido::validarCamposObligatorios);
     connect(ui->lineEdit_apellido, &QLineEdit::textChanged, this, &ConfirmacionPedido::validarCamposObligatorios);
     connect(ui->lineEdit_telefono, &QLineEdit::textChanged, this, &ConfirmacionPedido::validarCamposObligatorios);
     connect(ui->lineEdit_email, &QLineEdit::textChanged, this, &ConfirmacionPedido::validarCamposObligatorios);
     connect(ui->textEdit_direccion, &QTextEdit::textChanged, this, &ConfirmacionPedido::onDireccionChanged);
     
-    // Eventos de tipo de pedido
     connect(ui->radioButton_inmediato, &QRadioButton::toggled, this, &ConfirmacionPedido::toggleTipoPedido);
     connect(ui->radioButton_programado, &QRadioButton::toggled, this, &ConfirmacionPedido::toggleTipoPedido);
     
-    // Eventos de método de pago
     connect(ui->radioButton_digital, &QRadioButton::toggled, this, &ConfirmacionPedido::toggleMetodoPago);
     connect(ui->radioButton_efectivo, &QRadioButton::toggled, this, &ConfirmacionPedido::toggleMetodoPago);
     
-    // Eventos de botones
     connect(ui->pushButton_confirmar, &QPushButton::clicked, this, &ConfirmacionPedido::confirmarPedido);
     connect(ui->pushButton_volver, &QPushButton::clicked, this, &ConfirmacionPedido::volverCarrito);
     
-    // Eventos de fecha y hora
     connect(ui->dateEdit_fecha, &QDateEdit::dateChanged, this, &ConfirmacionPedido::validarFormulario);
     connect(ui->timeEdit_hora, &QTimeEdit::timeChanged, this, &ConfirmacionPedido::validarFormulario);
 }
 
 void ConfirmacionPedido::cargarConfiguracion()
 {
-    QSqlQuery query(db);
-    query.prepare("SELECT clave, valor FROM configuracion WHERE clave IN (?, ?, ?, ?, ?)");
-    query.addBindValue("hora_apertura_1");
-    query.addBindValue("hora_cierre_1");
-    query.addBindValue("hora_apertura_2");
-    query.addBindValue("hora_cierre_2");
-    query.addBindValue("direccion_sucursal");
-    
-    if (query.exec()) {
-        while (query.next()) {
-            QString clave = query.value(0).toString();
-            QString valor = query.value(1).toString();
-            
-            if (clave == "hora_apertura_1") {
-                horaApertura1 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "hora_cierre_1") {
-                horaCierre1 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "hora_apertura_2") {
-                horaApertura2 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "hora_cierre_2") {
-                horaCierre2 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "direccion_sucursal") {
-                direccionSucursal = valor;
-            }
-        }
-    }
-    
-    // Actualizar label de horario
     QString horarioTexto = QString("Horarios de atención: %1-%2 y %3-%4")
                           .arg(horaApertura1.toString("HH:mm"))
                           .arg(horaCierre1.toString("HH:mm"))
@@ -175,7 +115,6 @@ void ConfirmacionPedido::establecerDatosCliente(const DatosCliente& cliente)
     ui->lineEdit_email->setText(cliente.email);
     ui->textEdit_direccion->setPlainText(cliente.direccion);
     
-    // Si es cliente existente, deshabilitar algunos campos
     if (cliente.esClienteExistente) {
         ui->lineEdit_nombre->setReadOnly(true);
         ui->lineEdit_apellido->setReadOnly(true);
@@ -201,7 +140,6 @@ void ConfirmacionPedido::calcularTotales()
 
 void ConfirmacionPedido::mostrarResumenProductos()
 {
-    // Limpiar layout existente
     QLayout* layout = ui->scrollAreaWidgetContents_productos->layout();
     if (layout) {
         QLayoutItem* item;
@@ -221,7 +159,6 @@ void ConfirmacionPedido::mostrarResumenProductos()
         
         QHBoxLayout* layoutProducto = new QHBoxLayout(frameProducto);
         
-        // Información del producto
         QVBoxLayout* layoutInfo = new QVBoxLayout();
         
         QLabel* labelNombre = new QLabel(producto.nombre);
@@ -230,6 +167,9 @@ void ConfirmacionPedido::mostrarResumenProductos()
         QLabel* labelCantidad = new QLabel(QString("Cantidad: %1").arg(producto.cantidad));
         labelCantidad->setStyleSheet("color: #666; font-size: 10px;");
         
+        layoutInfo->addWidget(labelNombre);
+        layoutInfo->addWidget(labelCantidad);
+        
         if (!producto.comentarios.isEmpty()) {
             QLabel* labelComentarios = new QLabel(QString("Comentarios: %1").arg(producto.comentarios));
             labelComentarios->setStyleSheet("color: #666; font-size: 9px; font-style: italic;");
@@ -237,10 +177,6 @@ void ConfirmacionPedido::mostrarResumenProductos()
             layoutInfo->addWidget(labelComentarios);
         }
         
-        layoutInfo->addWidget(labelNombre);
-        layoutInfo->addWidget(labelCantidad);
-        
-        // Precio
         QLabel* labelPrecio = new QLabel(QString("$%1").arg(producto.precioTotal, 0, 'f', 2));
         labelPrecio->setFont(QFont("Segoe UI", 12, QFont::Bold));
         labelPrecio->setStyleSheet("color: rgb(200, 30, 45);");
@@ -293,36 +229,31 @@ void ConfirmacionPedido::calcularCostoDelivery()
 
 double ConfirmacionPedido::calcularDistancia(const QString& direccionDestino)
 {
-    // Implementación simplificada de cálculo de distancia
-    // En una implementación real, usarías una API de mapas como Google Maps
-    Q_UNUSED(direccionDestino)
-    
-    // Simulación basada en palabras clave de la dirección
     QString direccionLower = direccionDestino.toLower();
     
     if (direccionLower.contains("centro") || direccionLower.contains("cerrito")) {
-        return 1.0; // Zona muy cercana
+        return 1.0;
     } else if (direccionLower.contains("nueva cordoba") || direccionLower.contains("guemes")) {
-        return 2.5; // Zona cercana
+        return 2.5;
     } else if (direccionLower.contains("alta cordoba") || direccionLower.contains("cerro")) {
-        return 4.0; // Zona media
+        return 4.0;
     } else {
-        return 6.0; // Zona lejana
+        return 6.0;
     }
 }
 
 double ConfirmacionPedido::obtenerCostoDeliveryPorDistancia(double distancia)
 {
     if (distancia <= 1.5) {
-        return 200.0; // Zona muy cercana
+        return 200.0;
     } else if (distancia <= 3.0) {
-        return 350.0; // Zona cercana
+        return 350.0;
     } else if (distancia <= 5.0) {
-        return 500.0; // Zona media
+        return 500.0;
     } else if (distancia <= 7.0) {
-        return 700.0; // Zona lejana
+        return 700.0;
     } else {
-        return 1000.0; // Zona muy lejana
+        return 1000.0;
     }
 }
 
@@ -332,7 +263,6 @@ void ConfirmacionPedido::toggleTipoPedido()
     ui->frame_programacion->setEnabled(esProgramado);
     
     if (esProgramado) {
-        // Configurar fecha y hora mínimas para pedidos programados
         ui->dateEdit_fecha->setDate(QDate::currentDate());
         ui->timeEdit_hora->setTime(horaApertura1);
     }
@@ -349,46 +279,27 @@ void ConfirmacionPedido::validarFormulario()
 {
     bool formularioValido = true;
     
-    // Validar que hay productos en el carrito
     if (productosCarrito.isEmpty()) {
         formularioValido = false;
     }
     
-    // Validar datos personales
     if (!validarDatosPersonales()) {
         formularioValido = false;
     }
     
-    // Validar dirección de entrega
     if (!validarDireccionEntrega()) {
         formularioValido = false;
     }
     
-    // Validar tipo de pedido
     if (!validarTipoPedido()) {
         formularioValido = false;
     }
     
-    // Validar método de pago
     if (!validarMetodoPago()) {
         formularioValido = false;
     }
     
     ui->pushButton_confirmar->setEnabled(formularioValido);
-}
-
-void ConfirmacionPedido::validarFormulario()
-{
-    bool datosPersonalesValidos = validarDatosPersonales();
-    bool direccionValida = validarDireccionEntrega();
-    bool tipoPedidoValido = validarTipoPedido();
-    
-    if (datosPersonalesValidos && direccionValida && tipoPedidoValido) {
-        // Proceder con el pedido
-        QMessageBox::information(this, "Validación", "Todos los datos son correctos");
-    } else {
-        QMessageBox::warning(this, "Error de validación", "Por favor, complete correctamente todos los campos");
-    }
 }
 
 bool ConfirmacionPedido::validarDatosPersonales()
@@ -402,14 +313,12 @@ bool ConfirmacionPedido::validarDatosPersonales()
         return false;
     }
     
-    // Validar formato de teléfono
     int pos = 0;
     QString telefonoCopy = telefono;
     if (validadorTelefono->validate(telefonoCopy, pos) == QValidator::Invalid) {
         return false;
     }
     
-    // Validar formato de email
     int posEmail = 0;
     QString emailCopy = email;
     if (validadorEmail->validate(emailCopy, posEmail) == QValidator::Invalid) {
@@ -439,52 +348,22 @@ bool ConfirmacionPedido::validarTipoPedido()
 
 bool ConfirmacionPedido::validarPedidoInmediato()
 {
-    // Para pedidos inmediatos, verificamos que estamos dentro del horario de atención
     QTime horaActual = QTime::currentTime();
-    QTime horaApertura(8, 0); // 8:00 AM
-    QTime horaCierre(22, 0);  // 10:00 PM
-    
-    return horaActual >= horaApertura && horaActual <= horaCierre;
+    return esHorarioLaboral(horaActual);
 }
 
 bool ConfirmacionPedido::validarPedidoProgramado(const QDateTime& fechaHora)
 {
-    // Verificar que la fecha no sea anterior a la actual
     QDateTime ahora = QDateTime::currentDateTime();
     if (fechaHora <= ahora) {
         return false;
     }
     
-    // Verificar que la fecha no sea más de una semana en el futuro
     QDateTime maximaFecha = ahora.addDays(7);
     if (fechaHora > maximaFecha) {
         return false;
     }
     
-    // Verificar que la hora esté dentro del horario de atención
-    QTime hora = fechaHora.time();
-    QTime horaApertura(8, 0); // 8:00 AM
-    QTime horaCierre(22, 0);  // 10:00 PM
-    
-    return hora >= horaApertura && hora <= horaCierre;
-}
-
-
-// Implementación alternativa para evitar duplicación
-bool ConfirmacionPedido::validarFechaProgramada(const QDateTime& fechaHora)
-{
-    // Validar que la fecha no sea pasada
-    if (fechaHora.date() < QDate::currentDate()) {
-        return false;
-    }
-    
-    // Si es hoy, validar que la hora no sea pasada
-    if (fechaHora.date() == QDate::currentDate() && 
-        fechaHora.time() <= QTime::currentTime().addSecs(3600)) { // Mínimo 1 hora de anticipación
-        return false;
-    }
-    
-    // Validar que esté en horario laboral
     return esHorarioLaboral(fechaHora.time());
 }
 
@@ -496,228 +375,103 @@ bool ConfirmacionPedido::esHorarioLaboral(const QTime& hora)
 
 bool ConfirmacionPedido::validarMetodoPago()
 {
-    if (ui->radioButton_efectivo->isChecked()) {
-        // Validar si el cliente puede pagar en efectivo (solo clientes autorizados)
-        // Por ahora, permitimos a todos los clientes
-        return true;
-    }
-    
     return ui->radioButton_digital->isChecked() || ui->radioButton_efectivo->isChecked();
 }
 
 void ConfirmacionPedido::confirmarPedido()
 {
-    validarFormulario();
-    
-    // Verificamos si todos los campos son válidos
     if (!validarDatosPersonales() || !validarDireccionEntrega() || !validarTipoPedido()) {
         mostrarMensajeError("Por favor, complete todos los campos obligatorios correctamente");
         return;
     }
     
-    // Recopilar datos del cliente
     datosCliente.nombre = ui->lineEdit_nombre->text().trimmed();
     datosCliente.apellido = ui->lineEdit_apellido->text().trimmed();
     datosCliente.telefono = ui->lineEdit_telefono->text().trimmed();
     datosCliente.email = ui->lineEdit_email->text().trimmed();
     datosCliente.direccion = ui->textEdit_direccion->toPlainText().trimmed();
     
-    // Recopilar configuración del pedido
     configuracionPedido.tipoPedido = ui->radioButton_inmediato->isChecked() ? "inmediato" : "programado";
     
     if (ui->radioButton_programado->isChecked()) {
         configuracionPedido.fechaEntrega = QDateTime(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
-    } else {
-        configuracionPedido.fechaEntrega = QDateTime(); // Nulo para pedidos inmediatos
     }
     
     configuracionPedido.metodoPago = ui->radioButton_digital->isChecked() ? "digital" : "efectivo";
     configuracionPedido.comentarios = ui->textEdit_comentarios->toPlainText().trimmed();
     
-    // Bloquear formulario durante el procesamiento
     bloquearFormulario(true);
     
-    try {
-        // Verificar o crear cliente
-        if (!datosCliente.esClienteExistente) {
-            if (existeCliente(datosCliente.telefono, datosCliente.email)) {
-                datosCliente.clienteId = obtenerIdCliente(datosCliente.telefono, datosCliente.email);
-                datosCliente.esClienteExistente = true;
-            } else {
-                datosCliente.clienteId = crearCliente(datosCliente);
-                if (datosCliente.clienteId <= 0) {
-                    throw QString("Error al registrar los datos del cliente");
-                }
-            }
-        }
-        
-        // Crear el pedido
-        int pedidoId = crearPedido();
-        if (pedidoId <= 0) {
-            throw QString("Error al crear el pedido");
-        }
-        
-        // Agregar items al pedido
-        if (!agregarItemsPedido(pedidoId)) {
-            throw QString("Error al agregar los productos al pedido");
-        }
-        
-        // Crear seguimiento del pedido
-        if (!crearSeguimientoPedido(pedidoId)) {
-            throw QString("Error al crear el seguimiento del pedido");
-        }
-        
-        // Enviar factura por email
-        if (!enviarFacturaPorEmail(pedidoId)) {
-            qDebug() << "Advertencia: No se pudo enviar la factura por email";
-        }
-        
-        mostrarMensajeExito(QString("¡Pedido confirmado exitosamente!\nNúmero de pedido: %1").arg(pedidoId));
-        
-        emit pedidoConfirmado(pedidoId);
-        
-    } catch (const QString& error) {
-        mostrarMensajeError(error);
-        bloquearFormulario(false);
+    QJsonObject pedidoJson;
+    pedidoJson["cliente"] = QJsonObject{
+        {"nombre", datosCliente.nombre},
+        {"apellido", datosCliente.apellido},
+        {"telefono", datosCliente.telefono},
+        {"email", datosCliente.email},
+        {"direccion", datosCliente.direccion}
+    };
+    
+    QJsonArray itemsArray;
+    for (const auto& producto : productosCarrito) {
+        itemsArray.append(QJsonObject{
+            {"id", producto.id},
+            {"nombre", producto.nombre},
+            {"cantidad", producto.cantidad},
+            {"precio", producto.precio},
+            {"subtotal", producto.precioTotal}
+        });
     }
+    
+    pedidoJson["items"] = itemsArray;
+    pedidoJson["tipo_pedido"] = configuracionPedido.tipoPedido;
+    pedidoJson["metodo_pago"] = configuracionPedido.metodoPago;
+    pedidoJson["subtotal"] = configuracionPedido.subtotal;
+    pedidoJson["costo_envio"] = configuracionPedido.costoDelivery;
+    pedidoJson["total"] = configuracionPedido.total;
+    pedidoJson["comentarios"] = configuracionPedido.comentarios;
+    
+    if (configuracionPedido.fechaEntrega.isValid()) {
+        pedidoJson["fecha_entrega"] = configuracionPedido.fechaEntrega.toString(Qt::ISODate);
+    }
+    
+    QNetworkRequest request;
+    request.setUrl(QUrl(apiUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    
+    QNetworkReply* reply = networkManager->post(request, QJsonDocument(pedidoJson).toJson());
+    
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        procesarRespuestaConfirmacion(reply);
+    });
 }
 
-int ConfirmacionPedido::crearPedido()
+void ConfirmacionPedido::procesarRespuestaConfirmacion(QNetworkReply *reply)
 {
-    QSqlQuery query(db);
+    bloquearFormulario(false);
     
-    // Iniciar transacción
-    db.transaction();
-    
-    try {
-        query.prepare("INSERT INTO pedidos (numero_pedido, usuario_id, tipo_pedido, fecha_pedido, "
-                      "fecha_entrega_programada, direccion_entrega, telefono_contacto, metodo_pago, "
-                      "estado, subtotal, precio_delivery, total, comentarios_cliente) "
-                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        
-        QString numeroPedido = generarNumeroPedido();
-        
-        query.addBindValue(numeroPedido);
-        query.addBindValue(datosCliente.clienteId);
-        query.addBindValue(configuracionPedido.tipoPedido);
-        query.addBindValue(QDateTime::currentDateTime());
-        query.addBindValue(configuracionPedido.fechaEntrega.isValid() ? configuracionPedido.fechaEntrega : QVariant());
-        query.addBindValue(datosCliente.direccion);
-        query.addBindValue(datosCliente.telefono);
-        query.addBindValue(configuracionPedido.metodoPago);
-        query.addBindValue("pendiente");
-        query.addBindValue(configuracionPedido.subtotal);
-        query.addBindValue(configuracionPedido.costoDelivery);
-        query.addBindValue(configuracionPedido.total);
-        query.addBindValue(configuracionPedido.comentarios);
-        
-        if (!query.exec()) {
-            throw QString("Error en la consulta SQL: " + query.lastError().text());
-        }
-        
-        int pedidoId = query.lastInsertId().toInt();
-        
-        // Confirmar transacción
-        db.commit();
-        
-        return pedidoId;
-        
-    } catch (const QString& error) {
-        db.rollback();
-        throw error;
+    if (reply->error() != QNetworkReply::NoError) {
+        mostrarMensajeError("Error al conectar con el servidor: " + reply->errorString());
+        reply->deleteLater();
+        return;
     }
-}
-
-bool ConfirmacionPedido::agregarItemsPedido(int pedidoId)
-{
-    QSqlQuery query(db);
     
-    for (const ProductoConfirmacion& producto : productosCarrito) {
-        query.prepare("INSERT INTO pedido_items (pedido_id, producto_id, cantidad, precio_unitario, precio_total) "
-                      "VALUES (?, ?, ?, ?, ?)");
-        query.addBindValue(pedidoId);
-        query.addBindValue(producto.id);
-        query.addBindValue(producto.cantidad);
-        query.addBindValue(producto.precio);
-        query.addBindValue(producto.precioTotal);
+    QByteArray responseData = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+    
+    if (jsonDoc.isObject()) {
+        QJsonObject obj = jsonDoc.object();
+        int pedidoId = obj["pedido_id"].toInt();
+        QString estado = obj["estado"].toString();
         
-        if (!query.exec()) {
-            qDebug() << "Error al agregar item:" << query.lastError().text();
-            return false;
+        if (estado == "confirmado") {
+            mostrarMensajeExito(QString("¡Pedido confirmado exitosamente!\nNúmero de pedido: %1").arg(pedidoId));
+            emit pedidoConfirmado(pedidoId);
+        } else {
+            mostrarMensajeError("Error al procesar el pedido");
         }
     }
     
-    return true;
-}
-
-bool ConfirmacionPedido::crearSeguimientoPedido(int pedidoId)
-{
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO seguimiento_pedidos (pedido_id, estado_anterior, estado_nuevo, "
-                  "usuario_cambio_id, comentarios) VALUES (?, ?, ?, ?, ?)");
-    query.addBindValue(pedidoId);
-    query.addBindValue(QVariant()); // Estado anterior nulo
-    query.addBindValue("pendiente");
-    query.addBindValue(datosCliente.clienteId);
-    query.addBindValue("Pedido creado por el cliente");
-    
-    return query.exec();
-}
-
-bool ConfirmacionPedido::existeCliente(const QString& telefono, const QString& email)
-{
-    QSqlQuery query(db);
-    query.prepare("SELECT COUNT(*) FROM usuarios WHERE (telefono = ? OR email = ?) AND rol = 'cliente' AND activo = 1");
-    query.addBindValue(telefono);
-    query.addBindValue(email);
-    
-    if (query.exec() && query.next()) {
-        return query.value(0).toInt() > 0;
-    }
-    
-    return false;
-}
-
-int ConfirmacionPedido::obtenerIdCliente(const QString& telefono, const QString& email)
-{
-    QSqlQuery query(db);
-    query.prepare("SELECT id FROM usuarios WHERE (telefono = ? OR email = ?) AND rol = 'cliente' AND activo = 1 LIMIT 1");
-    query.addBindValue(telefono);
-    query.addBindValue(email);
-    
-    if (query.exec() && query.next()) {
-        return query.value(0).toInt();
-    }
-    
-    return -1;
-}
-
-int ConfirmacionPedido::crearCliente(const DatosCliente& cliente)
-{
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO usuarios (nombre, apellido, email, telefono, direccion, contraseña, rol) "
-                  "VALUES (?, ?, ?, ?, ?, ?, ?)");
-    query.addBindValue(cliente.nombre);
-    query.addBindValue(cliente.apellido);
-    query.addBindValue(cliente.email);
-    query.addBindValue(cliente.telefono);
-    query.addBindValue(cliente.direccion);
-    query.addBindValue("temp_password"); // Contraseña temporal
-    query.addBindValue("cliente");
-    
-    if (query.exec()) {
-        return query.lastInsertId().toInt();
-    }
-    
-    return -1;
-}
-
-bool ConfirmacionPedido::enviarFacturaPorEmail(int pedidoId)
-{
-    // Implementación simplificada
-    // En una implementación real, generarías y enviarías un PDF por email
-    Q_UNUSED(pedidoId)
-    return true;
+    reply->deleteLater();
 }
 
 QString ConfirmacionPedido::generarNumeroPedido()
@@ -737,7 +491,6 @@ void ConfirmacionPedido::bloquearFormulario(bool bloqueado)
     ui->pushButton_confirmar->setEnabled(!bloqueado);
     ui->pushButton_volver->setEnabled(!bloqueado);
     
-    // Cambiar texto del botón mientras procesa
     if (bloqueado) {
         ui->pushButton_confirmar->setText("Procesando...");
     } else {
@@ -758,4 +511,26 @@ void ConfirmacionPedido::mostrarMensajeExito(const QString& mensaje)
 void ConfirmacionPedido::mostrarMensajeAdvertencia(const QString& mensaje)
 {
     QMessageBox::warning(this, "Advertencia", mensaje);
+}
+
+QString ConfirmacionPedido::formatearDireccion(const QString& direccion)
+{
+    return direccion.trimmed();
+}
+
+void ConfirmacionPedido::limpiarFormulario()
+{
+    ui->lineEdit_nombre->clear();
+    ui->lineEdit_apellido->clear();
+    ui->lineEdit_telefono->clear();
+    ui->lineEdit_email->clear();
+    ui->textEdit_direccion->clear();
+    ui->textEdit_comentarios->clear();
+    ui->radioButton_inmediato->setChecked(true);
+    ui->radioButton_digital->setChecked(true);
+}
+
+bool ConfirmacionPedido::validarHorarioLaboral(const QDateTime& fechaHora)
+{
+    return esHorarioLaboral(fechaHora.time());
 }

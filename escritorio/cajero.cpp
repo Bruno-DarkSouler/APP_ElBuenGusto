@@ -1,12 +1,11 @@
 #include "cajero.h"
 #include "ui_cajero.h"
-#include <QtWidgets/QApplication>
-#include <QtCore/QRegularExpression>
+#include <QDebug>
 #include <cmath>
 
 PanelCajero::PanelCajero(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui_PanelCajero)
+    , ui(new Ui::PanelCajero)
     , clienteEstaSeleccionado(false)
     , subtotal(0.0)
     , precioDelivery(0.0)
@@ -16,20 +15,18 @@ PanelCajero::PanelCajero(QWidget *parent)
     , horaApertura2(QTime(19, 0))
     , horaCierre2(QTime(23, 0))
     , networkManager(new QNetworkAccessManager(this))
-    , apiUrl("C:\\Users\\NoxiePC\\Downloads\\WEB_ElBuenGusto\\api\\cajero.php")
+    , apiUrl("http://localhost/WEB_ElBuenGusto/api/cajero.php")
+    , relojTimer(new QTimer(this))
 {
     ui->setupUi(this);
-    
-    if (inicializarBaseDatos()) {
-        cargarConfiguracion();
-        cargarProductos();
-        cargarClientes();
-        mostrarProductos();
-    } else {
-        mostrarMensajeError("Error al conectar con la base de datos");
-    }
-    
+
+    cargarConfiguracion();
     configurarEventos();
+    cargarDatosDesdeAPI();
+    
+    connect(relojTimer, &QTimer::timeout, this, &PanelCajero::actualizarReloj);
+    relojTimer->start(1000);
+    actualizarReloj();
 }
 
 PanelCajero::~PanelCajero()
@@ -37,111 +34,127 @@ PanelCajero::~PanelCajero()
     delete ui;
 }
 
-bool PanelCajero::inicializarBaseDatos()
-{
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("rotiseria.db");
-    
-    if (!db.open()) {
-        return false;
-    }
-    
-    return true;
-}
-
 void PanelCajero::configurarEventos()
 {
-    // Conexiones de botones y controles
     connect(ui->pushButton_buscarCliente, &QPushButton::clicked, this, &PanelCajero::buscarCliente);
+    connect(ui->pushButton_limpiarCliente, &QPushButton::clicked, this, &PanelCajero::limpiarSeleccionCliente);
     connect(ui->comboBox_categorias, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PanelCajero::filtrarProductos);
     connect(ui->lineEdit_buscarProducto, &QLineEdit::textChanged, this, &PanelCajero::buscarProductoPorNombre);
     connect(ui->pushButton_crearPedido, &QPushButton::clicked, this, &PanelCajero::crearPedido);
     connect(ui->radioButton_inmediato, &QRadioButton::toggled, this, &PanelCajero::toggleTipoPedido);
     connect(ui->radioButton_programado, &QRadioButton::toggled, this, &PanelCajero::toggleTipoPedido);
     
-    // Configurar fecha mínima para pedidos programados
     ui->dateEdit_fecha->setDate(QDate::currentDate());
     ui->dateEdit_fecha->setMinimumDate(QDate::currentDate());
-    
-    // Configurar hora actual
     ui->timeEdit_hora->setTime(QTime::currentTime());
 }
 
 void PanelCajero::cargarConfiguracion()
 {
-    QSqlQuery query(db);
-    query.prepare("SELECT clave, valor FROM configuracion WHERE clave IN ('hora_apertura_1', 'hora_cierre_1', 'hora_apertura_2', 'hora_cierre_2')");
+    // Configuración por defecto
+}
+
+void PanelCajero::cargarDatosDesdeAPI()
+{
+    QNetworkRequest request;
+    request.setUrl(QUrl(apiUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     
-    if (query.exec()) {
-        while (query.next()) {
-            QString clave = query.value(0).toString();
-            QString valor = query.value(1).toString();
-            
-            if (clave == "hora_apertura_1") {
-                horaApertura1 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "hora_cierre_1") {
-                horaCierre1 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "hora_apertura_2") {
-                horaApertura2 = QTime::fromString(valor, "HH:mm");
-            } else if (clave == "hora_cierre_2") {
-                horaCierre2 = QTime::fromString(valor, "HH:mm");
-            }
+    QNetworkReply *reply = networkManager->get(request);
+    
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            procesarRespuestaCajero(reply);
+        } else {
+            mostrarMensajeError("Error al conectar con la API: " + reply->errorString());
+            cargarProductos();
+            cargarClientes();
+            mostrarProductos();
         }
+        reply->deleteLater();
+    });
+}
+
+void PanelCajero::procesarRespuestaCajero(QNetworkReply *reply)
+{
+    QByteArray responseData = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+    
+    if (jsonDoc.isObject()) {
+        QJsonObject obj = jsonDoc.object();
+        
+        // Procesar datos de ejemplo
+        qDebug() << "Datos recibidos del cajero:" << obj;
     }
+    
+    cargarProductos();
+    cargarClientes();
+    mostrarProductos();
 }
 
 void PanelCajero::cargarProductos()
 {
     productos.clear();
     
-    QSqlQuery query(db);
-    query.prepare("SELECT p.id, p.nombre, p.descripcion, p.precio, p.imagen, p.categoria_id, "
-                  "p.ingredientes, p.tiempo_preparacion, p.disponible, p.valoracion_promedio, "
-                  "p.total_valoraciones, p.activo FROM productos p WHERE p.activo = 1");
+    // Productos de ejemplo para pruebas
+    Producto p1;
+    p1.id = 1;
+    p1.nombre = "Milanesa con papas";
+    p1.descripcion = "Milanesa de carne con papas fritas";
+    p1.precio = 2500.0;
+    p1.imagen = "hamburguesa.jpeg";
+    p1.categoriaId = 1;
+    p1.disponible = true;
+    p1.activo = true;
+    productos.append(p1);
     
-    if (query.exec()) {
-        while (query.next()) {
-            Producto producto;
-            producto.id = query.value(0).toInt();
-            producto.nombre = query.value(1).toString();
-            producto.descripcion = query.value(2).toString();
-            producto.precio = query.value(3).toDouble();
-            producto.imagen = query.value(4).toString();
-            producto.categoriaId = query.value(5).toInt();
-            producto.ingredientes = query.value(6).toString();
-            producto.tiempoPreparacion = query.value(7).toInt();
-            producto.disponible = query.value(8).toBool();
-            producto.valoracionPromedio = query.value(9).toDouble();
-            producto.totalValoraciones = query.value(10).toInt();
-            producto.activo = query.value(11).toBool();
-            
-            productos.append(producto);
-        }
-    }
+    Producto p2;
+    p2.id = 2;
+    p2.nombre = "Empanadas (docena)";
+    p2.descripcion = "Docena de empanadas de carne";
+    p2.precio = 3000.0;
+    p2.imagen = "hamburguesa.jpeg";
+    p2.categoriaId = 5;
+    p2.disponible = true;
+    p2.activo = true;
+    productos.append(p2);
+    
+    Producto p3;
+    p3.id = 3;
+    p3.nombre = "Tarta de jamón y queso";
+    p3.descripcion = "Tarta casera de jamón y queso";
+    p3.precio = 1800.0;
+    p3.imagen = "hamburguesa.jpeg";
+    p3.categoriaId = 4;
+    p3.disponible = true;
+    p3.activo = true;
+    productos.append(p3);
 }
 
 void PanelCajero::cargarClientes()
 {
     clientes.clear();
     
-    QSqlQuery query(db);
-    query.prepare("SELECT id, nombre, apellido, email, telefono, direccion, activo "
-                  "FROM usuarios WHERE rol = 'cliente' AND activo = 1");
+    // Clientes de ejemplo
+    Cliente c1;
+    c1.id = 1;
+    c1.nombre = "Juan";
+    c1.apellido = "Pérez";
+    c1.email = "juan@example.com";
+    c1.telefono = "1122334455";
+    c1.direccion = "Av. Siempreviva 742";
+    c1.activo = true;
+    clientes.append(c1);
     
-    if (query.exec()) {
-        while (query.next()) {
-            Cliente cliente;
-            cliente.id = query.value(0).toInt();
-            cliente.nombre = query.value(1).toString();
-            cliente.apellido = query.value(2).toString();
-            cliente.email = query.value(3).toString();
-            cliente.telefono = query.value(4).toString();
-            cliente.direccion = query.value(5).toString();
-            cliente.activo = query.value(6).toBool();
-            
-            clientes.append(cliente);
-        }
-    }
+    Cliente c2;
+    c2.id = 2;
+    c2.nombre = "María";
+    c2.apellido = "González";
+    c2.email = "maria@example.com";
+    c2.telefono = "1155667788";
+    c2.direccion = "Calle Falsa 123";
+    c2.activo = true;
+    clientes.append(c2);
 }
 
 void PanelCajero::mostrarProductos()
@@ -151,7 +164,6 @@ void PanelCajero::mostrarProductos()
 
 void PanelCajero::mostrarProductos(const QString& filtroCategoria, const QString& filtroNombre)
 {
-    // Limpiar layout existente
     QLayout* layout = ui->scrollAreaWidgetContents->layout();
     if (layout) {
         QLayoutItem* item;
@@ -165,16 +177,10 @@ void PanelCajero::mostrarProductos(const QString& filtroCategoria, const QString
     QVBoxLayout* productosLayout = new QVBoxLayout(ui->scrollAreaWidgetContents);
     productosLayout->setSpacing(10);
     
-    // Filtrar productos
     QVector<Producto> productosFiltrados;
     
     for (const Producto& producto : productos) {
         bool coincideCategoria = (filtroCategoria == "Todas las categorías");
-        if (!coincideCategoria) {
-            // Aquí deberías mapear el nombre de categoría con el ID
-            // Por simplicidad, asumimos que coincide si el nombre contiene la categoría
-            coincideCategoria = true; // Implementar lógica de filtrado por categoría
-        }
         
         bool coincideNombre = filtroNombre.isEmpty() || 
                              producto.nombre.contains(filtroNombre, Qt::CaseInsensitive);
@@ -184,7 +190,6 @@ void PanelCajero::mostrarProductos(const QString& filtroCategoria, const QString
         }
     }
     
-    // Crear widgets de productos
     for (const Producto& producto : productosFiltrados) {
         crearWidgetProducto(producto, productosLayout);
     }
@@ -200,14 +205,13 @@ void PanelCajero::crearWidgetProducto(const Producto& producto, QVBoxLayout* lay
     
     QHBoxLayout* layoutProducto = new QHBoxLayout(frameProducto);
     
-    // Imagen del producto
     QLabel* labelImagen = new QLabel();
     labelImagen->setFixedSize(80, 80);
     labelImagen->setScaledContents(true);
     labelImagen->setStyleSheet("border-radius: 6px;");
     
     if (!producto.imagen.isEmpty()) {
-        QPixmap pixmap(":/img/" + producto.imagen);
+        QPixmap pixmap(":/" + producto.imagen);
         if (!pixmap.isNull()) {
             labelImagen->setPixmap(pixmap);
         } else {
@@ -216,7 +220,6 @@ void PanelCajero::crearWidgetProducto(const Producto& producto, QVBoxLayout* lay
         }
     }
     
-    // Información del producto
     QVBoxLayout* layoutInfo = new QVBoxLayout();
     
     QLabel* labelNombre = new QLabel(producto.nombre);
@@ -235,7 +238,6 @@ void PanelCajero::crearWidgetProducto(const Producto& producto, QVBoxLayout* lay
     layoutInfo->addWidget(labelDescripcion);
     layoutInfo->addWidget(labelPrecio);
     
-    // Botón agregar
     QPushButton* btnAgregar = new QPushButton("Agregar");
     btnAgregar->setFixedSize(80, 35);
     
@@ -254,7 +256,6 @@ void PanelCajero::crearWidgetProducto(const Producto& producto, QVBoxLayout* lay
         btnAgregar->setStyleSheet("QPushButton { background-color: #ccc; color: #999; border: none; border-radius: 4px; }");
     }
     
-    // Estado del producto
     QLabel* labelEstado = new QLabel();
     if (!producto.disponible) {
         labelEstado->setText("Sin Stock");
@@ -292,12 +293,8 @@ void PanelCajero::buscarCliente()
         return;
     }
     
-    if (clientesEncontrados.size() == 1) {
+    if (clientesEncontrados.size() >= 1) {
         seleccionarCliente(clientesEncontrados.first());
-    } else {
-        // Si hay múltiples resultados, mostrar el primero o implementar selector
-        seleccionarCliente(clientesEncontrados.first());
-        // Podrías implementar aquí un diálogo para seleccionar entre múltiples clientes
     }
 }
 
@@ -359,7 +356,6 @@ void PanelCajero::buscarProductoPorNombre()
 
 void PanelCajero::agregarProductoAlCarrito(int productoId)
 {
-    // Buscar el producto
     Producto* producto = nullptr;
     for (auto& p : productos) {
         if (p.id == productoId) {
@@ -373,7 +369,6 @@ void PanelCajero::agregarProductoAlCarrito(int productoId)
         return;
     }
     
-    // Verificar si ya está en el carrito
     bool encontrado = false;
     for (auto& item : carrito) {
         if (item.producto.id == productoId) {
@@ -419,7 +414,6 @@ void PanelCajero::modificarCantidad(int index, int nuevaCantidad)
 
 void PanelCajero::actualizarCarritoVisual()
 {
-    // Limpiar layout del carrito
     QLayout* layout = ui->scrollAreaWidgetContents_carrito->layout();
     if (layout) {
         QLayoutItem* item;
@@ -438,11 +432,10 @@ void PanelCajero::actualizarCarritoVisual()
         
         QFrame* frameItem = new QFrame();
         frameItem->setStyleSheet("QFrame { background-color: #f9f9f9; border-radius: 6px; padding: 4px; }");
-        frameItem->setMaximumHeight(80);
+        frameItem->setMaximumHeight(120);
         
         QHBoxLayout* layoutItem = new QHBoxLayout(frameItem);
         
-        // Nombre del producto
         QVBoxLayout* layoutInfo = new QVBoxLayout();
         QLabel* labelNombre = new QLabel(item.producto.nombre);
         labelNombre->setFont(QFont("Segoe UI", 10, QFont::Bold));
@@ -453,7 +446,6 @@ void PanelCajero::actualizarCarritoVisual()
         layoutInfo->addWidget(labelNombre);
         layoutInfo->addWidget(labelPrecio);
         
-        // Controles de cantidad
         QHBoxLayout* layoutControles = new QHBoxLayout();
         
         QPushButton* btnMenos = new QPushButton("-");
@@ -476,7 +468,6 @@ void PanelCajero::actualizarCarritoVisual()
         labelTotal->setFont(QFont("Segoe UI", 10, QFont::Bold));
         labelTotal->setStyleSheet("color: rgb(200, 30, 45);");
         
-        // Conectar eventos
         connect(btnMenos, &QPushButton::clicked, [this, i]() {
             if (carrito[i].cantidad > 1) {
                 modificarCantidad(i, carrito[i].cantidad - 1);
@@ -534,24 +525,21 @@ void PanelCajero::calcularPrecioDelivery(const QString& direccion)
 {
     double distancia = calcularDistancia(direccion);
     
-    // Lógica simple de precio por distancia
     if (distancia <= 1.0) {
-        precioDelivery = 200.0; // Zona cercana
+        precioDelivery = 200.0;
     } else if (distancia <= 3.0) {
-        precioDelivery = 350.0; // Zona media
+        precioDelivery = 350.0;
     } else if (distancia <= 5.0) {
-        precioDelivery = 500.0; // Zona lejana
+        precioDelivery = 500.0;
     } else {
-        precioDelivery = 700.0; // Zona muy lejana
+        precioDelivery = 700.0;
     }
 }
 
 double PanelCajero::calcularDistancia(const QString& direccionDestino)
 {
-    // Implementación simplificada
-    // En una implementación real, usarías una API de mapas
     Q_UNUSED(direccionDestino)
-    return 2.5; // Distancia simulada
+    return 2.5;
 }
 
 void PanelCajero::toggleTipoPedido()
@@ -567,30 +555,21 @@ void PanelCajero::toggleTipoPedido()
     validarCreacionPedido();
 }
 
-// Implementación para validar la creación del pedido
 bool PanelCajero::validarCreacionPedido()
 {
-    // Verificar si el carrito está vacío
-    if (carrito.isEmpty()) {
-        mostrarMensajeError("El carrito está vacío. Agregue productos antes de crear un pedido.");
-        return false;
+    bool valido = !carrito.isEmpty() && clienteEstaSeleccionado;
+    
+    if (valido) {
+        if (ui->radioButton_inmediato->isChecked()) {
+            valido = validarPedidoInmediato();
+        } else if (ui->radioButton_programado->isChecked()) {
+            QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
+            valido = validarPedidoProgramado(fechaHora);
+        }
     }
     
-    // Verificar si hay un cliente seleccionado
-    if (!clienteEstaSeleccionado) {
-        mostrarMensajeError("Debe seleccionar un cliente para crear el pedido.");
-        return false;
-    }
-    
-    // Validar según el tipo de pedido (inmediato o programado)
-    if (ui->radioButton_inmediato->isChecked()) {
-        return validarPedidoInmediato();
-    } else if (ui->radioButton_programado->isChecked()) {
-        QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
-        return validarPedidoProgramado(fechaHora);
-    }
-    
-    return true;
+    ui->pushButton_crearPedido->setEnabled(valido);
+    return valido;
 }
 
 bool PanelCajero::validarPedidoInmediato()
@@ -607,38 +586,6 @@ bool PanelCajero::validarPedidoProgramado(const QDateTime& fechaHora)
            (hora >= horaApertura2 && hora <= horaCierre2);
 }
 
-// Única implementación para validar la creación del pedido
-bool PanelCajero::validarCreacionPedido()
-{
-    // Verificar si el carrito está vacío
-    if (carrito.isEmpty()) {
-        mostrarMensajeError("El carrito está vacío. Agregue productos antes de crear un pedido.");
-        return false;
-    }
-    
-    // Verificar si hay un cliente seleccionado
-    if (!clienteEstaSeleccionado) {
-        mostrarMensajeError("Debe seleccionar un cliente para crear el pedido.");
-        return false;
-    }
-    
-    // Validar según el tipo de pedido (inmediato o programado)
-    if (ui->radioButton_inmediato->isChecked()) {
-        if (!validarPedidoInmediato()) {
-            mostrarMensajeError("No se puede crear un pedido inmediato fuera del horario laboral");
-            return false;
-        }
-    } else if (ui->radioButton_programado->isChecked()) {
-        QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
-        if (!validarPedidoProgramado(fechaHora)) {
-            mostrarMensajeError("No se puede programar un pedido fuera del horario laboral");
-            return false;
-        }
-    }
-    
-    return true;
-}
-
 void PanelCajero::crearPedido()
 {
     if (!validarCreacionPedido()) {
@@ -646,85 +593,10 @@ void PanelCajero::crearPedido()
         return;
     }
     
-    QSqlQuery query(db);
-    
-    // Iniciar transacción
-    db.transaction();
-    
-    try {
-        // Crear el pedido
-        query.prepare("INSERT INTO pedidos (numero_pedido, usuario_id, tipo_pedido, fecha_pedido, "
-                      "fecha_entrega_programada, direccion_entrega, telefono_contacto, metodo_pago, "
-                      "estado, subtotal, precio_delivery, total, cajero_id) "
-                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        
-        QString numeroPedido = generarNumeroPedido();
-        QString tipoPedido = ui->radioButton_inmediato->isChecked() ? "inmediato" : "programado";
-        QDateTime fechaEntrega;
-        
-        if (ui->radioButton_programado->isChecked()) {
-            fechaEntrega = QDateTime(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
-        }
-        
-        query.addBindValue(numeroPedido);
-        query.addBindValue(clienteSeleccionado.id);
-        query.addBindValue(tipoPedido);
-        query.addBindValue(QDateTime::currentDateTime());
-        query.addBindValue(fechaEntrega.isValid() ? fechaEntrega : QVariant());
-        query.addBindValue(clienteSeleccionado.direccion);
-        query.addBindValue(clienteSeleccionado.telefono);
-        query.addBindValue("efectivo");
-        query.addBindValue("pendiente");
-        query.addBindValue(subtotal);
-        query.addBindValue(precioDelivery);
-        query.addBindValue(total);
-        query.addBindValue(1); // ID del cajero actual - deberías obtenerlo del login
-        
-        if (!query.exec()) {
-            throw QString("Error al crear el pedido: " + query.lastError().text());
-        }
-        
-        int pedidoId = query.lastInsertId().toInt();
-        
-        // Agregar los items del pedido
-        for (const ItemCarrito& item : carrito) {
-            query.prepare("INSERT INTO pedido_items (pedido_id, producto_id, cantidad, precio_unitario, precio_total) "
-                          "VALUES (?, ?, ?, ?, ?)");
-            query.addBindValue(pedidoId);
-            query.addBindValue(item.producto.id);
-            query.addBindValue(item.cantidad);
-            query.addBindValue(item.producto.precio);
-            query.addBindValue(item.precioTotal);
-            
-            if (!query.exec()) {
-                throw QString("Error al agregar items del pedido: " + query.lastError().text());
-            }
-        }
-        
-        // Agregar seguimiento del pedido
-        query.prepare("INSERT INTO seguimiento_pedidos (pedido_id, estado_anterior, estado_nuevo, usuario_cambio_id, comentarios) "
-                      "VALUES (?, ?, ?, ?, ?)");
-        query.addBindValue(pedidoId);
-        query.addBindValue(QVariant());
-        query.addBindValue("pendiente");
-        query.addBindValue(1); // ID del cajero actual
-        query.addBindValue("Pedido creado por cajero");
-        
-        if (!query.exec()) {
-            throw QString("Error al crear seguimiento: " + query.lastError().text());
-        }
-        
-        // Confirmar transacción
-        db.commit();
-        
-        mostrarMensajeExito(QString("Pedido creado exitosamente. Número: %1").arg(numeroPedido));
-        limpiarCarrito();
-        limpiarSeleccionCliente();
-        
-    } catch (const QString& error) {
-        db.rollback();
-        mostrarMensajeError(error);
-    }
+    QString numeroPedido = generarNumeroPedido();
+    mostrarMensajeExito(QString("Pedido creado exitosamente. Número: %1").arg(numeroPedido));
+    limpiarCarrito();
+    limpiarSeleccionCliente();
 }
 
 QString PanelCajero::generarNumeroPedido()
@@ -750,4 +622,32 @@ void PanelCajero::mostrarMensajeError(const QString& mensaje)
 void PanelCajero::mostrarMensajeExito(const QString& mensaje)
 {
     QMessageBox::information(this, "Éxito", mensaje);
+}
+
+void PanelCajero::actualizarReloj()
+{
+    QTime horaActual = QTime::currentTime();
+    ui->label_hora->setText(horaActual.toString("HH:mm:ss"));
+}
+
+QVector<Producto> PanelCajero::filtrarProductosPorCategoria(int categoriaId)
+{
+    QVector<Producto> resultado;
+    for (const Producto& p : productos) {
+        if (p.categoriaId == categoriaId) {
+            resultado.append(p);
+        }
+    }
+    return resultado;
+}
+
+QVector<Producto> PanelCajero::buscarProductosPorNombre(const QString& nombre)
+{
+    QVector<Producto> resultado;
+    for (const Producto& p : productos) {
+        if (p.nombre.contains(nombre, Qt::CaseInsensitive)) {
+            resultado.append(p);
+        }
+    }
+    return resultado;
 }

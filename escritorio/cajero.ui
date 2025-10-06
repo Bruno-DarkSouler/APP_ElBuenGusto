@@ -72,7 +72,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>70</height>
+          <height>100</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -100,6 +100,12 @@
          </item>
          <item>
           <widget class="QLabel" name="label_titulo">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>90</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>Segoe UI</family>
@@ -132,6 +138,7 @@
           <widget class="QLabel" name="label_hora">
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
@@ -143,7 +150,7 @@
             <string>00:00:00</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -155,7 +162,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>50</height>
+          <height>100</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -164,11 +171,11 @@
         <layout class="QHBoxLayout" name="horizontalLayout_busqueda">
          <item>
           <widget class="QLineEdit" name="lineEdit_buscarCliente">
-           <property name="placeholderText">
-            <string>Buscar cliente por nombre o teléfono...</string>
-           </property>
            <property name="styleSheet">
             <string notr="true">QLineEdit { padding: 8px; border: 2px solid #ddd; border-radius: 4px; font-size: 12px; }</string>
+           </property>
+           <property name="placeholderText">
+            <string>Buscar cliente por nombre o teléfono...</string>
            </property>
           </widget>
          </item>
@@ -180,12 +187,12 @@
              <height>16777215</height>
             </size>
            </property>
-           <property name="text">
-            <string>Buscar</string>
-           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton { background-color: rgb(200, 30, 45); color: white; border: none; padding: 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
 QPushButton:hover { background-color: rgb(180, 25, 40); }</string>
+           </property>
+           <property name="text">
+            <string>Buscar</string>
            </property>
           </widget>
          </item>
@@ -197,12 +204,12 @@ QPushButton:hover { background-color: rgb(180, 25, 40); }</string>
              <height>16777215</height>
             </size>
            </property>
-           <property name="text">
-            <string>Limpiar</string>
-           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton { background-color: #666; color: white; border: none; padding: 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
 QPushButton:hover { background-color: #555; }</string>
+           </property>
+           <property name="text">
+            <string>Limpiar</string>
            </property>
           </widget>
          </item>
@@ -214,7 +221,7 @@ QPushButton:hover { background-color: #555; }</string>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>45</height>
+          <height>100</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -223,14 +230,15 @@ QPushButton:hover { background-color: #555; }</string>
         <layout class="QHBoxLayout" name="horizontalLayout_filtros">
          <item>
           <widget class="QLabel" name="label_categoria">
-           <property name="text">
-            <string>Categoría:</string>
-           </property>
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>11</pointsize>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Categoría:</string>
            </property>
           </widget>
          </item>
@@ -298,11 +306,11 @@ QPushButton:hover { background-color: #555; }</string>
          </item>
          <item>
           <widget class="QLineEdit" name="lineEdit_buscarProducto">
-           <property name="placeholderText">
-            <string>Buscar producto...</string>
-           </property>
            <property name="styleSheet">
             <string notr="true">QLineEdit { padding: 6px; border: 2px solid #ddd; border-radius: 4px; font-size: 11px; }</string>
+           </property>
+           <property name="placeholderText">
+            <string>Buscar producto...</string>
            </property>
           </widget>
          </item>
@@ -311,6 +319,12 @@ QPushButton:hover { background-color: #555; }</string>
       </item>
       <item>
        <widget class="QScrollArea" name="scrollArea_productos">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>550</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">QScrollArea { border: none; background-color: transparent; }</string>
         </property>
@@ -322,8 +336,8 @@ QPushButton:hover { background-color: #555; }</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>718</width>
-           <height>600</height>
+           <width>690</width>
+           <height>433</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_productos">
@@ -372,11 +386,12 @@ QPushButton:hover { background-color: #555; }</string>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>140</height>
+          <height>160</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <family>Segoe UI</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
@@ -402,11 +417,9 @@ QPushButton:hover { background-color: #555; }</string>
         <layout class="QVBoxLayout" name="verticalLayout_datosCliente">
          <item>
           <widget class="QLabel" name="label_nombreCliente">
-           <property name="text">
-            <string>Cliente no seleccionado</string>
-           </property>
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>11</pointsize>
              <bold>true</bold>
             </font>
@@ -414,31 +427,36 @@ QPushButton:hover { background-color: #555; }</string>
            <property name="styleSheet">
             <string notr="true">color: rgb(200, 30, 45);</string>
            </property>
+           <property name="text">
+            <string>Cliente no seleccionado</string>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_telefonoCliente">
-           <property name="text">
-            <string>Teléfono: -</string>
-           </property>
            <property name="font">
             <font>
-             <bold>false</bold>
+             <family>Segoe UI</family>
              <pointsize>10</pointsize>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Teléfono: -</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_direccionCliente">
-           <property name="text">
-            <string>Dirección: -</string>
-           </property>
            <property name="font">
             <font>
-             <bold>false</bold>
+             <family>Segoe UI</family>
              <pointsize>10</pointsize>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Dirección: -</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -447,14 +465,15 @@ QPushButton:hover { background-color: #555; }</string>
          </item>
          <item>
           <widget class="QLabel" name="label_emailCliente">
-           <property name="text">
-            <string>Email: -</string>
-           </property>
            <property name="font">
             <font>
-             <bold>false</bold>
+             <family>Segoe UI</family>
              <pointsize>10</pointsize>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Email: -</string>
            </property>
           </widget>
          </item>
@@ -471,6 +490,7 @@ QPushButton:hover { background-color: #555; }</string>
         </property>
         <property name="font">
          <font>
+          <family>Segoe UI</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
@@ -496,30 +516,32 @@ QPushButton:hover { background-color: #555; }</string>
         <layout class="QVBoxLayout" name="verticalLayout_tipoPedido">
          <item>
           <widget class="QRadioButton" name="radioButton_inmediato">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>11</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
            <property name="text">
             <string>Pedido Inmediato</string>
            </property>
            <property name="checked">
             <bool>true</bool>
            </property>
-           <property name="font">
-            <font>
-             <bold>false</bold>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
           </widget>
          </item>
          <item>
           <widget class="QRadioButton" name="radioButton_programado">
-           <property name="text">
-            <string>Pedido Programado</string>
-           </property>
            <property name="font">
             <font>
-             <bold>false</bold>
+             <family>Segoe UI</family>
              <pointsize>11</pointsize>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Pedido Programado</string>
            </property>
           </widget>
          </item>
@@ -562,6 +584,7 @@ QPushButton:hover { background-color: #555; }</string>
        <widget class="QGroupBox" name="groupBox_carrito">
         <property name="font">
          <font>
+          <family>Segoe UI</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
@@ -590,7 +613,7 @@ QPushButton:hover { background-color: #555; }</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>280</height>
+             <height>350</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -604,8 +627,8 @@ QPushButton:hover { background-color: #555; }</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>396</width>
-              <height>278</height>
+              <width>350</width>
+              <height>160</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_carritoItems">
@@ -624,11 +647,12 @@ QPushButton:hover { background-color: #555; }</string>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>100</height>
+          <height>150</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <family>Segoe UI</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
@@ -654,43 +678,46 @@ QPushButton:hover { background-color: #555; }</string>
         <layout class="QVBoxLayout" name="verticalLayout_totales">
          <item>
           <widget class="QLabel" name="label_subtotal">
-           <property name="text">
-            <string>Subtotal: $0.00</string>
-           </property>
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>11</pointsize>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Subtotal: $0.00</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_delivery">
-           <property name="text">
-            <string>Delivery: $0.00</string>
-           </property>
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>11</pointsize>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Delivery: $0.00</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_total">
-           <property name="text">
-            <string>Total: $0.00</string>
-           </property>
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>14</pointsize>
              <bold>true</bold>
             </font>
            </property>
            <property name="styleSheet">
             <string notr="true">color: rgb(200, 30, 45);</string>
+           </property>
+           <property name="text">
+            <string>Total: $0.00</string>
            </property>
           </widget>
          </item>
@@ -699,37 +726,24 @@ QPushButton:hover { background-color: #555; }</string>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_crearPedido">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
           <height>50</height>
          </size>
         </property>
-        <property name="text">
-         <string>Crear Pedido</string>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton { background-color: rgb(200, 30, 45); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; }
 QPushButton:hover { background-color: rgb(180, 25, 40); }
 QPushButton:disabled { background-color: #ccc; color: #999; }</string>
         </property>
-        <property name="enabled">
-         <bool>false</bool>
+        <property name="text">
+         <string>Crear Pedido</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

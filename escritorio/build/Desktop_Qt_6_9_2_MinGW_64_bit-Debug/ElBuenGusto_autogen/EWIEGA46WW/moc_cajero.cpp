@@ -1,13 +1,14 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cajero.h'
 **
-** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.2)
+** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "../../../../cajero.h"
 #include <QtGui/qtextcursor.h>
+#include <QtNetwork/QSslError>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -19,7 +20,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'cajero.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 69
-#error "This file was generated using the moc from 6.9.2. It"
+#error "This file was generated using the moc from 6.9.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -53,7 +54,10 @@ template <> constexpr inline auto PanelCajero::qt_create_metaobjectdata<qt_meta_
         "actualizarTotales",
         "toggleTipoPedido",
         "crearPedido",
-        "validarHorarioLaboral"
+        "procesarRespuestaCajero",
+        "QNetworkReply*",
+        "reply",
+        "actualizarReloj"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -81,8 +85,12 @@ template <> constexpr inline auto PanelCajero::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'crearPedido'
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'validarHorarioLaboral'
-        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'procesarRespuestaCajero'
+        QtMocHelpers::SlotData<void(QNetworkReply *)>(14, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 15, 16 },
+        }}),
+        // Slot 'actualizarReloj'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -115,8 +123,21 @@ void PanelCajero::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 6: _t->actualizarTotales(); break;
         case 7: _t->toggleTipoPedido(); break;
         case 8: _t->crearPedido(); break;
-        case 9: _t->validarHorarioLaboral(); break;
+        case 9: _t->procesarRespuestaCajero((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
+        case 10: _t->actualizarReloj(); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 9:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
+            }
+            break;
         }
     }
 }
@@ -140,14 +161,14 @@ int PanelCajero::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 10;
+        if (_id < 11)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 11;
     }
     return _id;
 }

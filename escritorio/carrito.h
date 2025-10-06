@@ -1,31 +1,29 @@
 #ifndef CARRITO_H
 #define CARRITO_H
 
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QScrollArea>
-#include <QtWidgets/QMessageBox>
-#include <QtCore/QTimer>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFrame>
+#include <QScrollArea>
+#include <QMessageBox>
+#include <QTimer>
 #include <QVector>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkReply>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonArray>
-#include <QtCore/QJsonObject>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QEvent>
+#include <QMouseEvent>
 
 QT_BEGIN_NAMESPACE
-class Ui_carrito;
+namespace Ui { class carrito; }
 QT_END_NAMESPACE
 
-// Estructura para representar un producto en el carrito
 struct ProductoCarrito {
     int id;
     QString nombre;
@@ -39,7 +37,6 @@ struct ProductoCarrito {
     QString comentarios;
 };
 
-// Estructura para condimentos
 struct Condimento {
     int id;
     QString nombre;
@@ -55,16 +52,13 @@ public:
     carrito(QWidget *parent = nullptr);
     ~carrito();
     
-    // Sobrescribir el método eventFilter para manejar eventos
     bool eventFilter(QObject *obj, QEvent *event) override;
 
-    // Métodos públicos para manejar el carrito
     void agregarProducto(int productoId, int cantidad = 1);
     void eliminarProducto(int productoId);
     void modificarCantidad(int productoId, int nuevaCantidad);
     void limpiarCarrito();
     
-    // Getters
     QVector<ProductoCarrito> obtenerProductos() const;
     double obtenerSubtotal() const;
     double obtenerTotal() const;
@@ -83,28 +77,20 @@ private slots:
     void eliminarDelCarrito(int productoId);
     void finalizarPedido();
     void actualizarInterfaz();
+    void procesarRespuestaAPI(QNetworkReply *reply);
 
 private:
-    Ui_carrito *ui;
+    Ui::carrito *ui;
     
-    // Base de datos
-    QSqlDatabase db;
-    bool inicializarBaseDatos();
-    
-    // Datos del carrito
     QVector<ProductoCarrito> productos;
     double subtotal;
     double total;
     
-    // API y Network
     QNetworkAccessManager *networkManager;
     QString apiUrl;
-    void cargarProductosDesdeAPI();
-    void procesarRespuestaAPI(QNetworkReply *reply);
-    bool validarPedido();
     
-    // Métodos privados
-    void cargarProductoDesdeDB(int productoId, ProductoCarrito& producto);
+    void cargarProductosDesdeAPI();
+    bool validarPedido();
     void crearWidgetProducto(const ProductoCarrito& producto);
     void actualizarTotales();
     void actualizarVisualizacion();
@@ -115,7 +101,6 @@ private:
     void limpiarLayout();
     void configurarEventos();
     
-    // Métodos para condimentos
     QVector<Condimento> cargarCondimentosDisponibles();
     void mostrarSelectorCondimentos(int productoId);
 };

@@ -9,9 +9,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network Sql)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Sql)
-
 set(PROJECT_SOURCES
     main.cpp
 
@@ -34,6 +34,7 @@ set(PROJECT_SOURCES
     tarjeta_especialidades.cpp
     tarjeta_especialidades.h
     tarjeta_especialidades.ui
+
 
     # Tarjeta comida principal
     tarjeta_comida_principal.cpp
@@ -62,7 +63,15 @@ else()
     endif()
 endif()
 
-target_link_libraries(ElBuenGusto PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+# ARREGLO PRINCIPAL: Se añaden Qt::Network y Qt::Sql a las librerías enlazadas.
+# En Qt 6, los componentes se enlazan con el formato Qt::[Componente].
+# En Qt 5, los componentes se enlazan con el formato Qt5::[Componente].
+# El uso de la variable Qt${QT_VERSION_MAJOR}::[Componente] asegura compatibilidad.
+target_link_libraries(ElBuenGusto PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::Sql
+)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.ElBuenGusto)

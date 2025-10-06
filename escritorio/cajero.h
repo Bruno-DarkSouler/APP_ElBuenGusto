@@ -1,33 +1,35 @@
 #ifndef PANELCAJERO_H
 #define PANELCAJERO_H
 
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QComboBox>
-#include <QtWidgets/QScrollArea>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QRadioButton>
-#include <QtWidgets/QDateEdit>
-#include <QtWidgets/QTimeEdit>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QSpinBox>
-#include <QtCore/QTimer>
-#include <QtCore/QDateTime>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QScrollArea>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFrame>
+#include <QRadioButton>
+#include <QDateEdit>
+#include <QTimeEdit>
+#include <QMessageBox>
+#include <QSpinBox>
+#include <QTimer>
+#include <QDateTime>
 #include <QVector>
 #include <QMap>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 QT_BEGIN_NAMESPACE
-class Ui_PanelCajero;
+namespace Ui { class PanelCajero; }
 QT_END_NAMESPACE
 
-// Estructura para representar un producto
 struct Producto {
     int id;
     QString nombre;
@@ -43,7 +45,6 @@ struct Producto {
     bool activo;
 };
 
-// Estructura para representar un cliente
 struct Cliente {
     int id;
     QString nombre;
@@ -54,7 +55,6 @@ struct Cliente {
     bool activo;
 };
 
-// Estructura para item del carrito
 struct ItemCarrito {
     Producto producto;
     int cantidad;
@@ -80,40 +80,34 @@ private slots:
     void actualizarTotales();
     void toggleTipoPedido();
     void crearPedido();
-    void validarHorarioLaboral();
+    void procesarRespuestaCajero(QNetworkReply *reply);
+    void actualizarReloj();
 
 private:
-    Ui_PanelCajero *ui;
+    Ui::PanelCajero *ui;
     
-    // Base de datos
-    QSqlDatabase db;
-    bool inicializarBaseDatos();
-    
-    // Datos
     QVector<Producto> productos;
     QVector<Cliente> clientes;
     QVector<ItemCarrito> carrito;
     Cliente clienteSeleccionado;
     bool clienteEstaSeleccionado;
     
-    // Cálculos
     double subtotal;
     double precioDelivery;
     double total;
     
-    // Configuración del horario
     QTime horaApertura1;
     QTime horaCierre1;
     QTime horaApertura2;
     QTime horaCierre2;
     
-    // Red
     QNetworkAccessManager *networkManager;
     QString apiUrl;
+    QTimer *relojTimer;
     
-    // Métodos privados
     void cargarProductos();
     void cargarClientes();
+    void cargarDatosDesdeAPI();
     void mostrarProductos();
     void mostrarProductos(const QString& filtroCategoria, const QString& filtroNombre = "");
     void crearWidgetProducto(const Producto& producto, QVBoxLayout* layout);
@@ -132,7 +126,6 @@ private:
     void configurarEventos();
     void cargarConfiguracion();
     
-    // Métodos de búsqueda
     QVector<Cliente> buscarClientesPorTexto(const QString& texto);
     QVector<Producto> filtrarProductosPorCategoria(int categoriaId);
     QVector<Producto> buscarProductosPorNombre(const QString& nombre);

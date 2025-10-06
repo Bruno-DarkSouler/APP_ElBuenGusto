@@ -1,37 +1,36 @@
 #ifndef CONFIRMACIONPEDIDO_H
 #define CONFIRMACIONPEDIDO_H
 
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QTextEdit>
-#include <QtWidgets/QRadioButton>
-#include <QtWidgets/QDateEdit>
-#include <QtWidgets/QTimeEdit>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QScrollArea>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QGroupBox>
-#include <QtCore/QTimer>
-#include <QtCore/QDateTime>
-#include <QtCore/QRegularExpression>
-#include <QtGui/QRegularExpressionValidator>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QTextEdit>
+#include <QRadioButton>
+#include <QDateEdit>
+#include <QTimeEdit>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFrame>
+#include <QScrollArea>
+#include <QMessageBox>
+#include <QGroupBox>
+#include <QTimer>
+#include <QDateTime>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <QVector>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkReply>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 QT_BEGIN_NAMESPACE
-class Ui_ConfirmacionPedido;
+namespace Ui { class ConfirmacionPedido; }
 QT_END_NAMESPACE
 
-// Estructura para representar un producto del carrito en la confirmación
 struct ProductoConfirmacion {
     int id;
     QString nombre;
@@ -42,7 +41,6 @@ struct ProductoConfirmacion {
     QString comentarios;
 };
 
-// Estructura para datos del cliente
 struct DatosCliente {
     QString nombre;
     QString apellido;
@@ -53,11 +51,10 @@ struct DatosCliente {
     int clienteId;
 };
 
-// Estructura para configuración del pedido
 struct ConfiguracionPedido {
-    QString tipoPedido; // "inmediato" o "programado"
+    QString tipoPedido;
     QDateTime fechaEntrega;
-    QString metodoPago; // "digital" o "efectivo"
+    QString metodoPago;
     QString comentarios;
     double subtotal;
     double costoDelivery;
@@ -73,11 +70,9 @@ public:
     ConfirmacionPedido(const QVector<ProductoConfirmacion>& productos, QWidget *parent = nullptr);
     ~ConfirmacionPedido();
 
-    // Métodos para configurar datos iniciales
     void establecerProductos(const QVector<ProductoConfirmacion>& productos);
     void establecerDatosCliente(const DatosCliente& cliente);
     
-    // Métodos de validación
     bool validarDatosPersonales();
     bool validarDireccionEntrega();
     bool validarTipoPedido();
@@ -98,77 +93,51 @@ private slots:
     void volverCarrito();
     void onDireccionChanged();
     void validarCamposObligatorios();
+    void procesarRespuestaConfirmacion(QNetworkReply *reply);
 
 private:
-    Ui_ConfirmacionPedido *ui;
+    Ui::ConfirmacionPedido *ui;
     
-    // Base de datos
-    QSqlDatabase db;
-    bool inicializarBaseDatos();
-    
-    // Datos
     QVector<ProductoConfirmacion> productosCarrito;
     DatosCliente datosCliente;
     ConfiguracionPedido configuracionPedido;
     
-    // Configuración del sistema
     QTime horaApertura1;
     QTime horaCierre1;
     QTime horaApertura2;
     QTime horaCierre2;
     QString direccionSucursal;
     
-    // Validadores
     QRegularExpressionValidator* validadorTelefono;
     QRegularExpressionValidator* validadorEmail;
     
-    // Red para cálculo de distancia (opcional)
     QNetworkAccessManager* networkManager;
     QString apiUrl;
     
-    // Métodos privados de inicialización
     void configurarInterfaz();
     void configurarValidadores();
     void configurarEventos();
     void cargarConfiguracion();
     
-    // Métodos de validación
     bool validarHorarioLaboral(const QDateTime& fechaHora);
-    bool validarEdadCliente();
     bool validarMetodoPago();
+    bool esHorarioLaboral(const QTime& hora);
     
-    // Métodos de cálculo
     void calcularTotales();
     double calcularDistancia(const QString& direccionDestino);
     double obtenerCostoDeliveryPorDistancia(double distancia);
     
-    // Métodos de interfaz
     void mostrarResumenProductos();
     void actualizarTotales();
-    void habilitarDeshabilitarConfirmacion();
-    void limpiarErrores();
-    void mostrarError(QWidget* campo, const QString& mensaje);
+    void limpiarFormulario();
+    void bloquearFormulario(bool bloqueado);
     
-    // Métodos de base de datos
-    bool existeCliente(const QString& telefono, const QString& email);
-    int obtenerIdCliente(const QString& telefono, const QString& email);
-    int crearCliente(const DatosCliente& cliente);
-    int crearPedido();
-    bool agregarItemsPedido(int pedidoId);
-    bool crearSeguimientoPedido(int pedidoId);
-    bool enviarFacturaPorEmail(int pedidoId);
-    
-    // Métodos de utilidad
-    QString generarNumeroPedido();
-    QString formatearDireccion(const QString& direccion);
-    bool esHorarioLaboral(const QTime& hora);
     void mostrarMensajeError(const QString& mensaje);
     void mostrarMensajeExito(const QString& mensaje);
     void mostrarMensajeAdvertencia(const QString& mensaje);
     
-    // Métodos de navegación
-    void limpiarFormulario();
-    void bloquearFormulario(bool bloqueado);
+    QString generarNumeroPedido();
+    QString formatearDireccion(const QString& direccion);
 };
 
 #endif // CONFIRMACIONPEDIDO_H

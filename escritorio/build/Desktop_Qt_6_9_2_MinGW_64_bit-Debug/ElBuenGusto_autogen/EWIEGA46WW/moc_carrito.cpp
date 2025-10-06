@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'carrito.h'
 **
-** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.2)
+** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -20,7 +20,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'carrito.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 69
-#error "This file was generated using the moc from 6.9.2. It"
+#error "This file was generated using the moc from 6.9.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -52,7 +52,10 @@ template <> constexpr inline auto carrito::qt_create_metaobjectdata<qt_meta_tag_
         "disminuirCantidad",
         "eliminarDelCarrito",
         "finalizarPedido",
-        "actualizarInterfaz"
+        "actualizarInterfaz",
+        "procesarRespuestaAPI",
+        "QNetworkReply*",
+        "reply"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -84,6 +87,10 @@ template <> constexpr inline auto carrito::qt_create_metaobjectdata<qt_meta_tag_
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'actualizarInterfaz'
         QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'procesarRespuestaAPI'
+        QtMocHelpers::SlotData<void(QNetworkReply *)>(13, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 14, 15 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -116,7 +123,20 @@ void carrito::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 6: _t->eliminarDelCarrito((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 7: _t->finalizarPedido(); break;
         case 8: _t->actualizarInterfaz(); break;
+        case 9: _t->procesarRespuestaAPI((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 9:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
@@ -150,14 +170,14 @@ int carrito::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        if (_id < 10)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 10;
     }
     return _id;
 }

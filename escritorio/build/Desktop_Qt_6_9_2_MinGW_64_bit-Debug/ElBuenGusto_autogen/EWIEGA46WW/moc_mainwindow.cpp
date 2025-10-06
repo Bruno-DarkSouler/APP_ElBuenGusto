@@ -1,12 +1,14 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.2)
+** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "../../../../mainwindow.h"
+#include <QtGui/qtextcursor.h>
+#include <QtNetwork/QSslError>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -18,7 +20,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 69
-#error "This file was generated using the moc from 6.9.2. It"
+#error "This file was generated using the moc from 6.9.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -40,12 +42,25 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     QtMocHelpers::StringRefStorage qt_stringData {
         "MainWindow",
         "on_barraBusqueda_textChanged",
-        ""
+        "",
+        "procesarRespuestaProductos",
+        "QNetworkReply*",
+        "reply",
+        "filtrarProductos",
+        "texto"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'on_barraBusqueda_textChanged'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'procesarRespuestaProductos'
+        QtMocHelpers::SlotData<void(QNetworkReply *)>(3, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 4, 5 },
+        }}),
+        // Slot 'filtrarProductos'
+        QtMocHelpers::SlotData<void(const QString &)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 7 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -70,10 +85,23 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->on_barraBusqueda_textChanged(); break;
+        case 1: _t->procesarRespuestaProductos((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
+        case 2: _t->filtrarProductos((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 1:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QNetworkReply* >(); break;
+            }
+            break;
+        }
+    }
 }
 
 const QMetaObject *MainWindow::metaObject() const
@@ -95,14 +123,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        if (_id < 3)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 3;
     }
     return _id;
 }
