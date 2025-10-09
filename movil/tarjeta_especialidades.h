@@ -2,6 +2,8 @@
 #define TARJETA_ESPECIALIDADES_H
 
 #include <QFrame>
+#include <QArrayData>
+#include <QPropertyAnimation>
 
 namespace Ui {
 class tarjeta_especialidades;
@@ -15,13 +17,23 @@ private slots:
     void abrirTarjeta(QString id);
 
 public:
-    explicit tarjeta_especialidades(QString nombre, QWidget *parent = nullptr);
+    explicit tarjeta_especialidades(int id, QString nombre, QString imagen, QJsonArray condimentos, QWidget *parent = nullptr);
     ~tarjeta_especialidades();
     void setData(QString texto);
-    int id;
+    int id = id;
+    bool condimentos_abiertos;
+    QString nombre = nombre;
+    QString imagen = imagen;
+    QJsonArray condimentos = condimentos;
+    QPropertyAnimation *animacion_condimentos;
+
+private slots:
+    void alternarCondimentos();
 
 private:
     Ui::tarjeta_especialidades *ui;
+    void verificarCondimentos();
+
 };
 
 #endif // TARJETA_ESPECIALIDADES_H

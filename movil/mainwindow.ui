@@ -124,7 +124,14 @@ padding: 8;</string>
       <property name="frameShadow">
        <enum>QFrame::Shadow::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0">
+       <item>
+        <widget class="QComboBox" name="comboBox">
+         <property name="currentText">
+          <string/>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QFrame" name="frame_6">
          <property name="frameShape">
@@ -162,7 +169,7 @@ margin: 0 10;</string>
                <x>0</x>
                <y>0</y>
                <width>381</width>
-               <height>339</height>
+               <height>304</height>
               </rect>
              </property>
             </widget>

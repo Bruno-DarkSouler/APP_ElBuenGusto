@@ -26,11 +26,11 @@ public:
     void mostrar_recomendaciones();
     void mostrar_resultados_busqueda(QString objetivo);
     QVBoxLayout *contenedor_v;
-    menu_lateral *menu_lateral;
+    menu_lateral *menu_lateral_w;
     bool menu_abierto = false;
     QPropertyAnimation *animacion;
 
-    menu_carrito *menu_carrito;
+    menu_carrito *menu_carrito_w;
     bool menu_carrito_abierto = false;
     QPropertyAnimation *animacion_menu_carrito;
 
