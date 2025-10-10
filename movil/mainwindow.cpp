@@ -90,7 +90,7 @@ void MainWindow::mostrar_resultados_busqueda(QString objetivo){
                 QJsonArray general = datos_json.array();
                 for(const QJsonValue &valor : general){
                     QJsonObject fila = valor.toObject();
-                    tarjeta_especialidades *tarjeta_comida = new tarjeta_especialidades(fila["nombre"].toString(), this);
+                    tarjeta_especialidades *tarjeta_comida = new tarjeta_especialidades(fila["id"].toInt(), fila["nombre"].toString(), fila["imagen"].toString(), fila["condimentos"].toArray(), this);
                     contenedor_v->addWidget(tarjeta_comida);
                 }
             }

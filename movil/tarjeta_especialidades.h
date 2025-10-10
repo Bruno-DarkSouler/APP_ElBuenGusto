@@ -4,6 +4,7 @@
 #include <QFrame>
 #include <QArrayData>
 #include <QPropertyAnimation>
+#include <qjsonarray.h>
 
 namespace Ui {
 class tarjeta_especialidades;
