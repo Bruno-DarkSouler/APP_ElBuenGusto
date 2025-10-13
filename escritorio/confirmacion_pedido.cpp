@@ -138,6 +138,8 @@ void ConfirmacionPedido::calcularTotales()
     actualizarTotales();
 }
 
+// En la función mostrarResumenProductos(), agregar mejor visualización
+
 void ConfirmacionPedido::mostrarResumenProductos()
 {
     QLayout* layout = ui->scrollAreaWidgetContents_productos->layout();
@@ -151,11 +153,14 @@ void ConfirmacionPedido::mostrarResumenProductos()
     }
     
     QVBoxLayout* productosLayout = new QVBoxLayout(ui->scrollAreaWidgetContents_productos);
-    productosLayout->setSpacing(5);
+    productosLayout->setSpacing(8);
     
     for (const ProductoConfirmacion& producto : productosCarrito) {
         QFrame* frameProducto = new QFrame();
-        frameProducto->setStyleSheet("QFrame { background-color: white; border: 1px solid #ddd; border-radius: 4px; padding: 8px; }");
+        frameProducto->setStyleSheet(
+            "QFrame { background-color: white; border: 1px solid #ddd; "
+            "border-radius: 6px; padding: 10px; margin: 2px; }"
+        );
         
         QHBoxLayout* layoutProducto = new QHBoxLayout(frameProducto);
         
@@ -163,22 +168,31 @@ void ConfirmacionPedido::mostrarResumenProductos()
         
         QLabel* labelNombre = new QLabel(producto.nombre);
         labelNombre->setFont(QFont("Segoe UI", 11, QFont::Bold));
+        labelNombre->setStyleSheet("color: rgb(80,50,20);");
         
+        QHBoxLayout* layoutDetalle = new QHBoxLayout();
         QLabel* labelCantidad = new QLabel(QString("Cantidad: %1").arg(producto.cantidad));
         labelCantidad->setStyleSheet("color: #666; font-size: 10px;");
         
+        QLabel* labelPrecioUnitario = new QLabel(QString("$%1 c/u").arg(producto.precio, 0, 'f', 2));
+        labelPrecioUnitario->setStyleSheet("color: #666; font-size: 10px;");
+        
+        layoutDetalle->addWidget(labelCantidad);
+        layoutDetalle->addWidget(labelPrecioUnitario);
+        layoutDetalle->addStretch();
+        
         layoutInfo->addWidget(labelNombre);
-        layoutInfo->addWidget(labelCantidad);
+        layoutInfo->addLayout(layoutDetalle);
         
         if (!producto.comentarios.isEmpty()) {
-            QLabel* labelComentarios = new QLabel(QString("Comentarios: %1").arg(producto.comentarios));
-            labelComentarios->setStyleSheet("color: #666; font-size: 9px; font-style: italic;");
+            QLabel* labelComentarios = new QLabel(QString("Nota: %1").arg(producto.comentarios));
+            labelComentarios->setStyleSheet("color: #666; font-size: 9px; font-style: italic; margin-top: 3px;");
             labelComentarios->setWordWrap(true);
             layoutInfo->addWidget(labelComentarios);
         }
         
         QLabel* labelPrecio = new QLabel(QString("$%1").arg(producto.precioTotal, 0, 'f', 2));
-        labelPrecio->setFont(QFont("Segoe UI", 12, QFont::Bold));
+        labelPrecio->setFont(QFont("Segoe UI", 14, QFont::Bold));
         labelPrecio->setStyleSheet("color: rgb(200, 30, 45);");
         labelPrecio->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         
@@ -189,6 +203,54 @@ void ConfirmacionPedido::mostrarResumenProductos()
     }
     
     productosLayout->addStretch();
+}
+
+int ConfirmacionPedido::calcularTiempoPreparacionTotal()
+{
+    int tiempoTotal = 0;
+    for (const ProductoConfirmacion& producto : productosCarrito) {
+        // Asumiendo un tiempo base de 30 minutos
+        tiempoTotal = qMax(tiempoTotal, 30);
+    }
+    return tiempoTotal;
+}
+
+// Mejorar validación de pedido programado
+bool ConfirmacionPedido::validarPedidoProgramado(const QDateTime& fechaHora)
+{
+    QDateTime ahora = QDateTime::currentDateTime();
+    
+    // Calcular tiempo de preparación necesario
+    int tiempoPreparacion = calcularTiempoPreparacionTotal();
+    QDateTime tiempoMinimo = ahora.addSecs(tiempoPreparacion * 60);
+    
+    if (fechaHora < tiempoMinimo) {
+        mostrarMensajeError(QString(
+            "El pedido programado debe ser al menos %1 minutos después del momento actual "
+            "para permitir la preparación."
+        ).arg(tiempoPreparacion));
+        return false;
+    }
+    
+    QDateTime maximaFecha = ahora.addDays(7);
+    if (fechaHora > maximaFecha) {
+        mostrarMensajeError("No se pueden programar pedidos con más de 7 días de anticipación");
+        return false;
+    }
+    
+    // Validar horario laboral
+    if (!esHorarioLaboral(fechaHora.time())) {
+        mostrarMensajeError(QString(
+            "El horario seleccionado está fuera del horario de atención.\n"
+            "Horarios disponibles: %1-%2 y %3-%4"
+        ).arg(horaApertura1.toString("HH:mm"))
+         .arg(horaCierre1.toString("HH:mm"))
+         .arg(horaApertura2.toString("HH:mm"))
+         .arg(horaCierre2.toString("HH:mm")));
+        return false;
+    }
+    
+    return true;
 }
 
 void ConfirmacionPedido::actualizarTotales()
@@ -352,20 +414,6 @@ bool ConfirmacionPedido::validarPedidoInmediato()
     return esHorarioLaboral(horaActual);
 }
 
-bool ConfirmacionPedido::validarPedidoProgramado(const QDateTime& fechaHora)
-{
-    QDateTime ahora = QDateTime::currentDateTime();
-    if (fechaHora <= ahora) {
-        return false;
-    }
-    
-    QDateTime maximaFecha = ahora.addDays(7);
-    if (fechaHora > maximaFecha) {
-        return false;
-    }
-    
-    return esHorarioLaboral(fechaHora.time());
-}
 
 bool ConfirmacionPedido::esHorarioLaboral(const QTime& hora)
 {

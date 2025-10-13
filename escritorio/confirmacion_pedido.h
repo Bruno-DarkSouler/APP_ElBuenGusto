@@ -72,12 +72,13 @@ public:
 
     void establecerProductos(const QVector<ProductoConfirmacion>& productos);
     void establecerDatosCliente(const DatosCliente& cliente);
-    
+
     bool validarDatosPersonales();
     bool validarDireccionEntrega();
     bool validarTipoPedido();
     bool validarPedidoInmediato();
     bool validarPedidoProgramado(const QDateTime& fechaHora);
+    int calcularTiempoPreparacionTotal();  // AGREGAR ESTA LÍNEA
 
 signals:
     void pedidoConfirmado(int pedidoId);
@@ -97,45 +98,45 @@ private slots:
 
 private:
     Ui::ConfirmacionPedido *ui;
-    
+
     QVector<ProductoConfirmacion> productosCarrito;
     DatosCliente datosCliente;
     ConfiguracionPedido configuracionPedido;
-    
+
     QTime horaApertura1;
     QTime horaCierre1;
     QTime horaApertura2;
     QTime horaCierre2;
     QString direccionSucursal;
-    
+
     QRegularExpressionValidator* validadorTelefono;
     QRegularExpressionValidator* validadorEmail;
-    
+
     QNetworkAccessManager* networkManager;
     QString apiUrl;
-    
+
     void configurarInterfaz();
     void configurarValidadores();
     void configurarEventos();
     void cargarConfiguracion();
-    
+
     bool validarHorarioLaboral(const QDateTime& fechaHora);
     bool validarMetodoPago();
     bool esHorarioLaboral(const QTime& hora);
-    
+
     void calcularTotales();
     double calcularDistancia(const QString& direccionDestino);
     double obtenerCostoDeliveryPorDistancia(double distancia);
-    
+
     void mostrarResumenProductos();
     void actualizarTotales();
     void limpiarFormulario();
     void bloquearFormulario(bool bloqueado);
-    
+
     void mostrarMensajeError(const QString& mensaje);
     void mostrarMensajeExito(const QString& mensaje);
     void mostrarMensajeAdvertencia(const QString& mensaje);
-    
+
     QString generarNumeroPedido();
     QString formatearDireccion(const QString& direccion);
 };

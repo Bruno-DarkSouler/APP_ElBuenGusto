@@ -25,6 +25,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QGroupBox>
+#include <QTextEdit>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class PanelCajero; }
@@ -37,6 +39,7 @@ struct Producto {
     double precio;
     QString imagen;
     int categoriaId;
+    QString categoriaNombre;
     QString ingredientes;
     int tiempoPreparacion;
     bool disponible;
@@ -53,6 +56,7 @@ struct Cliente {
     QString telefono;
     QString direccion;
     bool activo;
+    bool esNuevo;
 };
 
 struct ItemCarrito {
@@ -72,6 +76,9 @@ public:
 
 private slots:
     void buscarCliente();
+    void limpiarBusquedaCliente();
+    void mostrarFormularioNuevoCliente();
+    void guardarNuevoCliente();
     void filtrarProductos();
     void buscarProductoPorNombre();
     void agregarProductoAlCarrito(int productoId);
@@ -82,29 +89,42 @@ private slots:
     void crearPedido();
     void procesarRespuestaCajero(QNetworkReply *reply);
     void actualizarReloj();
+    void onCategoriaChanged(int index);
 
 private:
     Ui::PanelCajero *ui;
-    
+
     QVector<Producto> productos;
+    QVector<Producto> todosLosProductos;
     QVector<Cliente> clientes;
     QVector<ItemCarrito> carrito;
     Cliente clienteSeleccionado;
     bool clienteEstaSeleccionado;
-    
+
+    // Widgets para nuevo cliente
+    QGroupBox* groupBoxNuevoCliente;
+    QLineEdit* lineEditNuevoNombre;
+    QLineEdit* lineEditNuevoApellido;
+    QLineEdit* lineEditNuevoEmail;
+    QLineEdit* lineEditNuevoTelefono;
+    QTextEdit* textEditNuevaDireccion;
+    QPushButton* btnGuardarNuevoCliente;
+    QPushButton* btnCancelarNuevoCliente;
+
     double subtotal;
     double precioDelivery;
     double total;
-    
+
     QTime horaApertura1;
     QTime horaCierre1;
     QTime horaApertura2;
     QTime horaCierre2;
-    
+
     QNetworkAccessManager *networkManager;
     QString apiUrl;
     QTimer *relojTimer;
     
+    void inicializarProductosEjemplo();
     void cargarProductos();
     void cargarClientes();
     void cargarDatosDesdeAPI();
@@ -124,10 +144,13 @@ private:
     void mostrarMensajeExito(const QString& mensaje);
     QString generarNumeroPedido();
     void configurarEventos();
-    void cargarConfiguracion();
-    
+    void cargarConfiguracion();  // SOLO UNA VEZ
+    void crearFormularioNuevoCliente();
+    void ocultarFormularioNuevoCliente();
+    bool validarDatosNuevoCliente();
+
     QVector<Cliente> buscarClientesPorTexto(const QString& texto);
-    QVector<Producto> filtrarProductosPorCategoria(int categoriaId);
+    QVector<Producto> filtrarProductosPorCategoria(const QString& categoriaNombre);
     QVector<Producto> buscarProductosPorNombre(const QString& nombre);
 };
 

@@ -13,6 +13,9 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QVector>
+#include <QStackedWidget>
+#include <QPushButton>
+#include "carrito.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,7 +30,9 @@ struct ProductoMain {
     double precio;
     QString imagen;
     int categoriaId;
+    QString categoriaNombre;
     bool disponible;
+    int tiempoPreparacion;
 };
 
 class MainWindow : public QMainWindow
@@ -44,14 +49,24 @@ private slots:
     void on_barraBusqueda_textChanged();
     void procesarRespuestaProductos(QNetworkReply *reply);
     void filtrarProductos(const QString& texto);
+    void filtrarPorCategoria(const QString& categoria);
+    void agregarAlCarrito(int productoId);
+    void mostrarCarrito();
+    void navegarASeccion(const QString& seccion);
 
 private:
     Ui::MainWindow *ui;
     QNetworkAccessManager *networkManager;
     QString apiUrl;
     QVector<ProductoMain> productos;
+    QVector<ProductoMain> todosLosProductos;
+    carrito* ventanaCarrito;
+    QString categoriaActual;
     
+    void inicializarProductosEjemplo();
     void mostrarProductos();
+    void mostrarProductosPorCategoria(const QString& categoria);
     void crearTarjetaProducto(const ProductoMain& producto);
+    void configurarBotonesCategorias();
 };
 #endif // MAINWINDOW_H
