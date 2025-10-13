@@ -2,6 +2,13 @@
 #include "ui_cajero.h"
 #include <QDebug>
 #include <cmath>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
 
 PanelCajero::PanelCajero(QWidget *parent)
     : QWidget(parent)
@@ -855,31 +862,95 @@ void PanelCajero::crearPedido()
         mostrarMensajeError("No se puede crear el pedido en este momento");
         return;
     }
-    
-    QString numeroPedido = generarNumeroPedido();
-    QString tipoPedido = ui->radioButton_inmediato->isChecked() ? "Inmediato" : "Programado";
-    
-    QString mensaje = QString("Pedido creado exitosamente!\n\n"
-                             "Número: %1\n"
-                             "Cliente: %2 %3\n"
-                             "Tipo: %4\n"
-                             "Total: $%5")
-                        .arg(numeroPedido)
-                        .arg(clienteSeleccionado.nombre)
-                        .arg(clienteSeleccionado.apellido)
-                        .arg(tipoPedido)
-                        .arg(total, 0, 'f', 2);
-    
-    if (ui->radioButton_programado->isChecked()) {
-        QDateTime fechaEntrega(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
-        mensaje += QString("\nEntrega: %1").arg(fechaEntrega.toString("dd/MM/yyyy HH:mm"));
-    }
-    
-    mostrarMensajeExito(mensaje);
-    limpiarCarrito();
-    limpiarSeleccionCliente();
-}
 
+    // Preparar datos del pedido
+    QJsonObject pedidoJson;
+
+    // Datos del cliente
+    QJsonObject clienteJson;
+    clienteJson["nombre"] = clienteSeleccionado.nombre;
+    clienteJson["apellido"] = clienteSeleccionado.apellido;
+    clienteJson["email"] = clienteSeleccionado.email;
+    clienteJson["telefono"] = clienteSeleccionado.telefono;
+    clienteJson["direccion"] = clienteSeleccionado.direccion;
+
+    pedidoJson["cliente"] = clienteJson;
+
+    // Tipo de pedido
+    pedidoJson["tipo_pedido"] = ui->radioButton_inmediato->isChecked() ? "inmediato" : "programado";
+
+    // Dirección de entrega
+    pedidoJson["direccion_entrega"] = clienteSeleccionado.direccion;
+
+    // Método de pago
+    pedidoJson["metodo_pago"] = "digital"; // Puedes permitir que el usuario seleccione
+
+    // Totales
+    pedidoJson["subtotal"] = subtotal;
+    pedidoJson["precio_delivery"] = precioDelivery;
+    pedidoJson["total"] = total;
+    pedidoJson["cajero_id"] = 1; // ID del cajero actual (puedes hacerlo dinámico)
+    pedidoJson["comentarios"] = "";
+
+    // Fecha y hora si es programado
+    if (ui->radioButton_programado->isChecked()) {
+        QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
+        pedidoJson["fecha_entrega"] = fechaHora.toString(Qt::ISODate);
+    }
+
+    // Items del carrito
+    QJsonArray itemsArray;
+    for (const ItemCarrito& item : carrito) {
+        QJsonObject itemJson;
+        itemJson["id"] = item.producto.id;
+        itemJson["nombre"] = item.producto.nombre;
+        itemJson["cantidad"] = item.cantidad;
+        itemJson["precio"] = item.producto.precio;
+        itemJson["precioTotal"] = item.precioTotal;
+        itemsArray.append(itemJson);
+    }
+    pedidoJson["items"] = itemsArray;
+
+    // Enviar a la API
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://localhost/WEB_ElBuenGusto/api/guardar_pedido_cajero.php"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = networkManager->post(request, QJsonDocument(pedidoJson).toJson());
+
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QByteArray responseData = reply->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+            QJsonObject obj = jsonDoc.object();
+
+            if (obj["success"].toBool()) {
+                int pedidoId = obj["pedido_id"].toInt();
+                QString numeroPedido = obj["numero_pedido"].toString();
+
+                QString mensaje = QString("¡Pedido creado exitosamente!\n\n"
+                                          "Número: %1\n"
+                                          "Cliente: %2 %3\n"
+                                          "Total: $%4")
+                                      .arg(numeroPedido)
+                                      .arg(clienteSeleccionado.nombre)
+                                      .arg(clienteSeleccionado.apellido)
+                                      .arg(total, 0, 'f', 2);
+
+                mostrarMensajeExito(mensaje);
+
+                // Limpiar después de crear
+                limpiarCarrito();
+                limpiarSeleccionCliente();
+            } else {
+                mostrarMensajeError("Error: " + obj["error"].toString());
+            }
+        } else {
+            mostrarMensajeError("Error de conexión: " + reply->errorString());
+        }
+        reply->deleteLater();
+    });
+}
 QString PanelCajero::generarNumeroPedido()
 {
     return QString("P%1%2")
