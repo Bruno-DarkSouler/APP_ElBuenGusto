@@ -6,7 +6,6 @@
 #include <QPropertyAnimation>
 #include "menu_carrito.h"
 #include "menu_lateral.h"
-#include "tarjeta_comida_principal.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

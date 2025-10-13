@@ -52,7 +52,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::mostrar_recomendaciones(){
     QNetworkAccessManager *conexion = new QNetworkAccessManager(this);
-    QUrl url("http://localhost/WEB_ElBuenGusto/api/buscar_productos.php?objetivo=pizz");
+    QUrl url("http://localhost/WEB_ElBuenGusto/api/buscar_productos.php?objetivo=ham");
     QNetworkRequest peticion(url);
     QNetworkReply *respuesta = conexion->get(peticion);
     qInfo("Hola1");
@@ -68,7 +68,10 @@ void MainWindow::mostrar_recomendaciones(){
                 QJsonArray general = datos_json.array();
                 for(const QJsonValue &valor : general){
                     QJsonObject fila = valor.toObject();
-                    tarjeta_especialidades *tarjeta_comida = new tarjeta_especialidades(fila["nombre"].toString(), this);
+                    QByteArray datos_condimentos = fila["condimentos"].toString().toUtf8();
+                    qDebug()<<fila["precio"].toString().toDouble();
+                    tarjeta_especialidades *tarjeta_comida = new tarjeta_especialidades(fila["id"].toInt(), fila["precio"].toString().toDouble(), fila["nombre"].toString(), fila["imagen"].toString(), datos_condimentos, this);
+                    qInfo("LOL2");
                     contenedor_v->addWidget(tarjeta_comida);
                 }
             }
@@ -89,8 +92,10 @@ void MainWindow::mostrar_resultados_busqueda(QString objetivo){
             if(!datos_json.isNull()){
                 QJsonArray general = datos_json.array();
                 for(const QJsonValue &valor : general){
+                //for(const QJsonValue &valor : std::as_const(general)){
                     QJsonObject fila = valor.toObject();
-                    tarjeta_especialidades *tarjeta_comida = new tarjeta_especialidades(fila["id"].toInt(), fila["nombre"].toString(), fila["imagen"].toString(), fila["condimentos"].toArray(), this);
+                    QByteArray datos_condimentos = fila["condimentos"].toString().toUtf8();
+                    tarjeta_especialidades *tarjeta_comida = new tarjeta_especialidades(fila["id"].toInt(), fila["precio"].toString().toDouble(), fila["nombre"].toString(), fila["imagen"].toString(), datos_condimentos, this);
                     contenedor_v->addWidget(tarjeta_comida);
                 }
             }

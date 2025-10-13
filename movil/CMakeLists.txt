@@ -37,6 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         menu_lateral.h menu_lateral.cpp menu_lateral.ui
 
         menu_carrito.h menu_carrito.cpp menu_carrito.ui
+        condimento.h condimento.cpp condimento.ui
 
 
 

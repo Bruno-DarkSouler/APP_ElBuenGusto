@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>333</width>
-    <height>252</height>
+    <height>368</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -58,6 +58,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="etiqueta_precio">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QFrame" name="frame_condimentos">
      <property name="frameShape">
       <enum>QFrame::Shape::StyledPanel</enum>
@@ -82,14 +89,26 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QCommandLinkButton" name="commandLinkButton">
-        <property name="text">
-         <string>CommandLinkButton</string>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
         </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>311</width>
+           <height>88</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QGridLayout" name="contenedor_condimentos"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
-      </item>
-      <item>
-       <layout class="QGridLayout" name="contenedor_condimentos"/>
       </item>
      </layout>
     </widget>
