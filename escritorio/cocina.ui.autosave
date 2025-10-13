@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>600</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
     <width>600</width>
-    <height>600</height>
+    <height>800</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
      <property name="maximumSize">
       <size>
        <width>600</width>
-       <height>60</height>
+       <height>80</height>
       </size>
      </property>
      <property name="styleSheet">
@@ -57,9 +57,35 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
+       <widget class="QLabel" name="label_14">
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/WhatsApp Image 2025-08-11 at 20.56.21.jpeg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="img.qrc">:/WhatsApp Image 2025-08-11 at 20.56.21.jpeg</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="styleSheet">
-         <string notr="true">color: white;</string>
+         <string notr="true">color: white;
+font-size: 24px;</string>
         </property>
         <property name="text">
          <string>Panel de cocina</string>
@@ -259,12 +285,30 @@ border-radius: 13;</string>
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
-                   <height>60</height>
+                   <height>50</height>
                   </size>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
                   <item>
                    <widget class="QLabel" name="label_4">
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 16px;</string>
+                    </property>
                     <property name="text">
                      <string>Pedido de: Carlos Peréz</string>
                     </property>
@@ -285,6 +329,12 @@ border-radius: 13;</string>
                   </item>
                   <item>
                    <widget class="QWidget" name="widget_12" native="true">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>48</height>
+                     </size>
+                    </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: #C81E2D;
 padding: 3;</string>
@@ -362,7 +412,7 @@ font-size: 3;</string>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>600</height>
+                <height>300</height>
                </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -384,6 +434,12 @@ font-size: 3;</string>
                </item>
                <item>
                 <widget class="QWidget" name="widget_14" native="true">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>300</height>
+                  </size>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">background-color: #EDE4E4;</string>
                  </property>
@@ -395,7 +451,26 @@ font-size: 3;</string>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_5">
                      <item>
-                      <widget class="QWidget" name="widget_15" native="true"/>
+                      <widget class="QLabel" name="label_13">
+                       <property name="maximumSize">
+                        <size>
+                         <width>130</width>
+                         <height>130</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/fideos.jpeg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap resource="img.qrc">:/fideos.jpeg</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
                      </item>
                      <item>
                       <widget class="QWidget" name="widget_16" native="true">
@@ -403,7 +478,7 @@ font-size: 3;</string>
                         <item>
                          <widget class="QLabel" name="label_12">
                           <property name="styleSheet">
-                           <string notr="true">font-size: 16px;</string>
+                           <string notr="true">font-size: 18px;</string>
                           </property>
                           <property name="text">
                            <string>Ñoquis con salsa</string>
@@ -443,6 +518,19 @@ font-size: 3;</string>
                     </layout>
                    </widget>
                   </item>
+                  <item>
+                   <spacer name="verticalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Orientation::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>13</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                  </layout>
                 </widget>
                </item>
@@ -454,12 +542,94 @@ font-size: 3;</string>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>30</height>
+                <height>46</height>
                </size>
               </property>
               <property name="styleSheet">
                <string notr="true">background-color: #EDE4E4;</string>
               </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_17" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>80</height>
+               </size>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QWidget" name="widget_15" native="true">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_8">
+                  <item>
+                   <widget class="QLabel" name="label_15">
+                    <property name="maximumSize">
+                     <size>
+                      <width>90</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Fecha de pedido:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_16">
+                    <property name="text">
+                     <string>dd/mm/aa</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_2">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <item>
+                   <widget class="QLabel" name="label_17">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Fecha de entrega:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_18">
+                    <property name="text">
+                     <string>dd/mm/aa</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>
@@ -473,6 +643,8 @@ font-size: 3;</string>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>
