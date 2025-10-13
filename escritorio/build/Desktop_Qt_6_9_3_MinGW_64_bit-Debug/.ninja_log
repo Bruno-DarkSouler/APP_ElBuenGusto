@@ -1,0 +1,13 @@
+# ninja log v6
+254	5846	7820830748942849	ElBuenGusto_autogen/timestamp	ea3dc7e5d33c94c0
+254	5846	7820830748942849	ElBuenGusto_autogen/mocs_compilation.cpp	ea3dc7e5d33c94c0
+254	5846	7820830748942849	C:/Users/Alumno/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/ElBuenGusto_autogen/timestamp	ea3dc7e5d33c94c0
+254	5846	7820830748942849	C:/Users/Alumno/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/ElBuenGusto_autogen/mocs_compilation.cpp	ea3dc7e5d33c94c0
+5866	6026	7820830752326845	ElBuenGusto_autogen/EWIEGA46WW/qrc_img.cpp	8c8ca03c1e84db23
+5866	6026	7820830752326845	C:/Users/Alumno/APP_ElBuenGusto/escritorio/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/ElBuenGusto_autogen/EWIEGA46WW/qrc_img.cpp	8c8ca03c1e84db23
+6046	11774	7820830752592168	CMakeFiles/ElBuenGusto.dir/ElBuenGusto_autogen/EWIEGA46WW/qrc_img.cpp.obj	c1ff0dfebd4237fd
+6026	12063	7820830752500557	CMakeFiles/ElBuenGusto.dir/ElBuenGusto_autogen/mocs_compilation.cpp.obj	17a3fff413376065
+6031	12178	7820830752550516	CMakeFiles/ElBuenGusto.dir/main.cpp.obj	fd1077ac8739b846
+6041	12434	7820830752592168	CMakeFiles/ElBuenGusto.dir/tarjeta_especialidades.cpp.obj	793e032193a2dfc9
+6036	12950	7820830752592168	CMakeFiles/ElBuenGusto.dir/mainwindow.cpp.obj	59a086b898150b4d
+12950	13704	7820830821738364	ElBuenGusto.exe	ec71b45e5074e659
