@@ -229,6 +229,8 @@ void PanelCajero::configurarEventos()
     connect(ui->pushButton_crearPedido, &QPushButton::clicked, this, &PanelCajero::crearPedido);
     connect(ui->radioButton_inmediato, &QRadioButton::toggled, this, &PanelCajero::toggleTipoPedido);
     connect(ui->radioButton_programado, &QRadioButton::toggled, this, &PanelCajero::toggleTipoPedido);
+    connect(ui->timeEdit_hora, &QTimeEdit::userTimeChanged, this, &PanelCajero::on_timeEdit_hora_userTimeChanged);
+
     
     ui->dateEdit_fecha->setDate(QDate::currentDate());
     ui->dateEdit_fecha->setMinimumDate(QDate::currentDate());
@@ -774,16 +776,42 @@ void PanelCajero::toggleTipoPedido()
 {
     bool esProgramado = ui->radioButton_programado->isChecked();
     ui->frame_programacion->setEnabled(esProgramado);
-    
+
     if (esProgramado) {
+        // Fecha mínima = hoy, máxima = 7 días después
         ui->dateEdit_fecha->setDate(QDate::currentDate());
         ui->dateEdit_fecha->setMinimumDate(QDate::currentDate());
         ui->dateEdit_fecha->setMaximumDate(QDate::currentDate().addDays(7));
+
+        // Hora inicial por defecto: apertura de mañana
         ui->timeEdit_hora->setTime(horaApertura1);
+    } else {
+        // Si es inmediato, deshabilitamos los campos
+        ui->frame_programacion->setEnabled(false);
     }
-    
+
     validarCreacionPedido();
 }
+
+void PanelCajero::on_timeEdit_hora_userTimeChanged(const QTime &hora)
+{
+    // Si está fuera de rango de horario permitido, se ajusta automáticamente
+    bool dentroHorario1 = (hora >= horaApertura1 && hora <= horaCierre1);
+    bool dentroHorario2 = (hora >= horaApertura2 && hora <= horaCierre2);
+
+    if (!dentroHorario1 && !dentroHorario2) {
+        // Ajusta a la hora más cercana válida
+        if (hora < horaApertura1)
+            ui->timeEdit_hora->setTime(horaApertura1);
+        else if (hora > horaCierre2)
+            ui->timeEdit_hora->setTime(horaCierre2);
+        else if (hora > horaCierre1 && hora < horaApertura2)
+            ui->timeEdit_hora->setTime(horaApertura2);
+    }
+
+    validarCreacionPedido();
+}
+
 
 bool PanelCajero::validarCreacionPedido()
 {

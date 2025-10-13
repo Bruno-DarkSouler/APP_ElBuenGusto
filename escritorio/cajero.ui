@@ -485,7 +485,7 @@ QPushButton:hover { background-color: #555; }</string>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>120</height>
+          <height>240</height>
          </size>
         </property>
         <property name="font">
@@ -497,18 +497,22 @@ QPushButton:hover { background-color: #555; }</string>
         </property>
         <property name="styleSheet">
          <string notr="true">
-         QGroupBox {
-             background-color: white;
-             border-radius: 8px;
-             padding-top: 15px;
-             color: rgb(80,50,20);
-         }
-         QGroupBox::title {
-             subcontrol-origin: margin;
-             left: 10px;
-             padding: 0 8px 0 8px;
-         }
-         </string>
+        QGroupBox {
+            background-color: white;
+            border-radius: 8px;
+            padding-top: 15px;
+            color: rgb(80,50,20);
+        }
+        QGroupBox::title {
+            subcontrol-origin: margin;
+            left: 10px;
+            padding: 0 8px 0 8px;
+        }
+        QLabel {
+            color: rgb(80,50,20);
+            font-size: 10pt;
+        }
+        </string>
         </property>
         <property name="title">
          <string>Tipo de Pedido</string>
@@ -520,11 +524,10 @@ QPushButton:hover { background-color: #555; }</string>
             <font>
              <family>Segoe UI</family>
              <pointsize>11</pointsize>
-             <bold>false</bold>
             </font>
            </property>
            <property name="text">
-            <string>Pedido Inmediato</string>
+            <string>Pedido Inmediato (entrega en horario de atención)</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -537,7 +540,6 @@ QPushButton:hover { background-color: #555; }</string>
             <font>
              <family>Segoe UI</family>
              <pointsize>11</pointsize>
-             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -550,14 +552,35 @@ QPushButton:hover { background-color: #555; }</string>
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>65</height>
+            </size>
+           </property>
            <layout class="QHBoxLayout" name="horizontalLayout_programacion">
             <property name="spacing">
-             <number>8</number>
+             <number>10</number>
             </property>
+            <item>
+             <widget class="QLabel" name="label_fecha">
+              <property name="text">
+               <string> Fecha:</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QDateEdit" name="dateEdit_fecha">
               <property name="styleSheet">
-               <string notr="true">QDateEdit { padding: 4px; border: 2px solid #ddd; border-radius: 4px; font-size: 10px; }</string>
+               <string notr="true">
+                QDateEdit {
+                    padding: 4px;
+                    border: 2px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 10pt;
+                    background-color: #fff;
+                }
+                </string>
               </property>
               <property name="calendarPopup">
                <bool>true</bool>
@@ -565,9 +588,24 @@ QPushButton:hover { background-color: #555; }</string>
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="label_hora">
+              <property name="text">
+               <string> Hora:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QTimeEdit" name="timeEdit_hora">
               <property name="styleSheet">
-               <string notr="true">QTimeEdit { padding: 4px; border: 2px solid #ddd; border-radius: 4px; font-size: 10px; }</string>
+               <string notr="true">
+                QTimeEdit {
+                    padding: 4px;
+                    border: 2px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 10pt;
+                    background-color: #fff;
+                }
+                </string>
               </property>
               <property name="displayFormat">
                <string>HH:mm</string>
@@ -577,11 +615,36 @@ QPushButton:hover { background-color: #555; }</string>
            </layout>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="label_horariosAtencion">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(100, 80, 60); font-style: italic; font-size: 9pt;</string>
+           </property>
+           <property name="text">
+            <string>Horarios de atención: 11:00–15:00 y 19:00–23:00</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox_carrito">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>300</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <family>Segoe UI</family>
@@ -613,7 +676,7 @@ QPushButton:hover { background-color: #555; }</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>350</height>
+             <height>400</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -628,7 +691,7 @@ QPushButton:hover { background-color: #555; }</string>
               <x>0</x>
               <y>0</y>
               <width>350</width>
-              <height>160</height>
+              <height>109</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_carritoItems">
@@ -647,7 +710,7 @@ QPushButton:hover { background-color: #555; }</string>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>150</height>
+          <height>120</height>
          </size>
         </property>
         <property name="font">
@@ -709,7 +772,7 @@ QPushButton:hover { background-color: #555; }</string>
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>14</pointsize>
+             <pointsize>11</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -733,6 +796,12 @@ QPushButton:hover { background-color: #555; }</string>
          <size>
           <width>0</width>
           <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">

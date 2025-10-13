@@ -90,6 +90,8 @@ private slots:
     void procesarRespuestaCajero(QNetworkReply *reply);
     void actualizarReloj();
     void onCategoriaChanged(int index);
+    void on_timeEdit_hora_userTimeChanged(const QTime &hora);
+
 
 private:
     Ui::PanelCajero *ui;
