@@ -1,30 +1,22 @@
 #ifndef COCINA_H
 #define COCINA_H
 
-#include <QAbstractItemModel>
+#include <QDialog>
 
-class cocina : public QAbstractItemModel
+namespace Ui {
+class cocina;
+}
+
+class cocina : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit cocina(QObject *parent = nullptr);
-
-    // Header:
-    QVariant headerData(int section,
-                        Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const override;
-
-    // Basic functionality:
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    explicit cocina(QWidget *parent = nullptr);
+    ~cocina();
 
 private:
+    Ui::cocina *ui;
 };
 
 #endif // COCINA_H

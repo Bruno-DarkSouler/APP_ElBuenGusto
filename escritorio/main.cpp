@@ -1,12 +1,11 @@
-#include "mainwindow.h"
+#include "cocina.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    cocina w;
     w.show();
-    w.colocar_layouts();
     return a.exec();
 }
