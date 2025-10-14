@@ -15,6 +15,11 @@ public:
     explicit perfil(QWidget *parent = nullptr);
     ~perfil();
 
+private slots:
+    void on_logout_clicked();
+    void on_cargar_foto_clicked();
+    void loadUserData();  // Añade esta línea
+
 private:
     Ui::perfil *ui;
 };

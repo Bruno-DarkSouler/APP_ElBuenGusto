@@ -435,22 +435,12 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_fecha">
+              <widget class="QDateEdit" name="dateEdit_fecha_nacimiento">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
-border-radius: 20;
 border-radius: 10;
 padding: 10;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="echoMode">
-                <enum>QLineEdit::EchoMode::Normal</enum>
-               </property>
-               <property name="placeholderText">
-                <string>dd/mm/aaaa</string>
                </property>
               </widget>
              </item>

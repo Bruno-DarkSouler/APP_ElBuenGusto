@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sign_up.ui'
 **
-** Created by: Qt User Interface Compiler version 6.9.2
+** Created by: Qt User Interface Compiler version 6.9.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QDateEdit>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -56,7 +57,7 @@ public:
     QFrame *frame_9;
     QVBoxLayout *verticalLayout_8;
     QLabel *label_7;
-    QLineEdit *lineEdit_fecha;
+    QDateEdit *dateEdit_fecha_nacimiento;
     QFrame *frame_10;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_8;
@@ -312,16 +313,14 @@ public:
 
         verticalLayout_8->addWidget(label_7, 0, Qt::AlignmentFlag::AlignLeft);
 
-        lineEdit_fecha = new QLineEdit(frame_9);
-        lineEdit_fecha->setObjectName("lineEdit_fecha");
-        lineEdit_fecha->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        dateEdit_fecha_nacimiento = new QDateEdit(frame_9);
+        dateEdit_fecha_nacimiento->setObjectName("dateEdit_fecha_nacimiento");
+        dateEdit_fecha_nacimiento->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "border: 2 solid rgba(0, 0, 0,0.50);\n"
-"border-radius: 20;\n"
 "border-radius: 10;\n"
 "padding: 10;"));
-        lineEdit_fecha->setEchoMode(QLineEdit::EchoMode::Normal);
 
-        verticalLayout_8->addWidget(lineEdit_fecha);
+        verticalLayout_8->addWidget(dateEdit_fecha_nacimiento);
 
 
         verticalLayout_11->addWidget(frame_9);
@@ -501,8 +500,6 @@ public:
         lineEdit_telefono->setText(QString());
         lineEdit_telefono->setPlaceholderText(QCoreApplication::translate("sign_up", "11-1234-5678", nullptr));
         label_7->setText(QCoreApplication::translate("sign_up", "Fecha de nacimiento*", nullptr));
-        lineEdit_fecha->setText(QString());
-        lineEdit_fecha->setPlaceholderText(QCoreApplication::translate("sign_up", "dd/mm/aaaa", nullptr));
         label_8->setText(QCoreApplication::translate("sign_up", "Contrase\303\261a*", nullptr));
         lineEdit_password->setText(QString());
         lineEdit_password->setPlaceholderText(QCoreApplication::translate("sign_up", "Crea una contrase\303\261a", nullptr));

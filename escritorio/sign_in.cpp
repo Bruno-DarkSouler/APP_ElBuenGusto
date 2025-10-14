@@ -2,24 +2,20 @@
 #include "sign_in.h"
 #include "ui_sign_in.h"
 #include "sign_up.h"
-// ----------------------------------------------------------------------
-// SOLUCIÓN: INCLUIR LAS CABECERAS PARA REDIRECCIÓN POR ROL
-// ----------------------------------------------------------------------
 #include "carrito.h"
 #include "perfil.h"
-// ----------------------------------------------------------------------
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QDate>
 #include <QCheckBox>
 #include <QPushButton>
 #include <QLineEdit>
-
-#include "QNetworkAccessManager"
-#include "QNetworkRequest"
-#include "QNetworkReply"
-#include "QJsonDocument"
-#include "QJsonObject"
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QSettings>
 
 sign_in::sign_in(QWidget *parent)
     : QWidget(parent)
@@ -176,7 +172,7 @@ void sign_in::on_iniciar_clicked()
                     // Lógica de Redirección basada en Rol
                     if (rol == "cliente") {
                         // Si es cliente, llevar a la ventana principal
-                        nextWindow = new MainWindow();
+                        nextWindow = new perfil();
 
                     } else if (rol == "repartidor") {
                         // Si es repartidor, llevar al Carrito (ej. gestión de pedidos)
@@ -184,18 +180,31 @@ void sign_in::on_iniciar_clicked()
 
                     } else if (rol == "cajero") {
                         // Si es cajero, llevar al Perfil (ej. gestión de caja)
-                        nextWindow = new perfil();
+                        nextWindow = new MainWindow();
 
                     } else {
                         // Rol desconocido o por defecto
                         nextWindow = new MainWindow();
                     }
 
-                    if (nextWindow) {
+                    // Verificar si los datos del usuario están presentes
+                    if (nextWindow && response.contains("user_data") && response["user_data"].isObject()) {
+                        // Guardar datos en QSettings
+                        QSettings settings("YourCompany", "YourApp");
+                        settings.setValue("user_id", response["user_id"].toInt());
+                        QJsonObject userData = response["user_data"].toObject();
+                        settings.setValue("user_nombre_completo", userData["nombre_completo"].toString());
+                        settings.setValue("user_email", userData["email"].toString());
+                        settings.setValue("user_telefono", userData["telefono"].toString());
+                        settings.setValue("user_direccion", userData["direccion"].toString());
+                        settings.setValue("user_fecha_nacimiento", userData["fecha_nacimiento"].toString());
+
                         nextWindow->show();
                         this->close();
+                    } else {
+                        // Manejar el caso en que no haya datos de usuario
+                        showError("No se encontraron datos de usuario.");
                     }
-
                 } else {
                     // Fallo Lógico: Credenciales incorrectas, usuario no encontrado, etc.
                     showError(message);
