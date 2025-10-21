@@ -15,9 +15,9 @@ find_package(Qt6 REQUIRED COMPONENTS Core Network)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+
+
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -26,18 +26,21 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         img.qrc
 
-        tarjeta_especialidades.h tarjeta_especialidades.cpp tarjeta_especialidades.ui
+
         sign_up.h sign_up.cpp sign_up.ui
         sign_in.h sign_in.cpp sign_in.ui
-        carrito.h carrito.cpp carrito.ui
-        repartidor.h repartidor.cpp repartidor.ui
-        pedido_pendiente.h pedido_pendiente.cpp pedido_pendiente.ui
-        pedido_en_camino.h pedido_en_camino.cpp pedido_en_camino.ui
-        pedido_entregado.h pedido_entregado.cpp pedido_entregado.ui
-        menu_lateral.h menu_lateral.cpp menu_lateral.ui
 
-        menu_carrito.h menu_carrito.cpp menu_carrito.ui
-        condimento.h condimento.cpp condimento.ui
+        cajero.h cajero.cpp cajero.ui
+        perfil.h perfil.cpp perfil.ui
+
+
+
+
+
+
+
+
+
 
 
 

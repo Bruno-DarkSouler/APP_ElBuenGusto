@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>618</width>
-    <height>750</height>
+    <width>671</width>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -87,7 +87,7 @@ border-radius: 0;</string>
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="img.qrc">:/fondo2.jpg</pixmap>
+            <pixmap>:/fondo2.jpg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -161,9 +161,9 @@ border-radius: 0;</string>
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-292</y>
            <width>561</width>
-           <height>697</height>
+           <height>782</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -206,7 +206,7 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_2">
+              <widget class="QLineEdit" name="lineEdit_nombre">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
@@ -222,6 +222,53 @@ padding: 10;</string>
                </property>
                <property name="placeholderText">
                 <string>Tu nombre</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(80,50,20);
+</string>
+               </property>
+               <property name="text">
+                <string>Apellido*</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_apellido">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+border: 2 solid rgba(0, 0, 0,0.50);
+border-radius: 20;
+border-radius: 10;
+padding: 10;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Tu apellido</string>
                </property>
               </widget>
              </item>
@@ -267,7 +314,7 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="lineEdit_email">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
@@ -328,11 +375,10 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_3">
+              <widget class="QLineEdit" name="lineEdit_telefono">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
-border-radius: 20;
 border-radius: 10;
 padding: 10;</string>
                </property>
@@ -340,7 +386,7 @@ padding: 10;</string>
                 <string/>
                </property>
                <property name="echoMode">
-                <enum>QLineEdit::EchoMode::NoEcho</enum>
+                <enum>QLineEdit::EchoMode::Normal</enum>
                </property>
                <property name="placeholderText">
                 <string>11-1234-5678</string>
@@ -389,22 +435,12 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_4">
+              <widget class="QDateEdit" name="dateEdit_fecha_nacimiento">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
-border-radius: 20;
 border-radius: 10;
 padding: 10;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="echoMode">
-                <enum>QLineEdit::EchoMode::Normal</enum>
-               </property>
-               <property name="placeholderText">
-                <string>dd/mm/aaaa</string>
                </property>
               </widget>
              </item>
@@ -450,7 +486,7 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_5">
+              <widget class="QLineEdit" name="lineEdit_password">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);
 border: 2 solid rgba(0, 0, 0,0.50);
@@ -559,11 +595,20 @@ border-radius: 0;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(200, 30, 45);
-color: rgb(255,255,255);
-border: 2 solid rgb(200, 30, 45);
-border-radius: 10;
-padding: 10;</string>
+                <string notr="true">QPushButton {
+	background-color: rgb(200, 30, 45);
+	color: rgb(255,255,255);
+	border-radius: 10;
+	padding: 10;
+}
+QPushButton:hover {
+    background-color: rgb(171,17,27);
+	color: rgb(255,255,255);
+	box-shadow: 0 100 200 rgba(0, 0, 0, 0.3);
+}
+QPushButton:pressed {
+    background-color: rgb(124,10,25);
+}</string>
                </property>
                <property name="text">
                 <string>Iniciar Sesión</string>
@@ -609,7 +654,7 @@ border: 0 solid rgba(80, 50, 20,0);
 border-radius: 0;</string>
                </property>
                <property name="text">
-                <string>¿No tienes una cuenta?</string>
+                <string>¿Ya tienes una cuenta?</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -617,7 +662,7 @@ border-radius: 0;</string>
               </widget>
              </item>
              <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="pushButton_sign_in">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                  <horstretch>0</horstretch>
@@ -642,7 +687,7 @@ border-radius: 10;
 padding: 10;</string>
                </property>
                <property name="text">
-                <string>Crear cuenta</string>
+                <string>Iniciar sesion</string>
                </property>
               </widget>
              </item>
@@ -658,8 +703,6 @@ padding: 10;</string>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="img.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
