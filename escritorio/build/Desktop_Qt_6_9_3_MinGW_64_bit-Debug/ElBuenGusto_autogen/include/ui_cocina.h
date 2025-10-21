@@ -33,6 +33,8 @@ public:
     QVBoxLayout *verticalLayout_4;
     QWidget *widget_5;
     QHBoxLayout *horizontalLayout_2;
+    QWidget *widget_33;
+    QHBoxLayout *horizontalLayout_18;
     QWidget *widget_6;
     QVBoxLayout *verticalLayout_6;
     QWidget *widget_7;
@@ -103,6 +105,7 @@ public:
     QLabel *label_25;
     QSpacerItem *horizontalSpacer_8;
     QLabel *label_26;
+    QFrame *line;
     QWidget *widget_27;
     QVBoxLayout *verticalLayout_18;
     QLabel *label_29;
@@ -187,16 +190,23 @@ public:
         widget_5 = new QWidget(widget);
         widget_5->setObjectName("widget_5");
         horizontalLayout_2 = new QHBoxLayout(widget_5);
-        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setSpacing(0);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        horizontalLayout_2->setContentsMargins(9, 9, 9, 9);
-        widget_6 = new QWidget(widget_5);
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        widget_33 = new QWidget(widget_5);
+        widget_33->setObjectName("widget_33");
+        horizontalLayout_18 = new QHBoxLayout(widget_33);
+        horizontalLayout_18->setSpacing(24);
+        horizontalLayout_18->setObjectName("horizontalLayout_18");
+        horizontalLayout_18->setContentsMargins(24, 24, 24, 24);
+        widget_6 = new QWidget(widget_33);
         widget_6->setObjectName("widget_6");
         widget_6->setMaximumSize(QSize(16777215, 16777215));
         widget_6->setStyleSheet(QString::fromUtf8("background-color: white;\n"
 "border-radius: 13;"));
         verticalLayout_6 = new QVBoxLayout(widget_6);
         verticalLayout_6->setObjectName("verticalLayout_6");
+        verticalLayout_6->setContentsMargins(24, 0, 24, 0);
         widget_7 = new QWidget(widget_6);
         widget_7->setObjectName("widget_7");
         widget_7->setMaximumSize(QSize(16777215, 100));
@@ -212,7 +222,7 @@ public:
         horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(widget_11);
         label_4->setObjectName("label_4");
-        label_4->setStyleSheet(QString::fromUtf8("font-size: 16px;"));
+        label_4->setStyleSheet(QString::fromUtf8("font-size: 24px;"));
 
         horizontalLayout_6->addWidget(label_4);
 
@@ -267,7 +277,7 @@ public:
 
         widget_8 = new QWidget(widget_6);
         widget_8->setObjectName("widget_8");
-        widget_8->setMaximumSize(QSize(16777215, 300));
+        widget_8->setMaximumSize(QSize(16777215, 380));
         verticalLayout_9 = new QVBoxLayout(widget_8);
         verticalLayout_9->setObjectName("verticalLayout_9");
         label_8 = new QLabel(widget_8);
@@ -279,6 +289,7 @@ public:
 
         widget_14 = new QWidget(widget_8);
         widget_14->setObjectName("widget_14");
+        widget_14->setMinimumSize(QSize(0, 300));
         widget_14->setMaximumSize(QSize(16777215, 300));
         widget_14->setStyleSheet(QString::fromUtf8("background-color: #EDE4E4;"));
         verticalLayout_10 = new QVBoxLayout(widget_14);
@@ -366,25 +377,31 @@ public:
 
         widget_17 = new QWidget(widget_6);
         widget_17->setObjectName("widget_17");
-        widget_17->setMaximumSize(QSize(16777215, 80));
+        widget_17->setMaximumSize(QSize(16777215, 113));
         verticalLayout = new QVBoxLayout(widget_17);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         widget_15 = new QWidget(widget_17);
         widget_15->setObjectName("widget_15");
-        widget_15->setMaximumSize(QSize(16777215, 30));
+        widget_15->setMinimumSize(QSize(0, 0));
+        widget_15->setMaximumSize(QSize(16777215, 50));
         horizontalLayout_8 = new QHBoxLayout(widget_15);
         horizontalLayout_8->setObjectName("horizontalLayout_8");
         label_15 = new QLabel(widget_15);
         label_15->setObjectName("label_15");
-        label_15->setMaximumSize(QSize(90, 16777215));
+        label_15->setMinimumSize(QSize(130, 30));
+        label_15->setMaximumSize(QSize(130, 30));
+        label_15->setStyleSheet(QString::fromUtf8("font-size: 16px;"));
 
         horizontalLayout_8->addWidget(label_15);
 
         label_16 = new QLabel(widget_15);
         label_16->setObjectName("label_16");
-        label_16->setStyleSheet(QString::fromUtf8("color: #6B6B6B;"));
+        label_16->setMinimumSize(QSize(0, 30));
+        label_16->setMaximumSize(QSize(16777215, 30));
+        label_16->setStyleSheet(QString::fromUtf8("color: #6B6B6B;\n"
+"font-size: 16px;"));
 
         horizontalLayout_8->addWidget(label_16);
 
@@ -393,20 +410,26 @@ public:
 
         frame_2 = new QFrame(widget_17);
         frame_2->setObjectName("frame_2");
-        frame_2->setMaximumSize(QSize(16777215, 30));
+        frame_2->setMinimumSize(QSize(0, 50));
+        frame_2->setMaximumSize(QSize(16777215, 50));
         frame_2->setFrameShape(QFrame::Shape::StyledPanel);
         frame_2->setFrameShadow(QFrame::Shadow::Raised);
         horizontalLayout_9 = new QHBoxLayout(frame_2);
         horizontalLayout_9->setObjectName("horizontalLayout_9");
         label_17 = new QLabel(frame_2);
         label_17->setObjectName("label_17");
-        label_17->setMaximumSize(QSize(100, 16777215));
+        label_17->setMinimumSize(QSize(0, 30));
+        label_17->setMaximumSize(QSize(130, 30));
+        label_17->setStyleSheet(QString::fromUtf8("font-size: 16px;"));
 
         horizontalLayout_9->addWidget(label_17);
 
         label_18 = new QLabel(frame_2);
         label_18->setObjectName("label_18");
-        label_18->setStyleSheet(QString::fromUtf8("color: #6B6B6B;"));
+        label_18->setMinimumSize(QSize(0, 30));
+        label_18->setMaximumSize(QSize(16777215, 30));
+        label_18->setStyleSheet(QString::fromUtf8("color: #6B6B6B;\n"
+"font-size: 16px;"));
 
         horizontalLayout_9->addWidget(label_18);
 
@@ -463,7 +486,10 @@ public:
         verticalLayout_6->addWidget(widget_19);
 
 
-        horizontalLayout_2->addWidget(widget_6);
+        horizontalLayout_18->addWidget(widget_6);
+
+
+        horizontalLayout_2->addWidget(widget_33);
 
         widget_2 = new QWidget(widget_5);
         widget_2->setObjectName("widget_2");
@@ -545,6 +571,16 @@ public:
 
 
         verticalLayout_15->addWidget(widget_26);
+
+        line = new QFrame(widget_24);
+        line->setObjectName("line");
+        line->setMinimumSize(QSize(0, 0));
+        line->setMaximumSize(QSize(16777215, 16777215));
+        line->setStyleSheet(QString::fromUtf8("background-color: black;"));
+        line->setFrameShape(QFrame::Shape::HLine);
+        line->setFrameShadow(QFrame::Shadow::Sunken);
+
+        verticalLayout_15->addWidget(line);
 
         widget_27 = new QWidget(widget_24);
         widget_27->setObjectName("widget_27");
@@ -762,7 +798,7 @@ public:
 #endif // QT_CONFIG(tooltip)
         label->setText(QCoreApplication::translate("cocina", "Panel de cocina", nullptr));
         widget_6->setWindowTitle(QCoreApplication::translate("cocina", "Dialog", nullptr));
-        label_4->setText(QCoreApplication::translate("cocina", "Pedido de: Carlos Per\303\251z", nullptr));
+        label_4->setText(QCoreApplication::translate("cocina", "Pedido de Carlos Per\303\251z", nullptr));
         label_5->setText(QCoreApplication::translate("cocina", "Programado", nullptr));
         label_6->setText(QCoreApplication::translate("cocina", "Numero de pedido: X", nullptr));
         label_7->setText(QCoreApplication::translate("cocina", "Av. Libertador xxxx, Ciudad de Buenos Aires", nullptr));

@@ -25,6 +25,7 @@ public:
 private slots:
     void cargarPedidos();
     void confirmarPedido();
+    void asignarRepartidor(int repartidorId);
 
 private:
     Ui::cocina *ui;
