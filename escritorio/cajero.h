@@ -85,6 +85,7 @@ private slots:
     void eliminarDelCarrito(int index);
     void modificarCantidad(int index, int nuevaCantidad);
     void actualizarTotales();
+    void cargarProductosDesdeAPI();
     void toggleTipoPedido();
     void crearPedido();
     void procesarRespuestaCajero(QNetworkReply *reply);
@@ -126,7 +127,7 @@ private:
     QString apiUrl;
     QTimer *relojTimer;
     
-    void inicializarProductosEjemplo();
+
     void cargarProductos();
     void cargarClientes();
     void cargarDatosDesdeAPI();
