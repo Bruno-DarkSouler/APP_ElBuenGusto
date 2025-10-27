@@ -676,13 +676,13 @@ void PanelCajero::calcularPrecioDelivery(const QString& direccion)
     double distancia = calcularDistancia(direccion);
     
     if (distancia <= 1.5) {
-        precioDelivery = 200.0;
+        precioDelivery = 2000.0;
     } else if (distancia <= 3.0) {
-        precioDelivery = 350.0;
+        precioDelivery = 3500.0;
     } else if (distancia <= 5.0) {
-        precioDelivery = 500.0;
+        precioDelivery = 5000.0;
     } else if (distancia <= 7.0) {
-        precioDelivery = 700.0;
+        precioDelivery = 7000.0;
     } else {
         precioDelivery = 1000.0;
     }
@@ -746,38 +746,64 @@ void PanelCajero::on_timeEdit_hora_userTimeChanged(const QTime &hora)
 
 bool PanelCajero::validarCreacionPedido()
 {
+    qDebug() << "=== Validando creación de pedido ===";
+    qDebug() << "Carrito vacío:" << carrito.isEmpty();
+    qDebug() << "Cliente seleccionado:" << clienteEstaSeleccionado;
+
     bool valido = !carrito.isEmpty() && clienteEstaSeleccionado;
-    
+
     if (valido) {
         if (ui->radioButton_inmediato->isChecked()) {
+            qDebug() << "Validando pedido inmediato...";
             valido = validarPedidoInmediato();
+            qDebug() << "Pedido inmediato válido:" << valido;
         } else if (ui->radioButton_programado->isChecked()) {
+            qDebug() << "Validando pedido programado...";
             QDateTime fechaHora(ui->dateEdit_fecha->date(), ui->timeEdit_hora->time());
+            qDebug() << "Fecha/Hora seleccionada:" << fechaHora.toString();
             valido = validarPedidoProgramado(fechaHora);
+            qDebug() << "Pedido programado válido:" << valido;
         }
     }
-    
+
+    qDebug() << "Botón habilitado:" << valido;
     ui->pushButton_crearPedido->setEnabled(valido);
     return valido;
 }
 
 bool PanelCajero::validarPedidoInmediato()
 {
+    // Para pruebas, permitir siempre crear pedidos inmediatos
+    // Comentar estas líneas cuando quieras activar la validación de horario
+    return true;
+
+    // Descomentar estas líneas para validar horarios:
+    /*
     QTime ahora = QTime::currentTime();
     return (ahora >= horaApertura1 && ahora <= horaCierre1) ||
            (ahora >= horaApertura2 && ahora <= horaCierre2);
+    */
 }
 
 bool PanelCajero::validarPedidoProgramado(const QDateTime& fechaHora)
 {
     QDateTime ahora = QDateTime::currentDateTime();
-    if (fechaHora <= ahora) {
+
+    // Permitir al menos 30 minutos de anticipación
+    if (fechaHora <= ahora.addSecs(1800)) {
+        qDebug() << "Pedido programado debe ser al menos 30 minutos en el futuro";
         return false;
     }
-    
+
     QTime hora = fechaHora.time();
-    return (hora >= horaApertura1 && hora <= horaCierre1) ||
-           (hora >= horaApertura2 && hora <= horaCierre2);
+    bool horarioValido = (hora >= horaApertura1 && hora <= horaCierre1) ||
+                         (hora >= horaApertura2 && hora <= horaCierre2);
+
+    if (!horarioValido) {
+        qDebug() << "Horario no válido:" << hora.toString();
+    }
+
+    return horarioValido;
 }
 
 void PanelCajero::crearPedido()
@@ -837,7 +863,7 @@ void PanelCajero::crearPedido()
 
     // Enviar a la API
     QNetworkRequest request;
-    request.setUrl(QUrl("http://localhost/WEB_ElBuenGusto/apiQT/guardar_pedido_cajero.php"));
+    request.setUrl(QUrl("http://localhost/dashboard/WEB_ElBuenGusto/apiQT/guardar_pedido_cajero.php"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QNetworkReply *reply = networkManager->post(request, QJsonDocument(pedidoJson).toJson());
@@ -914,16 +940,43 @@ void PanelCajero::cargarDatosDesdeAPI()
 
 void PanelCajero::cargarClientes()
 {
-    clientes.clear();
-    
-    Cliente c1 = {1, "Juan", "Pérez", "juan.perez@example.com", "3511234567", "Av. Colón 1234, Centro", true, false};
-    Cliente c2 = {2, "María", "González", "maria.gonzalez@example.com", "3519876543", "Calle Lima 567, Nueva Córdoba", true, false};
-    Cliente c3 = {3, "Carlos", "Rodríguez", "carlos.rodriguez@example.com", "3515555555", "Av. Vélez Sarsfield 2345, Güemes", true, false};
-    Cliente c4 = {4, "Ana", "Martínez", "ana.martinez@example.com", "3517777777", "Rondeau 890, Centro", true, false};
-    Cliente c5 = {5, "Pedro", "López", "pedro.lopez@example.com", "3513333333", "Chacabuco 456, Alberdi", true, false};
-    
-    clientes << c1 << c2 << c3 << c4 << c5;
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://localhost/dashboard/WEB_ElBuenGusto/apiQT/clientes.php"));
+
+    QNetworkReply *reply = networkManager->get(request);
+
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QByteArray responseData = reply->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+            QJsonArray clientesArray = jsonDoc.array();
+
+            clientes.clear();
+
+            for (const QJsonValue &value : clientesArray) {
+                QJsonObject obj = value.toObject();
+
+                Cliente c;
+                c.id = obj["id"].toInt();
+                c.nombre = obj["nombre"].toString();
+                c.apellido = obj["apellido"].toString();
+                c.email = obj["email"].toString();
+                c.telefono = obj["telefono"].toString();
+                c.direccion = obj["direccion"].toString();
+                c.activo = obj["activo"].toBool();
+                c.esNuevo = false;
+
+                clientes.append(c);
+            }
+
+            qDebug() << "Clientes cargados:" << clientes.size();
+        } else {
+            mostrarMensajeError("Error al cargar clientes: " + reply->errorString());
+        }
+        reply->deleteLater();
+    });
 }
+
 void PanelCajero::cargarProductosDesdeAPI()
 {
     QNetworkRequest request;
