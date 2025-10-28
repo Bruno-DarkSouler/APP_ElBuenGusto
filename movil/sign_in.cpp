@@ -1,9 +1,8 @@
-#include "mainwindow.h"
 #include "sign_in.h"
 #include "ui_sign_in.h"
 #include "sign_up.h"
-#include "carrito.h"
-#include "perfil.h"
+#include "cajero.h"
+#include "cocina.h"
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QDate>
@@ -59,7 +58,7 @@ void sign_in::validatePassword()
         setFieldStyle(ui->lineEdit_password, "normal");
         return;
     }
-    if (password.length() >= 8) {
+    if (password.length() >= 6) {
         setFieldStyle(ui->lineEdit_password, "valid");
     } else {
         setFieldStyle(ui->lineEdit_password, "invalid");
@@ -97,8 +96,8 @@ bool sign_in::isFormValid()
         return false;
     }
 
-    if (password.length() < 8) {
-        showError("La contraseña debe tener al menos 8 caracteres");
+    if (password.length() < 6) {
+        showError("La contraseña debe tener al menos 6 caracteres");
         return false;
     }
 
@@ -139,7 +138,7 @@ void sign_in::on_iniciar_clicked()
 
     // 3. Configurar y enviar la solicitud POST
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QUrl url("http://localhost/WEB_ElBuenGusto/api/sign_in.php");
+    QUrl url("http://elbuengusto.shop/api/sign_in.php");
     QNetworkRequest request(url);
 
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -170,21 +169,21 @@ void sign_in::on_iniciar_clicked()
                     QWidget *nextWindow = nullptr;
 
                     // Lógica de Redirección basada en Rol
-                    if (rol == "cliente") {
+                    if (rol == "cocinero") {
                         // Si es cliente, llevar a la ventana principal
-                        nextWindow = new perfil();
+                       nextWindow = new cocina();
 
                     } else if (rol == "repartidor") {
                         // Si es repartidor, llevar al Carrito (ej. gestión de pedidos)
-                        nextWindow = new carrito();
+                        nextWindow = new PanelCajero();
 
                     } else if (rol == "cajero") {
                         // Si es cajero, llevar al Perfil (ej. gestión de caja)
-                        nextWindow = new MainWindow();
+                        nextWindow = new PanelCajero();
 
                     } else {
                         // Rol desconocido o por defecto
-                        nextWindow = new MainWindow();
+                        nextWindow = new PanelCajero();
                     }
 
                     // Verificar si los datos del usuario están presentes

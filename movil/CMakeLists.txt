@@ -32,6 +32,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
         cajero.h cajero.cpp cajero.ui
         perfil.h perfil.cpp perfil.ui
+        cocina.h cocina.cpp cocina.ui
 
 
 
